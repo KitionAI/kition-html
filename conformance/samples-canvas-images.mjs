@@ -1,0 +1,30 @@
+const setup="const source=document.createElement('canvas');source.width=80;source.height=40;const brush=source.getContext('2d');brush.fillStyle='#5645d4';brush.fillRect(0,0,40,40);brush.fillStyle='#e5486a';brush.fillRect(40,0,40,40);";
+const sample=(id,code)=>['canvas-image-'+id,'javascript','canvas{display:block}',`<canvas id="canvas" width="320" height="180"></canvas><script>const canvas=document.getElementById('canvas'),ctx=canvas.getContext('2d');${setup}${code}</script>`,{requires:'javascript'}];
+const supplied=(id,extension,code)=>['canvas-image-'+id,'javascript','canvas{display:block}img{display:none}',`<img id="source" src="../assets/sample-canvas.${extension}"><canvas id="canvas" width="320" height="180"></canvas><script>window.addEventListener('load',()=>{const canvas=document.getElementById('canvas'),ctx=canvas.getContext('2d'),source=document.getElementById('source');${code}})</script>`,{requires:'javascript'}];
+export default [
+ sample('copy',"ctx.drawImage(source,20,20);"),
+ sample('scale',"ctx.drawImage(source,20,20,240,120);"),
+ sample('nearest',"ctx.imageSmoothingEnabled=false;ctx.drawImage(source,20,20,240,120);"),
+ sample('crop',"ctx.drawImage(source,40,0,40,40,20,20,160,120);"),
+ sample('crop-outside',"ctx.drawImage(source,-40,0,160,40,0,20,320,120);"),
+ sample('negative-source-size',"ctx.drawImage(source,80,40,-80,-40,20,20,240,120);"),
+ sample('negative-destination-size',"ctx.drawImage(source,260,140,-240,-120);"),
+ sample('self-copy',"ctx.drawImage(source,0,0);ctx.drawImage(canvas,0,0,80,40,40,20,160,80);"),
+ sample('empty-source',"ctx.drawImage(source,20,20);const blank=document.createElement('canvas');blank.width=80;blank.height=40;ctx.drawImage(blank,20,20);"),
+ sample('zero-source-size',"ctx.fillStyle='#5645d4';ctx.fillRect(0,0,320,180);ctx.drawImage(source,0,0,0,40,20,20,240,120);"),
+ sample('clip',"ctx.beginPath();ctx.rect(40,40,120,80);ctx.clip();ctx.drawImage(source,0,0,320,160);"),
+ sample('translate',"ctx.translate(40,30);ctx.drawImage(source,0,0,240,120);"),
+ sample('rotate',"ctx.translate(160,90);ctx.rotate(Math.PI/6);ctx.drawImage(source,-120,-60,240,120);"),
+ sample('alpha',"ctx.fillStyle='#1f9d4c';ctx.fillRect(0,0,320,180);ctx.globalAlpha=.5;ctx.drawImage(source,20,20,240,120);"),
+ sample('composite',"ctx.fillStyle='#1f9d4c';ctx.fillRect(0,0,320,180);ctx.globalCompositeOperation='destination-out';ctx.drawImage(source,20,20,240,120);"),
+ sample('invalid-source',"let rejected=false;try{ctx.drawImage({},0,0)}catch(error){rejected=error instanceof TypeError}if(rejected){ctx.fillStyle='#5645d4';ctx.fillRect(0,0,320,180)}"),
+ sample('snapshot',"ctx.drawImage(source,20,20,240,120);brush.clearRect(0,0,80,40);"),
+ sample('copy-empty-rectangle',"ctx.fillStyle='#5645d4';ctx.fillRect(0,0,320,180);ctx.globalCompositeOperation='copy';ctx.drawImage(source,0,0,0,40,20,20,240,120);"),
+ sample('transparent-source',"brush.clearRect(20,0,40,40);ctx.drawImage(source,20,20,240,120);"),
+ supplied('png','png','ctx.drawImage(source,20,20);'),
+ supplied('png-scale','png','ctx.drawImage(source,20,20,240,120);'),
+ supplied('png-crop','png','ctx.drawImage(source,40,0,40,40,20,20,240,120);'),
+ supplied('svg','svg','ctx.drawImage(source,20,20);'),
+ supplied('svg-scale','svg','ctx.drawImage(source,20,20,240,120);'),
+ supplied('svg-crop','svg','ctx.drawImage(source,40,0,40,40,20,20,240,120);'),
+];

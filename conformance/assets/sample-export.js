@@ -1,0 +1,1 @@
+const purple = '#5645d4'; export {purple}

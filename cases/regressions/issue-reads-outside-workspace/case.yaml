@@ -1,0 +1,26 @@
+format: 1
+id: regressions/issue-reads-outside-workspace
+feature: html.page.edit
+intent: >-
+  A page is the agent's data: whatever it links (SVG pictures by absolute, `../` or file: path or
+  URL, an SVG written into a data: URL that links a file, images, srcset, stylesheets, @import,
+  @font-face, scripts, frames, objects, a <base>, and what its scripts fetch, import or add), the
+  headless kit's preview and check open no file outside the workspace (named pipes planted there
+  show any attempt), connect to no server, write nothing in the process's folders, and report
+  each SVG picture they did not draw as html.resource-unavailable (KHP A29, A37, A42, section
+  10.6). An audit found by reading code that usvg's default resolver read an SVG <image href> by
+  path, relative to the process's folder, so html.setSource and a preview showed a picture from
+  anywhere on the machine.
+layer: gate
+tags: [headless, security]
+source:
+  kind: probe
+  from: workspace-escape audit
+  license: Apache-2.0
+input: []
+steps:
+  - cargo-test: { package: "kition-html", test: "workspace_only" }
+expected:
+  - actual: out:exit
+    compare: exit
+since: "2026-11-16"

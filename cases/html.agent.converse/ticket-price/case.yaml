@@ -1,0 +1,37 @@
+format: 1
+id: html.agent.converse/ticket-price
+feature: html.agent.converse
+intent: >-
+  Over two messages the agent adds a line and then corrects that same line when the person changes the price, instead of adding a second one. html declares no drafts (agent.drafts false, KHP A35), so this is its multi-turn case.
+layer: eval
+source:
+  kind: synthetic
+  from: repo:conformance/basic.html
+  license: Apache-2.0
+  note: "A copy of the conformance page: a purple h1 \"Spring concert\" and a card with \"Saturday 8 pm, Town Hall\"."
+input: [input/concert.html]
+steps:
+  - task:
+      turns:
+        - "In concert.html, add a paragraph inside the card that says \"Tickets: £10\"."
+        - "The price went up. Make that line say \"Tickets: £12\" instead."
+      max_turns: 20
+  - file: { path: concert.html, as: page }
+expected:
+  - actual: out:page
+    compare: text
+    value:
+      contains: ["Tickets: £12"]
+      absent: ["£10"]
+  - actual: out:page
+    compare: text
+    collateral: true
+    value:
+      contains: ["<h1>Spring concert</h1>", "Saturday 8 pm, Town Hall", "border-radius:12px"]
+solution:
+  - tool: html_run
+    args: { path: concert.html, steps: [{ command: html.setSource, params: { source: "<!doctype html>\n<html><head><style>body{margin:24px;font-family:sans-serif;background:#fff}h1{color:#5645d4}.card{border:1px solid #ddd;border-radius:12px;padding:16px}</style></head>\n<body><h1>Spring concert</h1><div class=\"card\"><p>Saturday 8 pm, Town Hall</p><p>Tickets: £10</p></div></body></html>\n" } }] }
+  - tool: html_run
+    args: { path: concert.html, steps: [{ command: html.setSource, params: { source: "<!doctype html>\n<html><head><style>body{margin:24px;font-family:sans-serif;background:#fff}h1{color:#5645d4}.card{border:1px solid #ddd;border-radius:12px;padding:16px}</style></head>\n<body><h1>Spring concert</h1><div class=\"card\"><p>Saturday 8 pm, Town Hall</p><p>Tickets: £12</p></div></body></html>\n" } }] }
+since: "2026-11-16"
+timeout_s: 600

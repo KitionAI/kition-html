@@ -1,0 +1,98 @@
+[
+  {
+    "id": "defaults",
+    "script": "return ctx.letterSpacing==='0px'&&ctx.wordSpacing==='0px'"
+  },
+  {
+    "id": "canonical",
+    "script": "ctx.letterSpacing='.25PX';ctx.wordSpacing='2e1pt';return ctx.letterSpacing==='0.25px'&&ctx.wordSpacing==='20pt'"
+  },
+  {
+    "id": "invalid",
+    "script": "ctx.letterSpacing='3px';for(const v of ['normal','0',' 2px','2px ','20%','calc(1px + 2px)'])ctx.letterSpacing=v;return ctx.letterSpacing==='3px'"
+  },
+  {
+    "id": "physical",
+    "script": "const base=ctx.measureText('AB').width;ctx.letterSpacing='3pt';return Math.abs(ctx.measureText('AB').width-base-8)<.001"
+  },
+  {
+    "id": "em",
+    "script": "const base=ctx.measureText('AB').width;ctx.letterSpacing='.25em';return Math.abs(ctx.measureText('AB').width-base-16)<.001"
+  },
+  {
+    "id": "rem",
+    "script": "const base=ctx.measureText('AB').width;ctx.letterSpacing='.25rem';return Math.abs(ctx.measureText('AB').width-base-16)<.001"
+  },
+  {
+    "id": "font-metrics",
+    "script": "const base=ctx.measureText('AB').width;ctx.letterSpacing='1ex';const ex=ctx.measureText('AB').width-base;ctx.letterSpacing='1cap';const cap=ctx.measureText('AB').width-base;ctx.letterSpacing='1ch';const ch=ctx.measureText('AB').width-base;return Math.abs(ex-33)<.001&&Math.abs(cap-46.5625)<.001&&Math.abs(ch-39.25)<.001"
+  },
+  {
+    "id": "viewport",
+    "script": "const base=ctx.measureText('AB').width;ctx.letterSpacing='2vw';ctx.wordSpacing='3cqw';return ctx.letterSpacing==='2vw'&&ctx.wordSpacing==='3cqw'&&ctx.measureText('AB').width===base"
+  },
+  {
+    "id": "negative",
+    "script": "const base=ctx.measureText('AB').width;ctx.letterSpacing='-100px';return Math.abs(ctx.measureText('AB').width-base+200)<.001&&ctx.measureText('AB').width<0"
+  },
+  {
+    "id": "spaces",
+    "script": "const reference=document.createElement('canvas').getContext('2d');reference.font='32px Inter';const text='A  B ',base=reference.measureText(text).width;ctx.letterSpacing='0px';ctx.wordSpacing='3px';return Math.abs(ctx.measureText(text).width-base-9)<.001"
+  },
+  {
+    "id": "space-kinds",
+    "script": "const reference=document.createElement('canvas').getContext('2d');reference.font='32px Inter';const a=String.fromCodePoint(65,160,66),b=String.fromCodePoint(65,8201,66),wa=reference.measureText(a).width,wb=reference.measureText(b).width;ctx.letterSpacing='0px';ctx.wordSpacing='5px';return Math.abs(ctx.measureText(a).width-wa-5)<.001&&ctx.measureText(b).width===wb"
+  },
+  {
+    "id": "graphemes",
+    "script": "const text=String.fromCodePoint(65,769,66),base=ctx.measureText(text).width;ctx.letterSpacing='2px';return Math.abs(ctx.measureText(text).width-base-4)<.001"
+  },
+  {
+    "id": "save-restore",
+    "script": "ctx.letterSpacing='2px';ctx.wordSpacing='4px';ctx.save();ctx.letterSpacing='8px';ctx.wordSpacing='9px';ctx.restore();return ctx.letterSpacing==='2px'&&ctx.wordSpacing==='4px'"
+  },
+  {
+    "id": "nested-save",
+    "script": "ctx.letterSpacing='2px';ctx.save();ctx.letterSpacing='4px';ctx.save();ctx.letterSpacing='6px';ctx.restore();const inner=ctx.letterSpacing;ctx.restore();return inner==='4px'&&ctx.letterSpacing==='2px'"
+  },
+  {
+    "id": "reset",
+    "script": "ctx.letterSpacing='2px';ctx.wordSpacing='4px';ctx.save();ctx.reset();ctx.restore();return ctx.letterSpacing==='0px'&&ctx.wordSpacing==='0px'"
+  },
+  {
+    "id": "resize",
+    "script": "ctx.letterSpacing='2px';ctx.wordSpacing='4px';canvas.width=canvas.width;return ctx.letterSpacing==='0px'&&ctx.wordSpacing==='0px'"
+  },
+  {
+    "id": "font-change",
+    "script": "ctx.letterSpacing='.25em';ctx.font='48px Inter';const spaced=ctx.measureText('AB').width;ctx.letterSpacing='0px';return Math.abs(spaced-ctx.measureText('AB').width-24)<.001"
+  },
+  {
+    "id": "independent",
+    "script": "ctx.letterSpacing='2px';canvas.style.letterSpacing='10px';const other=document.createElement('canvas').getContext('2d');return other.letterSpacing==='0px'&&ctx.letterSpacing==='2px'"
+  },
+  {
+    "id": "coercion",
+    "script": "let count=0;ctx.wordSpacing={toString(){count++;return '3px'}};return count===1&&ctx.wordSpacing==='3px'"
+  },
+  {
+    "id": "reentrant",
+    "script": "ctx.letterSpacing='2px';ctx.wordSpacing={toString(){canvas.width=canvas.width;return '3px'}};return ctx.letterSpacing==='0px'&&ctx.wordSpacing==='3px'"
+  },
+  {
+    "id": "descriptors",
+    "script": "const d=Object.getOwnPropertyDescriptor(Object.getPrototypeOf(ctx),'letterSpacing');return d.enumerable&&d.configurable&&typeof d.get==='function'&&typeof d.set==='function'"
+  },
+  {
+    "id": "receivers",
+    "script": "const d=Object.getOwnPropertyDescriptor(Object.getPrototypeOf(ctx),'wordSpacing');let errors=0;try{d.get.call({})}catch(e){if(e instanceof TypeError)errors++}try{d.set.call({},'2px')}catch(e){if(e instanceof TypeError)errors++}return errors===2"
+  },
+  {
+    "id": "symbol",
+    "script": "ctx.letterSpacing='2px';try{ctx.letterSpacing=Symbol('spacing')}catch(e){return e instanceof TypeError&&ctx.letterSpacing==='2px'}return false"
+  },
+  {
+    "id": "transform",
+    "script": "ctx.letterSpacing='2px';ctx.wordSpacing='3px';const width=ctx.measureText('A B').width;ctx.scale(2,3);ctx.rotate(.25);return ctx.measureText('A B').width===width"
+  }
+]

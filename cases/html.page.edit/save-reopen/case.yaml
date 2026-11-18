@@ -1,0 +1,20 @@
+format: 1
+id: html.page.edit/save-reopen
+feature: html.page.edit
+intent: >-
+  A new page edited through html.setSource (a title, a style sheet, non-ASCII and emoji text, a
+  list), with an undo and a redo, saves to .html as exactly the last edit; reopened from those
+  bytes it has the same source, the same described page and the same rendered pixels, and it
+  edits on from there.
+layer: unit
+source:
+  kind: synthetic
+  from: crates/kition-html-kit/src/edit_tests.rs
+  license: Apache-2.0
+input: []
+steps:
+  - cargo-test: { package: kition-html-kit, filter: "edit_tests::an_edited_page_saves_and_reopens_as_edited" }
+expected:
+  - actual: out:exit
+    compare: exit
+since: "2026-11-16"

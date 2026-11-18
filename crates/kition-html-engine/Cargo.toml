@@ -1,0 +1,36 @@
+[package]
+name = "kition-html-engine"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[lib]
+crate-type = ["rlib", "cdylib"]
+
+[dependencies]
+blitz-vibey-script = { path = "../../vendor/blitz-vibey-script" }
+url = "2.5"
+blitz-dom.workspace = true
+blitz-html.workspace = true
+blitz-paint.workspace = true
+blitz-traits.workspace = true
+anyrender.workspace = true
+anyrender_vello_cpu.workspace = true
+parley.workspace = true
+png.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+data-url = "0.3"
+peniko = "0.6"
+# Reads a host's font files (`add_font`) before they are registered.
+skrifa = "0.44"
+# The font database SVG text draws with (the version blitz-dom's usvg uses).
+usvg = { version = "0.48.1", default-features = false }
+style_config = { git = "https://github.com/DioxusLabs/stylo", rev = "d6502e0002e9c40c43a0a4776f9e7eb93be360e3", package = "stylo_static_prefs" }
+
+[lints]
+workspace = true
+
+[dev-dependencies]

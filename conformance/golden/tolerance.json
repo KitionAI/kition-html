@@ -1,0 +1,5 @@
+{
+  "maxChannelDelta": 2,
+  "maxDifferentPixels": 1500,
+  "note": "The kit's own renderer draws the preview; glyph edges may differ by a step between platforms and fonts."
+}

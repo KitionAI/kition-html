@@ -1,0 +1,24 @@
+format: 1
+id: html.platform.display-modes/mode-smoke
+feature: html.platform.display-modes
+intent: >-
+  The HTML editor in each display mode, through the development host and kition-sdk's mode
+  smoke: Menus, Single line and Classic each show, Cmd+\ enters Focus and Escape leaves it;
+  Single line opens on Edit with its three commands in the row at 1440 and 1024 px; Classic still
+  shows at Kition's editor widths (1165 and 749 px); the Focus bar covers none of the editor's
+  controls.
+layer: gate
+dimension: function
+source:
+  kind: synthetic
+  from: web/tests/modes.mjs
+  license: owned
+input: []
+steps:
+  - exec:
+      cmd: [node, web/tests/modes.mjs, webkit]
+expected:
+  - { actual: "out:exec", compare: exit, value: 0 }
+since: "2026-11-16"
+timeout_s: 300
+requires: [webkit]

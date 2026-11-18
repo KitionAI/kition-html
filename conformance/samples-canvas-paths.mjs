@@ -1,0 +1,26 @@
+const sample=(id,code)=>['canvas-paths-'+id,'javascript','canvas{display:block}',`<canvas id="canvas" width="320" height="180"></canvas><script>const canvas=document.getElementById('canvas'),ctx=canvas.getContext('2d');ctx.fillStyle='#5645d4';ctx.strokeStyle='#e5486a';ctx.lineWidth=6;${code}</script>`,{requires:'javascript'}];
+const rect="const path=new Path2D();path.rect(20,20,240,120);";
+export default [
+ sample('retained-fill',rect+'ctx.fill(path);'),
+ sample('retained-stroke',rect+'ctx.stroke(path);'),
+ sample('retained-clip',rect+'ctx.clip(path);ctx.fillRect(0,0,320,180);'),
+ sample('retained-copy',rect+'const copy=new Path2D(path);path.rect(0,0,320,180);ctx.fill(copy);'),
+ sample('retained-transform',rect+'ctx.translate(20,20);ctx.fill(path);'),
+ sample('retained-add',"const part=new Path2D();part.rect(0,0,100,100);const path=new Path2D();path.addPath(part,new DOMMatrix().translate(20,20));path.addPath(part,new DOMMatrix().translate(160,20));ctx.fill(path);"),
+ sample('retained-evenodd',rect+"path.rect(60,40,160,80);ctx.fill(path,'evenodd');"),
+ sample('svg-triangle',"ctx.fill(new Path2D('M20 160 L160 20 L300 160 Z'));"),
+ sample('svg-relative',"ctx.fill(new Path2D('m20 20h240v120h-240z'));"),
+ sample('svg-curves',"ctx.stroke(new Path2D('M20 90 C100 -40 220 220 300 90'));"),
+ sample('svg-arc',"ctx.fill(new Path2D('M60 90a100 60 0 1 0 200 0a100 60 0 1 0-200 0'));"),
+ sample('hit-fill',rect+"if(ctx.isPointInPath(path,80,80)&&!ctx.isPointInPath(path,0,0))ctx.fill(path);"),
+ sample('hit-stroke',rect+"if(ctx.isPointInStroke(path,20,80)&&!ctx.isPointInStroke(path,80,80))ctx.fill(path);"),
+ sample('hit-transform',"ctx.translate(40,20);ctx.beginPath();ctx.rect(0,0,100,100);if(ctx.isPointInPath(60,60)&&!ctx.isPointInPath(20,60))ctx.fill();"),
+ sample('round-default',"ctx.roundRect(20,20,240,120);ctx.fill();"),
+ sample('round-uniform',"ctx.roundRect(20,20,240,120,24);ctx.fill();"),
+ sample('round-asymmetric',"ctx.roundRect(20,20,240,120,[8,24,40,16]);ctx.fill();"),
+ sample('round-elliptical',"ctx.roundRect(20,20,240,120,{x:48,y:24});ctx.fill();"),
+ sample('round-overlap',"ctx.roundRect(20,20,240,120,[120,80,40,160]);ctx.fill();"),
+ sample('round-negative',"ctx.roundRect(260,140,-240,-120,[8,24,40,16]);ctx.fill();"),
+ sample('round-hole',"ctx.rect(0,0,320,180);ctx.roundRect(260,20,-240,120,24);ctx.fill();"),
+ sample('retained-round',"const path=new Path2D();path.roundRect(20,20,240,120,24);ctx.fill(path);"),
+];

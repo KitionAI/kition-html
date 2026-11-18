@@ -1,0 +1,21 @@
+format: 1
+id: regressions/issue-2
+feature: html.render.fonts
+intent: >-
+  SVG <text> draws with the page's fonts (the bundled Inter, its font resources and the fonts the
+  host added), never the machine's: a family the page lacks (Helvetica, Times New Roman) and the
+  generic families without a face of their own draw in Inter, an added face draws by its name, and
+  serif is the serif face the host added. Before, usvg's font database loaded the system fonts, so
+  renders differed between machines and font-family named only system faces.
+layer: gate
+source:
+  kind: issue
+  from: Kition HTML regression suite
+  license: owned
+  note: Showcase finding HT2
+input: []
+steps:
+  - cargo-test: { package: kition-html-kit, test: svg_fonts }
+expected:
+  - { actual: "out:exit", compare: exit, value: 0 }
+since: "2026-11-16"

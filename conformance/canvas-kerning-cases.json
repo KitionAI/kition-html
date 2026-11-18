@@ -1,0 +1,62 @@
+[
+  {
+    "id": "defaults",
+    "script": "return ctx.fontKerning==='auto'&&!Object.hasOwn(ctx,'fontKerning');"
+  },
+  {
+    "id": "disable",
+    "script": "const a=ctx.measureText('AVATAR').width;ctx.fontKerning='none';return ctx.measureText('AVATAR').width>a+5;"
+  },
+  {
+    "id": "normal",
+    "script": "ctx.fontKerning='normal';const a=ctx.measureText('AVATAR').width;ctx.fontKerning='none';const b=ctx.measureText('AVATAR').width;ctx.fontKerning='auto';return b>a+5&&ctx.measureText('AVATAR').width===a;"
+  },
+  {
+    "id": "invalid",
+    "script": "ctx.fontKerning='none';for(const value of ['NONE',' normal','initial','inherit','',null,undefined,4]){ctx.fontKerning=value;if(ctx.fontKerning!=='none')return false}return true;"
+  },
+  {
+    "id": "save-restore",
+    "script": "ctx.fontKerning='none';const width=ctx.measureText('AVATAR').width;ctx.save();ctx.fontKerning='normal';ctx.restore();return ctx.fontKerning==='none'&&ctx.measureText('AVATAR').width===width;"
+  },
+  {
+    "id": "nested-state",
+    "script": "ctx.save();ctx.fontKerning='none';ctx.save();ctx.fontKerning='normal';ctx.restore();const a=ctx.fontKerning;ctx.restore();return a==='none'&&ctx.fontKerning==='auto';"
+  },
+  {
+    "id": "reset",
+    "script": "ctx.fontKerning='none';ctx.save();ctx.reset();ctx.restore();return ctx.fontKerning==='auto';"
+  },
+  {
+    "id": "resize",
+    "script": "ctx.fontKerning='none';ctx.save();canvas.width=canvas.width;ctx.restore();return ctx.fontKerning==='auto';"
+  },
+  {
+    "id": "font-change",
+    "script": "ctx.fontKerning='none';ctx.font='48px Inter';const a=ctx.measureText('AVATAR').width;ctx.fontKerning='normal';return a>ctx.measureText('AVATAR').width+10;"
+  },
+  {
+    "id": "contexts",
+    "script": "const other=document.createElement('canvas').getContext('2d');ctx.fontKerning='none';return other.fontKerning==='auto'&&ctx.fontKerning==='none';"
+  },
+  {
+    "id": "css-independent",
+    "script": "canvas.style.fontKerning='none';return ctx.fontKerning==='auto';"
+  },
+  {
+    "id": "coercion",
+    "script": "let calls=0;ctx.fontKerning={toString(){calls++;return 'none'}};const a=ctx.measureText('AVATAR').width;ctx.fontKerning='normal';return calls===1&&a>ctx.measureText('AVATAR').width+5;"
+  },
+  {
+    "id": "descriptor",
+    "script": "const d=Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype,'fontKerning');return !!d&&d.enumerable&&d.configurable&&typeof d.get==='function'&&typeof d.set==='function';"
+  },
+  {
+    "id": "symbol",
+    "script": "ctx.fontKerning='none';try{ctx.fontKerning=Symbol('invalid')}catch(error){return error instanceof TypeError&&ctx.fontKerning==='none'}return false;"
+  },
+  {
+    "id": "illegal-receiver",
+    "script": "const d=Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype,'fontKerning');if(!d)return false;let errors=0;for(const action of [()=>d.get.call({}),()=>d.set.call({},'invalid')]){try{action()}catch(error){if(error instanceof TypeError)errors++}}return errors===2;"
+  }
+]

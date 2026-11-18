@@ -1,0 +1,22 @@
+const sample=(id,css='',attributes='value="Input text"',prefix='')=>['input-layout-'+id,'forms',`#line{font:16px/24px Inter}input{font:14px Inter;width:240px;padding:10px;border:1px solid #c8c4be;color:#1a1a1a}#after{height:24px;background:#5645d4}${css}`,`<div id="line">${prefix}<input id="input" ${attributes}></div><div id="after"></div>`];
+export default [
+ sample('normal'), sample('empty','',''),
+ sample('small-font','input{font-size:10px}'),
+ sample('large-font','input{font-size:24px}'),
+ sample('line-height-large','input{line-height:2}'),
+ sample('line-height-small','input{line-height:.5}'),
+ sample('tall','input{height:64px}'),
+ sample('short','input{height:20px;padding:2px}'),
+ sample('no-padding','input{padding:0}'),
+ sample('inline-label','','value="Input text"','Label '),
+ sample('large-label','#line{font-size:32px;line-height:48px}','value="Input text"','Label '),
+ sample('vertical-top','input{vertical-align:top}'),
+ sample('vertical-middle','input{vertical-align:middle}'),
+ sample('search','','type="search" value="Search text"'),
+ sample('email','','type="email" value="mail@example.invalid"'),
+ sample('rtl','input{direction:rtl}'),
+ sample('aligned-center','input{text-align:center}'),
+ sample('aligned-right','input{text-align:right}'),
+ sample('nowrap','input{width:100px}','value="Long input text stays on a single line"'),
+ sample('spaces','','value="Input    text"'),
+];

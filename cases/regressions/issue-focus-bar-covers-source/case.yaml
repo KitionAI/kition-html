@@ -1,0 +1,24 @@
+format: 1
+id: regressions/issue-focus-bar-covers-source
+feature: html.platform.display-modes
+intent: >-
+  Focus shows only the source and the preview, ending above the Focus bar: the panel headings and
+  the diagnostics footer are the frame's chrome there. The headings and the footer stayed in Focus
+  and the bar sat over the HTML source and the footer (kition-sdk's mode smoke: "the Focus bar
+  covers none of the kit's controls" failed with html-source at 1165 and 749 px). The editor also
+  opened in Menus with Single line or Classic chosen, as its tabs came only once the engine
+  listed its commands.
+layer: gate
+source:
+  kind: probe
+  from: kit display modes work (DM-html), web/tests/modes.mjs
+  license: owned
+input: []
+steps:
+  - exec:
+      cmd: [node, web/tests/modes.mjs, chromium]
+expected:
+  - { actual: "out:exec", compare: exit, value: 0 }
+since: "2026-11-16"
+timeout_s: 300
+requires: [chromium]

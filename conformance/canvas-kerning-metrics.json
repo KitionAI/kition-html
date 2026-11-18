@@ -1,0 +1,722 @@
+[
+  {
+    "family": "Inter",
+    "size": 8,
+    "text": "AVATAR",
+    "widths": {
+      "auto": 29.9375,
+      "normal": 29.9375,
+      "none": 32.390625
+    }
+  },
+  {
+    "family": "Inter",
+    "size": 8,
+    "text": "To Wa",
+    "widths": {
+      "auto": 23.5546875,
+      "normal": 23.5546875,
+      "none": 24.5859375
+    }
+  },
+  {
+    "family": "Inter",
+    "size": 8,
+    "text": "office",
+    "widths": {
+      "auto": 21.578125,
+      "normal": 21.578125,
+      "none": 21.890625
+    }
+  },
+  {
+    "family": "Inter",
+    "size": 8,
+    "text": "AV AV",
+    "widths": {
+      "auto": 23.234375,
+      "normal": 23.234375,
+      "none": 24.328125
+    }
+  },
+  {
+    "family": "Inter",
+    "size": 12,
+    "text": "AVATAR",
+    "widths": {
+      "auto": 44.90625,
+      "normal": 44.90625,
+      "none": 48.5859375
+    }
+  },
+  {
+    "family": "Inter",
+    "size": 12,
+    "text": "To Wa",
+    "widths": {
+      "auto": 35.33203125,
+      "normal": 35.33203125,
+      "none": 36.87890625
+    }
+  },
+  {
+    "family": "Inter",
+    "size": 12,
+    "text": "office",
+    "widths": {
+      "auto": 32.3671875,
+      "normal": 32.3671875,
+      "none": 32.8359375
+    }
+  },
+  {
+    "family": "Inter",
+    "size": 12,
+    "text": "AV AV",
+    "widths": {
+      "auto": 34.8515625,
+      "normal": 34.8515625,
+      "none": 36.4921875
+    }
+  },
+  {
+    "family": "Inter",
+    "size": 16,
+    "text": "AVATAR",
+    "widths": {
+      "auto": 59.3828125,
+      "normal": 59.3828125,
+      "none": 64.43841552734375
+    }
+  },
+  {
+    "family": "Inter",
+    "size": 16,
+    "text": "To Wa",
+    "widths": {
+      "auto": 46.689300537109375,
+      "normal": 46.689300537109375,
+      "none": 48.821258544921875
+    }
+  },
+  {
+    "family": "Inter",
+    "size": 16,
+    "text": "office",
+    "widths": {
+      "auto": 42.62251281738281,
+      "normal": 42.62251281738281,
+      "none": 43.23014831542969
+    }
+  },
+  {
+    "family": "Inter",
+    "size": 16,
+    "text": "AV AV",
+    "widths": {
+      "auto": 46.04864501953125,
+      "normal": 46.04864501953125,
+      "none": 48.34033203125
+    }
+  },
+  {
+    "family": "Inter",
+    "size": 20,
+    "text": "AVATAR",
+    "widths": {
+      "auto": 72.99815368652344,
+      "normal": 72.99815368652344,
+      "none": 79.69081115722656
+    }
+  },
+  {
+    "family": "Inter",
+    "size": 20,
+    "text": "To Wa",
+    "widths": {
+      "auto": 57.311248779296875,
+      "normal": 57.311248779296875,
+      "none": 60.1497802734375
+    }
+  },
+  {
+    "family": "Inter",
+    "size": 20,
+    "text": "office",
+    "widths": {
+      "auto": 51.943450927734375,
+      "normal": 51.943450927734375,
+      "none": 52.65960693359375
+    }
+  },
+  {
+    "family": "Inter",
+    "size": 20,
+    "text": "AV AV",
+    "widths": {
+      "auto": 56.51051330566406,
+      "normal": 56.51051330566406,
+      "none": 59.63548278808594
+    }
+  },
+  {
+    "family": "Inter",
+    "size": 32,
+    "text": "AVATAR",
+    "widths": {
+      "auto": 110.890625,
+      "normal": 110.890625,
+      "none": 123.390625
+    }
+  },
+  {
+    "family": "Inter",
+    "size": 32,
+    "text": "To Wa",
+    "widths": {
+      "auto": 86.65625,
+      "normal": 86.65625,
+      "none": 92.03125
+    }
+  },
+  {
+    "family": "Inter",
+    "size": 32,
+    "text": "office",
+    "widths": {
+      "auto": 76.703125,
+      "normal": 76.703125,
+      "none": 77.640625
+    }
+  },
+  {
+    "family": "Inter",
+    "size": 32,
+    "text": "AV AV",
+    "widths": {
+      "auto": 85.375,
+      "normal": 85.375,
+      "none": 91.625
+    }
+  },
+  {
+    "family": "Inter",
+    "size": 48,
+    "text": "AVATAR",
+    "widths": {
+      "auto": 166.3359375,
+      "normal": 166.3359375,
+      "none": 185.0859375
+    }
+  },
+  {
+    "family": "Inter",
+    "size": 48,
+    "text": "To Wa",
+    "widths": {
+      "auto": 129.984375,
+      "normal": 129.984375,
+      "none": 138.046875
+    }
+  },
+  {
+    "family": "Inter",
+    "size": 48,
+    "text": "office",
+    "widths": {
+      "auto": 115.0546875,
+      "normal": 115.0546875,
+      "none": 116.4609375
+    }
+  },
+  {
+    "family": "Inter",
+    "size": 48,
+    "text": "AV AV",
+    "widths": {
+      "auto": 128.0625,
+      "normal": 128.0625,
+      "none": 137.4375
+    }
+  },
+  {
+    "family": "Lora",
+    "size": 8,
+    "text": "AVATAR",
+    "widths": {
+      "auto": 29.343963623046875,
+      "normal": 29.343963623046875,
+      "none": 30.3919677734375
+    }
+  },
+  {
+    "family": "Lora",
+    "size": 8,
+    "text": "To Wa",
+    "widths": {
+      "auto": 23.2879638671875,
+      "normal": 23.2879638671875,
+      "none": 23.991958618164062
+    }
+  },
+  {
+    "family": "Lora",
+    "size": 8,
+    "text": "office",
+    "widths": {
+      "auto": 20.959991455078125,
+      "normal": 20.959991455078125,
+      "none": 20.959976196289062
+    }
+  },
+  {
+    "family": "Lora",
+    "size": 8,
+    "text": "AV AV",
+    "widths": {
+      "auto": 21.943984985351562,
+      "normal": 21.943984985351562,
+      "none": 22.567977905273438
+    }
+  },
+  {
+    "family": "Lora",
+    "size": 12,
+    "text": "AVATAR",
+    "widths": {
+      "auto": 44.01597595214844,
+      "normal": 44.01597595214844,
+      "none": 45.58796691894531
+    }
+  },
+  {
+    "family": "Lora",
+    "size": 12,
+    "text": "To Wa",
+    "widths": {
+      "auto": 34.93194580078125,
+      "normal": 34.93194580078125,
+      "none": 35.987945556640625
+    }
+  },
+  {
+    "family": "Lora",
+    "size": 12,
+    "text": "office",
+    "widths": {
+      "auto": 31.439971923828125,
+      "normal": 31.439971923828125,
+      "none": 31.439971923828125
+    }
+  },
+  {
+    "family": "Lora",
+    "size": 12,
+    "text": "AV AV",
+    "widths": {
+      "auto": 32.91596984863281,
+      "normal": 32.91596984863281,
+      "none": 33.85197448730469
+    }
+  },
+  {
+    "family": "Lora",
+    "size": 16,
+    "text": "AVATAR",
+    "widths": {
+      "auto": 58.687957763671875,
+      "normal": 58.687957763671875,
+      "none": 60.78395080566406
+    }
+  },
+  {
+    "family": "Lora",
+    "size": 16,
+    "text": "To Wa",
+    "widths": {
+      "auto": 46.57597351074219,
+      "normal": 46.57597351074219,
+      "none": 47.98396301269531
+    }
+  },
+  {
+    "family": "Lora",
+    "size": 16,
+    "text": "office",
+    "widths": {
+      "auto": 41.919952392578125,
+      "normal": 41.919952392578125,
+      "none": 41.919952392578125
+    }
+  },
+  {
+    "family": "Lora",
+    "size": 16,
+    "text": "AV AV",
+    "widths": {
+      "auto": 43.88798522949219,
+      "normal": 43.88798522949219,
+      "none": 45.13597106933594
+    }
+  },
+  {
+    "family": "Lora",
+    "size": 20,
+    "text": "AVATAR",
+    "widths": {
+      "auto": 73.35995483398438,
+      "normal": 73.35995483398438,
+      "none": 75.97994995117188
+    }
+  },
+  {
+    "family": "Lora",
+    "size": 20,
+    "text": "To Wa",
+    "widths": {
+      "auto": 58.219970703125,
+      "normal": 58.219970703125,
+      "none": 59.97996520996094
+    }
+  },
+  {
+    "family": "Lora",
+    "size": 20,
+    "text": "office",
+    "widths": {
+      "auto": 52.39996337890625,
+      "normal": 52.39996337890625,
+      "none": 52.39997863769531
+    }
+  },
+  {
+    "family": "Lora",
+    "size": 20,
+    "text": "AV AV",
+    "widths": {
+      "auto": 54.85997009277344,
+      "normal": 54.85997009277344,
+      "none": 56.41996765136719
+    }
+  },
+  {
+    "family": "Lora",
+    "size": 32,
+    "text": "AVATAR",
+    "widths": {
+      "auto": 117.37596130371094,
+      "normal": 117.37596130371094,
+      "none": 121.56797790527344
+    }
+  },
+  {
+    "family": "Lora",
+    "size": 32,
+    "text": "To Wa",
+    "widths": {
+      "auto": 93.1519775390625,
+      "normal": 93.1519775390625,
+      "none": 95.96797180175781
+    }
+  },
+  {
+    "family": "Lora",
+    "size": 32,
+    "text": "office",
+    "widths": {
+      "auto": 83.83995056152344,
+      "normal": 83.83995056152344,
+      "none": 83.83995056152344
+    }
+  },
+  {
+    "family": "Lora",
+    "size": 32,
+    "text": "AV AV",
+    "widths": {
+      "auto": 87.77598571777344,
+      "normal": 87.77598571777344,
+      "none": 90.27198791503906
+    }
+  },
+  {
+    "family": "Lora",
+    "size": 48,
+    "text": "AVATAR",
+    "widths": {
+      "auto": 176.06396484375,
+      "normal": 176.06396484375,
+      "none": 182.35194396972656
+    }
+  },
+  {
+    "family": "Lora",
+    "size": 48,
+    "text": "To Wa",
+    "widths": {
+      "auto": 139.7279510498047,
+      "normal": 139.7279510498047,
+      "none": 143.9519500732422
+    }
+  },
+  {
+    "family": "Lora",
+    "size": 48,
+    "text": "office",
+    "widths": {
+      "auto": 125.75994873046875,
+      "normal": 125.75994873046875,
+      "none": 125.75996398925781
+    }
+  },
+  {
+    "family": "Lora",
+    "size": 48,
+    "text": "AV AV",
+    "widths": {
+      "auto": 131.66397094726562,
+      "normal": 131.66397094726562,
+      "none": 135.407958984375
+    }
+  },
+  {
+    "family": "JetBrainsMono",
+    "size": 8,
+    "text": "AVATAR",
+    "widths": {
+      "auto": 28.7999267578125,
+      "normal": 28.7999267578125,
+      "none": 28.7999267578125
+    }
+  },
+  {
+    "family": "JetBrainsMono",
+    "size": 8,
+    "text": "To Wa",
+    "widths": {
+      "auto": 23.99993896484375,
+      "normal": 23.99993896484375,
+      "none": 23.99993896484375
+    }
+  },
+  {
+    "family": "JetBrainsMono",
+    "size": 8,
+    "text": "office",
+    "widths": {
+      "auto": 28.7999267578125,
+      "normal": 28.7999267578125,
+      "none": 28.7999267578125
+    }
+  },
+  {
+    "family": "JetBrainsMono",
+    "size": 8,
+    "text": "AV AV",
+    "widths": {
+      "auto": 23.99993896484375,
+      "normal": 23.99993896484375,
+      "none": 23.99993896484375
+    }
+  },
+  {
+    "family": "JetBrainsMono",
+    "size": 12,
+    "text": "AVATAR",
+    "widths": {
+      "auto": 43.199981689453125,
+      "normal": 43.199981689453125,
+      "none": 43.199981689453125
+    }
+  },
+  {
+    "family": "JetBrainsMono",
+    "size": 12,
+    "text": "To Wa",
+    "widths": {
+      "auto": 35.99998474121094,
+      "normal": 35.99998474121094,
+      "none": 35.99998474121094
+    }
+  },
+  {
+    "family": "JetBrainsMono",
+    "size": 12,
+    "text": "office",
+    "widths": {
+      "auto": 43.199981689453125,
+      "normal": 43.199981689453125,
+      "none": 43.199981689453125
+    }
+  },
+  {
+    "family": "JetBrainsMono",
+    "size": 12,
+    "text": "AV AV",
+    "widths": {
+      "auto": 35.99998474121094,
+      "normal": 35.99998474121094,
+      "none": 35.99998474121094
+    }
+  },
+  {
+    "family": "JetBrainsMono",
+    "size": 16,
+    "text": "AVATAR",
+    "widths": {
+      "auto": 57.599945068359375,
+      "normal": 57.599945068359375,
+      "none": 57.599945068359375
+    }
+  },
+  {
+    "family": "JetBrainsMono",
+    "size": 16,
+    "text": "To Wa",
+    "widths": {
+      "auto": 47.99995422363281,
+      "normal": 47.99995422363281,
+      "none": 47.99995422363281
+    }
+  },
+  {
+    "family": "JetBrainsMono",
+    "size": 16,
+    "text": "office",
+    "widths": {
+      "auto": 57.599945068359375,
+      "normal": 57.599945068359375,
+      "none": 57.599945068359375
+    }
+  },
+  {
+    "family": "JetBrainsMono",
+    "size": 16,
+    "text": "AV AV",
+    "widths": {
+      "auto": 47.99995422363281,
+      "normal": 47.99995422363281,
+      "none": 47.99995422363281
+    }
+  },
+  {
+    "family": "JetBrainsMono",
+    "size": 20,
+    "text": "AVATAR",
+    "widths": {
+      "auto": 72,
+      "normal": 72,
+      "none": 72
+    }
+  },
+  {
+    "family": "JetBrainsMono",
+    "size": 20,
+    "text": "To Wa",
+    "widths": {
+      "auto": 60,
+      "normal": 60,
+      "none": 60
+    }
+  },
+  {
+    "family": "JetBrainsMono",
+    "size": 20,
+    "text": "office",
+    "widths": {
+      "auto": 72,
+      "normal": 72,
+      "none": 72
+    }
+  },
+  {
+    "family": "JetBrainsMono",
+    "size": 20,
+    "text": "AV AV",
+    "widths": {
+      "auto": 60,
+      "normal": 60,
+      "none": 60
+    }
+  },
+  {
+    "family": "JetBrainsMono",
+    "size": 32,
+    "text": "AVATAR",
+    "widths": {
+      "auto": 115.19998168945312,
+      "normal": 115.19998168945312,
+      "none": 115.19998168945312
+    }
+  },
+  {
+    "family": "JetBrainsMono",
+    "size": 32,
+    "text": "To Wa",
+    "widths": {
+      "auto": 95.99998474121094,
+      "normal": 95.99998474121094,
+      "none": 95.99998474121094
+    }
+  },
+  {
+    "family": "JetBrainsMono",
+    "size": 32,
+    "text": "office",
+    "widths": {
+      "auto": 115.19998168945312,
+      "normal": 115.19998168945312,
+      "none": 115.19998168945312
+    }
+  },
+  {
+    "family": "JetBrainsMono",
+    "size": 32,
+    "text": "AV AV",
+    "widths": {
+      "auto": 95.99998474121094,
+      "normal": 95.99998474121094,
+      "none": 95.99998474121094
+    }
+  },
+  {
+    "family": "JetBrainsMono",
+    "size": 48,
+    "text": "AVATAR",
+    "widths": {
+      "auto": 172.7999267578125,
+      "normal": 172.7999267578125,
+      "none": 172.7999267578125
+    }
+  },
+  {
+    "family": "JetBrainsMono",
+    "size": 48,
+    "text": "To Wa",
+    "widths": {
+      "auto": 143.99993896484375,
+      "normal": 143.99993896484375,
+      "none": 143.99993896484375
+    }
+  },
+  {
+    "family": "JetBrainsMono",
+    "size": 48,
+    "text": "office",
+    "widths": {
+      "auto": 172.7999267578125,
+      "normal": 172.7999267578125,
+      "none": 172.7999267578125
+    }
+  },
+  {
+    "family": "JetBrainsMono",
+    "size": 48,
+    "text": "AV AV",
+    "widths": {
+      "auto": 143.99993896484375,
+      "normal": 143.99993896484375,
+      "none": 143.99993896484375
+    }
+  }
+]

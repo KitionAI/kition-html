@@ -1,0 +1,1747 @@
+[
+  {
+    "id": "regroup",
+    "body": "<select id=s><option id=a value=a>A</option><option id=b value=b>B</option><option id=c value=c>C</option></select>",
+    "script": "const s=document.getElementById('s'),a=document.getElementById('a'),b=document.getElementById('b'),c=document.getElementById('c'),trace=[];const snap=()=>trace.push({index:s.selectedIndex,value:s.value,states:[...s.querySelectorAll('option')].map(o=>[o.value,o.selected,o.defaultSelected])});snap();const g=document.createElement('optgroup');while(s.firstChild){g.appendChild(s.firstChild);snap()}s.appendChild(g);snap()",
+    "expected": [
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "b",
+        "states": [
+          [
+            "b",
+            true,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "c",
+        "states": [
+          [
+            "c",
+            true,
+            false
+          ]
+        ]
+      },
+      {
+        "index": -1,
+        "value": "",
+        "states": []
+      },
+      {
+        "index": 2,
+        "value": "c",
+        "states": [
+          [
+            "a",
+            false,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            true,
+            false
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "remove-reinsert",
+    "body": "<select id=s><option id=a value=a>A</option><option id=b value=b>B</option><option id=c value=c>C</option></select>",
+    "script": "const s=document.getElementById('s'),a=document.getElementById('a'),b=document.getElementById('b'),c=document.getElementById('c'),trace=[];const snap=()=>trace.push({index:s.selectedIndex,value:s.value,states:[...s.querySelectorAll('option')].map(o=>[o.value,o.selected,o.defaultSelected])});snap();a.remove();snap();s.appendChild(a);snap()",
+    "expected": [
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "b",
+        "states": [
+          [
+            "b",
+            true,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 2,
+        "value": "a",
+        "states": [
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ],
+          [
+            "a",
+            true,
+            false
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "move-first-last",
+    "body": "<select id=s><option id=a value=a>A</option><option id=b value=b>B</option><option id=c value=c>C</option></select>",
+    "script": "const s=document.getElementById('s'),a=document.getElementById('a'),b=document.getElementById('b'),c=document.getElementById('c'),trace=[];const snap=()=>trace.push({index:s.selectedIndex,value:s.value,states:[...s.querySelectorAll('option')].map(o=>[o.value,o.selected,o.defaultSelected])});snap();s.appendChild(a);snap()",
+    "expected": [
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 2,
+        "value": "a",
+        "states": [
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ],
+          [
+            "a",
+            true,
+            false
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "prepend-selected",
+    "body": "<select id=s><option id=a value=a>A</option><option id=b value=b>B</option><option id=c value=c>C</option></select>",
+    "script": "const s=document.getElementById('s'),a=document.getElementById('a'),b=document.getElementById('b'),c=document.getElementById('c'),trace=[];const snap=()=>trace.push({index:s.selectedIndex,value:s.value,states:[...s.querySelectorAll('option')].map(o=>[o.value,o.selected,o.defaultSelected])});snap();c.selected=true;snap();s.insertBefore(c,a);snap()",
+    "expected": [
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 2,
+        "value": "c",
+        "states": [
+          [
+            "a",
+            false,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            true,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "c",
+        "states": [
+          [
+            "c",
+            true,
+            false
+          ],
+          [
+            "a",
+            false,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "clear-insert",
+    "body": "<select id=s><option id=a value=a>A</option><option id=b value=b>B</option><option id=c value=c>C</option></select>",
+    "script": "const s=document.getElementById('s'),a=document.getElementById('a'),b=document.getElementById('b'),c=document.getElementById('c'),trace=[];const snap=()=>trace.push({index:s.selectedIndex,value:s.value,states:[...s.querySelectorAll('option')].map(o=>[o.value,o.selected,o.defaultSelected])});snap();s.selectedIndex=-1;snap();const n=document.createElement('option');n.textContent='D';s.appendChild(n);snap()",
+    "expected": [
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": -1,
+        "value": "",
+        "states": [
+          [
+            "a",
+            false,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ],
+          [
+            "D",
+            false,
+            false
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "clear-text",
+    "body": "<select id=s><option id=a value=a>A</option><option id=b value=b>B</option><option id=c value=c>C</option></select>",
+    "script": "const s=document.getElementById('s'),a=document.getElementById('a'),b=document.getElementById('b'),c=document.getElementById('c'),trace=[];const snap=()=>trace.push({index:s.selectedIndex,value:s.value,states:[...s.querySelectorAll('option')].map(o=>[o.value,o.selected,o.defaultSelected])});snap();s.selectedIndex=-1;snap();a.textContent='AA';snap()",
+    "expected": [
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": -1,
+        "value": "",
+        "states": [
+          [
+            "a",
+            false,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": -1,
+        "value": "",
+        "states": [
+          [
+            "a",
+            false,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "clear-remove",
+    "body": "<select id=s><option id=a value=a>A</option><option id=b value=b>B</option><option id=c value=c>C</option></select>",
+    "script": "const s=document.getElementById('s'),a=document.getElementById('a'),b=document.getElementById('b'),c=document.getElementById('c'),trace=[];const snap=()=>trace.push({index:s.selectedIndex,value:s.value,states:[...s.querySelectorAll('option')].map(o=>[o.value,o.selected,o.defaultSelected])});snap();s.selectedIndex=-1;snap();c.remove();snap()",
+    "expected": [
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": -1,
+        "value": "",
+        "states": [
+          [
+            "a",
+            false,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "selected-false",
+    "body": "<select id=s><option id=a value=a>A</option><option id=b value=b>B</option><option id=c value=c>C</option></select>",
+    "script": "const s=document.getElementById('s'),a=document.getElementById('a'),b=document.getElementById('b'),c=document.getElementById('c'),trace=[];const snap=()=>trace.push({index:s.selectedIndex,value:s.value,states:[...s.querySelectorAll('option')].map(o=>[o.value,o.selected,o.defaultSelected])});snap();a.selected=false;snap();c.selected=true;snap();c.selected=false;snap()",
+    "expected": [
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 2,
+        "value": "c",
+        "states": [
+          [
+            "a",
+            false,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            true,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "default-after-live",
+    "body": "<select id=s><option id=a value=a>A</option><option id=b value=b>B</option><option id=c value=c>C</option></select>",
+    "script": "const s=document.getElementById('s'),a=document.getElementById('a'),b=document.getElementById('b'),c=document.getElementById('c'),trace=[];const snap=()=>trace.push({index:s.selectedIndex,value:s.value,states:[...s.querySelectorAll('option')].map(o=>[o.value,o.selected,o.defaultSelected])});snap();c.selected=true;snap();a.defaultSelected=true;snap();c.defaultSelected=true;snap();c.defaultSelected=false;snap()",
+    "expected": [
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 2,
+        "value": "c",
+        "states": [
+          [
+            "a",
+            false,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            true,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            true
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            true
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            true
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            true
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "index-dirtiness",
+    "body": "<select id=s><option id=a value=a>A</option><option id=b value=b>B</option><option id=c value=c>C</option></select>",
+    "script": "const s=document.getElementById('s'),a=document.getElementById('a'),b=document.getElementById('b'),c=document.getElementById('c'),trace=[];const snap=()=>trace.push({index:s.selectedIndex,value:s.value,states:[...s.querySelectorAll('option')].map(o=>[o.value,o.selected,o.defaultSelected])});snap();s.selectedIndex=2;snap();a.defaultSelected=true;snap();c.defaultSelected=true;snap()",
+    "expected": [
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 2,
+        "value": "c",
+        "states": [
+          [
+            "a",
+            false,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            true,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            true
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            true
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            true
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "value-dirtiness",
+    "body": "<select id=s><option id=a value=a>A</option><option id=b value=b>B</option><option id=c value=c>C</option></select>",
+    "script": "const s=document.getElementById('s'),a=document.getElementById('a'),b=document.getElementById('b'),c=document.getElementById('c'),trace=[];const snap=()=>trace.push({index:s.selectedIndex,value:s.value,states:[...s.querySelectorAll('option')].map(o=>[o.value,o.selected,o.defaultSelected])});snap();s.value='c';snap();a.defaultSelected=true;snap();c.defaultSelected=true;snap()",
+    "expected": [
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 2,
+        "value": "c",
+        "states": [
+          [
+            "a",
+            false,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            true,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            true
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            true
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            true
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "multiple-toggle",
+    "body": "<select id=s multiple><option id=a value=a>A</option><option id=b value=b>B</option><option id=c value=c>C</option></select>",
+    "script": "const s=document.getElementById('s'),a=document.getElementById('a'),b=document.getElementById('b'),c=document.getElementById('c'),trace=[];const snap=()=>trace.push({index:s.selectedIndex,value:s.value,states:[...s.querySelectorAll('option')].map(o=>[o.value,o.selected,o.defaultSelected])});snap();a.selected=true;c.selected=true;snap();s.removeAttribute('multiple');snap();s.setAttribute('multiple','');snap()",
+    "expected": [
+      {
+        "index": -1,
+        "value": "",
+        "states": [
+          [
+            "a",
+            false,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            true,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "size-toggle",
+    "body": "<select id=s size=3><option id=a value=a>A</option><option id=b value=b>B</option><option id=c value=c>C</option></select>",
+    "script": "const s=document.getElementById('s'),a=document.getElementById('a'),b=document.getElementById('b'),c=document.getElementById('c'),trace=[];const snap=()=>trace.push({index:s.selectedIndex,value:s.value,states:[...s.querySelectorAll('option')].map(o=>[o.value,o.selected,o.defaultSelected])});snap();s.setAttribute('size','1');snap();s.setAttribute('size','3');snap();s.selectedIndex=-1;snap();s.setAttribute('size','2');snap();s.setAttribute('size','1');snap()",
+    "expected": [
+      {
+        "index": -1,
+        "value": "",
+        "states": [
+          [
+            "a",
+            false,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": -1,
+        "value": "",
+        "states": [
+          [
+            "a",
+            false,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": -1,
+        "value": "",
+        "states": [
+          [
+            "a",
+            false,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "disabled-toggle",
+    "body": "<select id=s><option id=a value=a>A</option><option id=b value=b>B</option><option id=c value=c>C</option></select>",
+    "script": "const s=document.getElementById('s'),a=document.getElementById('a'),b=document.getElementById('b'),c=document.getElementById('c'),trace=[];const snap=()=>trace.push({index:s.selectedIndex,value:s.value,states:[...s.querySelectorAll('option')].map(o=>[o.value,o.selected,o.defaultSelected])});snap();a.disabled=true;snap();a.disabled=false;snap()",
+    "expected": [
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "group-selected-insert",
+    "body": "<select id=s><option id=a value=a>A</option><option id=b value=b>B</option><option id=c value=c>C</option></select>",
+    "script": "const s=document.getElementById('s'),a=document.getElementById('a'),b=document.getElementById('b'),c=document.getElementById('c'),trace=[];const snap=()=>trace.push({index:s.selectedIndex,value:s.value,states:[...s.querySelectorAll('option')].map(o=>[o.value,o.selected,o.defaultSelected])});snap();const g=document.createElement('optgroup');g.innerHTML='<option selected value=x>X</option><option selected value=y>Y</option>';s.insertBefore(g,a);snap()",
+    "expected": [
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 1,
+        "value": "y",
+        "states": [
+          [
+            "x",
+            false,
+            true
+          ],
+          [
+            "y",
+            true,
+            true
+          ],
+          [
+            "a",
+            false,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "detach-selected",
+    "body": "<select id=s><option id=a value=a>A</option><option id=b value=b>B</option><option id=c value=c>C</option></select>",
+    "script": "const s=document.getElementById('s'),a=document.getElementById('a'),b=document.getElementById('b'),c=document.getElementById('c'),trace=[];const snap=()=>trace.push({index:s.selectedIndex,value:s.value,states:[...s.querySelectorAll('option')].map(o=>[o.value,o.selected,o.defaultSelected])});snap();a.remove();snap();trace.push({detached:a.selected,default:a.defaultSelected})",
+    "expected": [
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "b",
+        "states": [
+          [
+            "b",
+            true,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "detached": true,
+        "default": false
+      }
+    ]
+  },
+  {
+    "id": "replace-options",
+    "body": "<select id=s><option id=a value=a>A</option><option id=b value=b>B</option><option id=c value=c>C</option></select>",
+    "script": "const s=document.getElementById('s'),a=document.getElementById('a'),b=document.getElementById('b'),c=document.getElementById('c'),trace=[];const snap=()=>trace.push({index:s.selectedIndex,value:s.value,states:[...s.querySelectorAll('option')].map(o=>[o.value,o.selected,o.defaultSelected])});snap();s.replaceChildren(c,b,a);snap()",
+    "expected": [
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 2,
+        "value": "a",
+        "states": [
+          [
+            "c",
+            false,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "a",
+            true,
+            false
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "disabled-initial",
+    "body": "<select id=s><option id=a disabled>A</option><optgroup disabled><option id=b>B</option></optgroup><option id=c>C</option></select>",
+    "script": "const s=document.getElementById('s'),a=document.getElementById('a'),b=document.getElementById('b'),c=document.getElementById('c'),trace=[];const snap=()=>trace.push({index:s.selectedIndex,value:s.value,states:[...s.querySelectorAll('option')].map(o=>[o.value,o.selected,o.defaultSelected])});snap();",
+    "expected": [
+      {
+        "index": 2,
+        "value": "C",
+        "states": [
+          [
+            "A",
+            false,
+            false
+          ],
+          [
+            "B",
+            false,
+            false
+          ],
+          [
+            "C",
+            true,
+            false
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "default-remove",
+    "body": "<select id=s><option id=a selected>A</option><option id=b selected>B</option><option id=c>C</option></select>",
+    "script": "const s=document.getElementById('s'),a=document.getElementById('a'),b=document.getElementById('b'),c=document.getElementById('c'),trace=[];const snap=()=>trace.push({index:s.selectedIndex,value:s.value,states:[...s.querySelectorAll('option')].map(o=>[o.value,o.selected,o.defaultSelected])});snap();b.defaultSelected=false;snap();a.defaultSelected=true;snap()",
+    "expected": [
+      {
+        "index": 1,
+        "value": "B",
+        "states": [
+          [
+            "A",
+            false,
+            true
+          ],
+          [
+            "B",
+            true,
+            true
+          ],
+          [
+            "C",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "A",
+        "states": [
+          [
+            "A",
+            true,
+            true
+          ],
+          [
+            "B",
+            false,
+            false
+          ],
+          [
+            "C",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "A",
+        "states": [
+          [
+            "A",
+            true,
+            true
+          ],
+          [
+            "B",
+            false,
+            false
+          ],
+          [
+            "C",
+            false,
+            false
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "transfer",
+    "body": "<select id=s><option id=a value=a>A</option><option id=b value=b>B</option><option id=c value=c>C</option></select><select id=t><option value=x>X</option></select>",
+    "script": "const s=document.getElementById('s'),a=document.getElementById('a'),b=document.getElementById('b'),c=document.getElementById('c'),trace=[];const snap=()=>trace.push({index:s.selectedIndex,value:s.value,states:[...s.querySelectorAll('option')].map(o=>[o.value,o.selected,o.defaultSelected])});snap();const t=document.getElementById('t');t.appendChild(a);snap();trace.push({other:t.value,detached:a.selected})",
+    "expected": [
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "b",
+        "states": [
+          [
+            "b",
+            true,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "other": "a",
+        "detached": true
+      }
+    ]
+  },
+  {
+    "id": "fragment-selected",
+    "body": "<select id=s><option id=a value=a>A</option><option id=b value=b>B</option><option id=c value=c>C</option></select>",
+    "script": "const s=document.getElementById('s'),a=document.getElementById('a'),b=document.getElementById('b'),c=document.getElementById('c'),trace=[];const snap=()=>trace.push({index:s.selectedIndex,value:s.value,states:[...s.querySelectorAll('option')].map(o=>[o.value,o.selected,o.defaultSelected])});snap();const f=document.createDocumentFragment();f.appendChild(a);f.appendChild(b);snap();s.appendChild(f);snap()",
+    "expected": [
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "c",
+        "states": [
+          [
+            "c",
+            true,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 2,
+        "value": "b",
+        "states": [
+          [
+            "c",
+            false,
+            false
+          ],
+          [
+            "a",
+            false,
+            false
+          ],
+          [
+            "b",
+            true,
+            false
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "reset-dirty",
+    "body": "<form id=f><select id=s><option id=a value=a>A</option><option id=b value=b>B</option><option id=c value=c>C</option></select></form>",
+    "script": "const s=document.getElementById('s'),a=document.getElementById('a'),b=document.getElementById('b'),c=document.getElementById('c'),trace=[];const snap=()=>trace.push({index:s.selectedIndex,value:s.value,states:[...s.querySelectorAll('option')].map(o=>[o.value,o.selected,o.defaultSelected])});snap();c.selected=true;a.defaultSelected=true;snap();document.getElementById('f').reset();snap();c.defaultSelected=true;snap()",
+    "expected": [
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            true
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            true
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 2,
+        "value": "c",
+        "states": [
+          [
+            "a",
+            false,
+            true
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            true,
+            true
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "clone-option",
+    "body": "<select id=s><option id=a value=a>A</option><option id=b value=b>B</option><option id=c value=c>C</option></select>",
+    "script": "const s=document.getElementById('s'),a=document.getElementById('a'),b=document.getElementById('b'),c=document.getElementById('c'),trace=[];const snap=()=>trace.push({index:s.selectedIndex,value:s.value,states:[...s.querySelectorAll('option')].map(o=>[o.value,o.selected,o.defaultSelected])});snap();c.selected=true;const clone=c.cloneNode(true);clone.value='copy';s.insertBefore(clone,a);snap();clone.defaultSelected=true;clone.defaultSelected=false;snap()",
+    "expected": [
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 3,
+        "value": "c",
+        "states": [
+          [
+            "copy",
+            false,
+            false
+          ],
+          [
+            "a",
+            false,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            true,
+            false
+          ]
+        ]
+      },
+      {
+        "index": 0,
+        "value": "copy",
+        "states": [
+          [
+            "copy",
+            true,
+            false
+          ],
+          [
+            "a",
+            false,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      }
+    ]
+  },
+  {
+    "id": "checked-selector",
+    "body": "<select id=s><option id=a value=a>A</option><option id=b value=b>B</option><option id=c value=c>C</option></select>",
+    "script": "const s=document.getElementById('s'),a=document.getElementById('a'),b=document.getElementById('b'),c=document.getElementById('c'),trace=[];const snap=()=>trace.push({index:s.selectedIndex,value:s.value,states:[...s.querySelectorAll('option')].map(o=>[o.value,o.selected,o.defaultSelected])});snap();trace.push({checked:s.querySelectorAll(':checked').length});c.selected=true;trace.push({checked:s.querySelector(':checked').value});s.selectedIndex=-1;trace.push({checked:s.querySelectorAll(':checked').length});a.defaultSelected=true;snap()",
+    "expected": [
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            false
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      },
+      {
+        "checked": 1
+      },
+      {
+        "checked": "c"
+      },
+      {
+        "checked": 0
+      },
+      {
+        "index": 0,
+        "value": "a",
+        "states": [
+          [
+            "a",
+            true,
+            true
+          ],
+          [
+            "b",
+            false,
+            false
+          ],
+          [
+            "c",
+            false,
+            false
+          ]
+        ]
+      }
+    ]
+  }
+]

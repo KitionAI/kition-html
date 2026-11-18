@@ -1,0 +1,20 @@
+format: 1
+id: regressions/issue-3
+feature: html.render.inline-layout
+intent: >-
+  Horizontal margin, border and padding of inline elements and of ::before and ::after take room
+  on the line, as in a browser: a span's left margin moves its text by that much, a drawn left
+  border by its width (a width without a border style takes none), and padding widens the span's
+  background on both sides. Before, they were ignored and samples needed display:inline-block.
+layer: gate
+source:
+  kind: issue
+  from: Kition HTML regression suite
+  license: owned
+  note: Showcase finding HT3
+input: []
+steps:
+  - cargo-test: { package: kition-html-kit, test: inline_spacing }
+expected:
+  - { actual: "out:exit", compare: exit, value: 0 }
+since: "2026-11-16"

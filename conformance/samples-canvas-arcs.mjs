@@ -1,0 +1,21 @@
+const sample=(id,code)=>['canvas-arcs-'+id,'javascript','canvas{display:block}',`<canvas id="canvas" width="320" height="200"></canvas><script>const canvas=document.getElementById('canvas'),ctx=canvas.getContext('2d');ctx.fillStyle='#5645d4';ctx.strokeStyle='#5645d4';ctx.lineWidth=8;${code}</script>`,{requires:'javascript'}];
+export default [
+ sample('clockwise',"ctx.moveTo(20,20);ctx.arcTo(240,20,240,160,40);ctx.lineTo(240,160);ctx.stroke();"),
+ sample('counterclockwise',"ctx.moveTo(20,160);ctx.arcTo(240,160,240,20,40);ctx.lineTo(240,20);ctx.stroke();"),
+ sample('acute',"ctx.moveTo(20,20);ctx.arcTo(240,20,100,160,32);ctx.lineTo(100,160);ctx.stroke();"),
+ sample('obtuse',"ctx.moveTo(20,20);ctx.arcTo(160,20,280,160,32);ctx.lineTo(280,160);ctx.stroke();"),
+ sample('large-radius',"ctx.moveTo(20,20);ctx.arcTo(100,20,100,160,100);ctx.lineTo(100,160);ctx.stroke();"),
+ sample('zero-radius',"ctx.moveTo(20,20);ctx.arcTo(240,20,240,160,0);ctx.lineTo(240,160);ctx.stroke();"),
+ sample('empty-path',"ctx.arcTo(20,20,240,160,40);ctx.lineTo(240,160);ctx.stroke();"),
+ sample('same-start',"ctx.moveTo(20,20);ctx.arcTo(20,20,240,160,40);ctx.lineTo(240,160);ctx.stroke();"),
+ sample('same-end',"ctx.moveTo(20,20);ctx.arcTo(240,160,240,160,40);ctx.stroke();"),
+ sample('collinear',"ctx.moveTo(20,20);ctx.arcTo(140,80,260,140,40);ctx.stroke();"),
+ sample('collinear-reverse',"ctx.moveTo(20,20);ctx.arcTo(260,140,140,80,40);ctx.stroke();"),
+ sample('fill',"ctx.moveTo(20,20);ctx.arcTo(260,20,260,160,32);ctx.arcTo(260,160,20,160,32);ctx.arcTo(20,160,20,20,32);ctx.closePath();ctx.fill();"),
+ sample('retained',"const path=new Path2D();path.moveTo(20,20);path.arcTo(240,20,240,160,40);path.lineTo(240,160);ctx.stroke(path);"),
+ sample('scaled',"ctx.scale(1.2,.8);ctx.moveTo(20,20);ctx.arcTo(240,20,240,160,40);ctx.lineTo(240,160);ctx.stroke();"),
+ sample('transform-change',"ctx.moveTo(20,20);ctx.translate(40,20);ctx.arcTo(200,0,200,140,40);ctx.lineTo(200,140);ctx.stroke();"),
+ sample('closed-subpath',"ctx.rect(20,20,100,100);ctx.arcTo(240,20,240,160,40);ctx.lineTo(240,160);ctx.stroke();"),
+ sample('negative-radius',"let rejected=false;try{ctx.arcTo(240,20,240,160,-1)}catch(error){rejected=error.name==='IndexSizeError'}if(rejected)ctx.fillRect(20,20,240,140);"),
+ sample('nonfinite',"ctx.moveTo(20,20);ctx.arcTo(NaN,20,240,160,40);ctx.lineTo(240,160);ctx.stroke();"),
+];

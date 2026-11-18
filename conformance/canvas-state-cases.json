@@ -1,0 +1,186 @@
+[
+  {
+    "id": "globalalpha-bigint",
+    "script": "const key='globalAlpha';ctx[key]=0.5;let errors=0;for(const v of [1n,Object(1n)])try{ctx[key]=v}catch(e){if(e instanceof TypeError)errors++}return errors===2&&ctx[key]===0.5"
+  },
+  {
+    "id": "globalalpha-receiver",
+    "script": "const key='globalAlpha';const set=Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype,key).set;let calls=0;try{set.call({}, {valueOf(){calls++;return 1}})}catch(e){return e instanceof TypeError&&calls===0}return false"
+  },
+  {
+    "id": "globalalpha-invalid",
+    "script": "const key='globalAlpha';ctx[key]=0.5;for(const value of [NaN,Infinity,-Infinity,undefined])ctx[key]=value;return ctx[key]===0.5"
+  },
+  {
+    "id": "globalalpha-coercion",
+    "script": "const key='globalAlpha';let calls=0;ctx[key]={[Symbol.toPrimitive](hint){calls++;if(hint!=='number')throw Error('hint');return '0.5'}};return calls===1&&ctx[key]===0.5"
+  },
+  {
+    "id": "globalalpha-reset",
+    "script": "const key='globalAlpha';ctx[key]={valueOf(){canvas.width=canvas.width;return 0.5}};return ctx[key]===0.5&&ctx.font==='10px sans-serif'"
+  },
+  {
+    "id": "globalalpha-throw",
+    "script": "const key='globalAlpha';ctx[key]=0.5;const sentinel={};try{ctx[key]={valueOf(){throw sentinel}}}catch(e){return e===sentinel&&ctx[key]===0.5}return false"
+  },
+  {
+    "id": "globalalpha-save",
+    "script": "const key='globalAlpha';ctx.save();ctx[key]=0.5;ctx.restore();return ctx[key]===1"
+  },
+  {
+    "id": "linewidth-bigint",
+    "script": "const key='lineWidth';ctx[key]=4;let errors=0;for(const v of [1n,Object(1n)])try{ctx[key]=v}catch(e){if(e instanceof TypeError)errors++}return errors===2&&ctx[key]===4"
+  },
+  {
+    "id": "linewidth-receiver",
+    "script": "const key='lineWidth';const set=Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype,key).set;let calls=0;try{set.call({}, {valueOf(){calls++;return 1}})}catch(e){return e instanceof TypeError&&calls===0}return false"
+  },
+  {
+    "id": "linewidth-invalid",
+    "script": "const key='lineWidth';ctx[key]=4;for(const value of [NaN,Infinity,-Infinity,undefined])ctx[key]=value;return ctx[key]===4"
+  },
+  {
+    "id": "linewidth-coercion",
+    "script": "const key='lineWidth';let calls=0;ctx[key]={[Symbol.toPrimitive](hint){calls++;if(hint!=='number')throw Error('hint');return '4'}};return calls===1&&ctx[key]===4"
+  },
+  {
+    "id": "linewidth-reset",
+    "script": "const key='lineWidth';ctx[key]={valueOf(){canvas.width=canvas.width;return 4}};return ctx[key]===4&&ctx.font==='10px sans-serif'"
+  },
+  {
+    "id": "linewidth-throw",
+    "script": "const key='lineWidth';ctx[key]=4;const sentinel={};try{ctx[key]={valueOf(){throw sentinel}}}catch(e){return e===sentinel&&ctx[key]===4}return false"
+  },
+  {
+    "id": "linewidth-save",
+    "script": "const key='lineWidth';ctx.save();ctx[key]=4;ctx.restore();return ctx[key]===1"
+  },
+  {
+    "id": "miterlimit-bigint",
+    "script": "const key='miterLimit';ctx[key]=4;let errors=0;for(const v of [1n,Object(1n)])try{ctx[key]=v}catch(e){if(e instanceof TypeError)errors++}return errors===2&&ctx[key]===4"
+  },
+  {
+    "id": "miterlimit-receiver",
+    "script": "const key='miterLimit';const set=Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype,key).set;let calls=0;try{set.call({}, {valueOf(){calls++;return 1}})}catch(e){return e instanceof TypeError&&calls===0}return false"
+  },
+  {
+    "id": "miterlimit-invalid",
+    "script": "const key='miterLimit';ctx[key]=4;for(const value of [NaN,Infinity,-Infinity,undefined])ctx[key]=value;return ctx[key]===4"
+  },
+  {
+    "id": "miterlimit-coercion",
+    "script": "const key='miterLimit';let calls=0;ctx[key]={[Symbol.toPrimitive](hint){calls++;if(hint!=='number')throw Error('hint');return '4'}};return calls===1&&ctx[key]===4"
+  },
+  {
+    "id": "miterlimit-reset",
+    "script": "const key='miterLimit';ctx[key]={valueOf(){canvas.width=canvas.width;return 4}};return ctx[key]===4&&ctx.font==='10px sans-serif'"
+  },
+  {
+    "id": "miterlimit-throw",
+    "script": "const key='miterLimit';ctx[key]=4;const sentinel={};try{ctx[key]={valueOf(){throw sentinel}}}catch(e){return e===sentinel&&ctx[key]===4}return false"
+  },
+  {
+    "id": "miterlimit-save",
+    "script": "const key='miterLimit';ctx.save();ctx[key]=4;ctx.restore();return ctx[key]===10"
+  },
+  {
+    "id": "linedashoffset-bigint",
+    "script": "const key='lineDashOffset';ctx[key]=4;let errors=0;for(const v of [1n,Object(1n)])try{ctx[key]=v}catch(e){if(e instanceof TypeError)errors++}return errors===2&&ctx[key]===4"
+  },
+  {
+    "id": "linedashoffset-receiver",
+    "script": "const key='lineDashOffset';const set=Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype,key).set;let calls=0;try{set.call({}, {valueOf(){calls++;return 1}})}catch(e){return e instanceof TypeError&&calls===0}return false"
+  },
+  {
+    "id": "linedashoffset-invalid",
+    "script": "const key='lineDashOffset';ctx[key]=4;for(const value of [NaN,Infinity,-Infinity,undefined])ctx[key]=value;return ctx[key]===4"
+  },
+  {
+    "id": "linedashoffset-coercion",
+    "script": "const key='lineDashOffset';let calls=0;ctx[key]={[Symbol.toPrimitive](hint){calls++;if(hint!=='number')throw Error('hint');return '4'}};return calls===1&&ctx[key]===4"
+  },
+  {
+    "id": "linedashoffset-reset",
+    "script": "const key='lineDashOffset';ctx[key]={valueOf(){canvas.width=canvas.width;return 4}};return ctx[key]===4&&ctx.font==='10px sans-serif'"
+  },
+  {
+    "id": "linedashoffset-throw",
+    "script": "const key='lineDashOffset';ctx[key]=4;const sentinel={};try{ctx[key]={valueOf(){throw sentinel}}}catch(e){return e===sentinel&&ctx[key]===4}return false"
+  },
+  {
+    "id": "linedashoffset-save",
+    "script": "const key='lineDashOffset';ctx.save();ctx[key]=4;ctx.restore();return ctx[key]===0"
+  },
+  {
+    "id": "numeric-ranges",
+    "script": "ctx.globalAlpha=0.5;ctx.globalAlpha=2;ctx.globalAlpha=-1;ctx.lineWidth=4;ctx.lineWidth=0;ctx.lineWidth=-2;ctx.miterLimit=4;ctx.miterLimit=0;ctx.miterLimit=-2;ctx.lineDashOffset=-2;return ctx.globalAlpha===0.5&&ctx.lineWidth===4&&ctx.miterLimit===4&&ctx.lineDashOffset===-2"
+  },
+  {
+    "id": "dash-primitives",
+    "script": "let errors=0;for(const v of [undefined,null,4,true,'12',2n,Symbol('dash'),{0:2,length:1}])try{ctx.setLineDash(v)}catch(e){if(e instanceof TypeError)errors++}return errors===8"
+  },
+  {
+    "id": "dash-missing",
+    "script": "try{ctx.setLineDash()}catch(e){return e instanceof TypeError}return false"
+  },
+  {
+    "id": "dash-receiver",
+    "script": "let calls=0;try{ctx.setLineDash.call({}, {[Symbol.iterator](){calls++;return [2,4][Symbol.iterator]()}})}catch(e){return e instanceof TypeError&&calls===0}return false"
+  },
+  {
+    "id": "dash-bigint",
+    "script": "ctx.setLineDash([2,4]);let errors=0;for(const v of [1n,Object(1n)])try{ctx.setLineDash([v])}catch(e){if(e instanceof TypeError)errors++}return errors===2&&ctx.getLineDash().join(',')==='2,4'"
+  },
+  {
+    "id": "dash-order",
+    "script": "const log=[];const values={[Symbol.iterator](){log.push('iterator');let i=0;return {next(){log.push('next'+i);if(i===2)return {done:true};const n=++i;return {done:false,value:{valueOf(){log.push('value'+n);return n}}}}}}};ctx.setLineDash(values);return log.join(',')==='iterator,next0,value1,next1,value2,next2'&&ctx.getLineDash().join(',')==='1,2'"
+  },
+  {
+    "id": "dash-no-close",
+    "script": "const log=[],sentinel={};const values={[Symbol.iterator](){log.push('iterator');return {next(){log.push('next');return {value:{valueOf(){log.push('value');throw sentinel}},done:false}},return(){log.push('return');return {done:true}}}}};try{ctx.setLineDash(values)}catch(e){return e===sentinel&&log.join(',')==='iterator,next,value'}return false"
+  },
+  {
+    "id": "dash-nonfinite",
+    "script": "ctx.setLineDash([2,4]);let calls=0;ctx.setLineDash([NaN,{valueOf(){calls++;return 2}}]);return calls===1&&ctx.getLineDash().join(',')==='2,4'"
+  },
+  {
+    "id": "dash-negative",
+    "script": "ctx.setLineDash([2,4]);let calls=0;ctx.setLineDash([-1,{valueOf(){calls++;return 2}}]);return calls===1&&ctx.getLineDash().join(',')==='2,4'"
+  },
+  {
+    "id": "dash-nonfinite-throw",
+    "script": "const sentinel={};try{ctx.setLineDash([Infinity,{valueOf(){throw sentinel}}])}catch(e){return e===sentinel}return false"
+  },
+  {
+    "id": "dash-generator",
+    "script": "ctx.setLineDash((function*(){yield '2';yield true;yield 3})());return ctx.getLineDash().join(',')==='2,1,3,2,1,3'"
+  },
+  {
+    "id": "dash-reset",
+    "script": "ctx.fillStyle='#5645d4';ctx.setLineDash([{valueOf(){canvas.width=canvas.width;return 2}},4]);return ctx.getLineDash().join(',')==='2,4'&&ctx.fillStyle==='#000000'"
+  },
+  {
+    "id": "dash-nested",
+    "script": "ctx.setLineDash([2,{valueOf(){ctx.setLineDash([8,8]);return 4}}]);return ctx.getLineDash().join(',')==='2,4'"
+  },
+  {
+    "id": "dash-copy-save",
+    "script": "const input=[2,4];ctx.setLineDash(input);input[0]=8;const result=ctx.getLineDash();result[0]=9;ctx.save();ctx.setLineDash([]);ctx.restore();return ctx.getLineDash().join(',')==='2,4'"
+  },
+  {
+    "id": "dash-iterator-access",
+    "script": "let gets=0,calls=0;const input={get [Symbol.iterator](){gets++;return function(){if(this!==input)throw Error('receiver');calls++;return [2,4][Symbol.iterator]()}}};ctx.setLineDash(input);return gets===1&&calls===1&&ctx.getLineDash().join(',')==='2,4'"
+  },
+  {
+    "id": "dash-next-access",
+    "script": "let gets=0,i=0;const input={[Symbol.iterator](){return {get next(){gets++;return function(){return i++===0?{done:false,value:2}:{done:true}}}}}};ctx.setLineDash(input);return gets===1&&ctx.getLineDash().join(',')==='2,2'"
+  },
+  {
+    "id": "dash-invalid-iterator",
+    "script": "let errors=0;for(const input of [{[Symbol.iterator]:4},{[Symbol.iterator](){return 2}},{[Symbol.iterator](){return {next(){return 2}}}}])try{ctx.setLineDash(input)}catch(e){if(e instanceof TypeError)errors++}return errors===3"
+  },
+  {
+    "id": "dash-extra",
+    "script": "let calls=0;ctx.setLineDash([2,4],{valueOf(){calls++;return 8}});return calls===0&&ctx.setLineDash.length===1&&ctx.getLineDash().join(',')==='2,4'"
+  }
+]

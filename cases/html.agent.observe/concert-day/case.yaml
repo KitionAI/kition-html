@@ -1,0 +1,35 @@
+format: 1
+id: html.agent.observe/concert-day
+feature: html.agent.observe
+intent: >-
+  The agent reads the page source through the kit, works out the day from the card's text, and adds it inside the card without disturbing the rest of the page.
+layer: eval
+source:
+  kind: synthetic
+  from: repo:conformance/basic.html
+  license: Apache-2.0
+  note: "A copy of the conformance page: a purple h1 \"Spring concert\" and a card with \"Saturday 8 pm, Town Hall\"."
+input: [input/concert.html]
+steps:
+  - task:
+      prompt: >-
+        In concert.html, add a second paragraph inside the card that says which day of the week the
+        concert is on, written exactly as "Day: <weekday>". Keep everything else as it is.
+      max_turns: 20
+  - file: { path: concert.html, as: page }
+expected:
+  - actual: out:page
+    compare: text
+    value:
+      contains: ["Day: Saturday"]
+      matches: ['class="card"[^>]*>[\s\S]*Day: Saturday[\s\S]*</div>']
+  - actual: out:page
+    compare: text
+    collateral: true
+    value:
+      contains: ["<h1>Spring concert</h1>", "Saturday 8 pm, Town Hall", "border-radius:12px"]
+solution:
+  - tool: html_run
+    args: { path: concert.html, steps: [{ command: html.setSource, params: { source: "<!doctype html>\n<html><head><style>body{margin:24px;font-family:sans-serif;background:#fff}h1{color:#5645d4}.card{border:1px solid #ddd;border-radius:12px;padding:16px}</style></head>\n<body><h1>Spring concert</h1><div class=\"card\"><p>Saturday 8 pm, Town Hall</p><p>Day: Saturday</p></div></body></html>\n" } }] }
+since: "2026-11-16"
+timeout_s: 600

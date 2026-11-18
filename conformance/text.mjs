@@ -1,0 +1,38 @@
+const phrase = 'Kition renders HTML with a shared Rust engine.';
+const paragraph = `${phrase} Inline text wraps across the available width. Typography includes words, punctuation, numbers 0123456789, and ligatures: office affinity.`;
+const table = '<table><caption>Quarterly totals</caption><thead><tr><th>Team</th><th>Count</th><th>Total</th></tr></thead><tbody><tr><td>Design</td><td>12</td><td>240</td></tr><tr><td>Engineering</td><td>8</td><td>160</td></tr></tbody></table>';
+const tableStyle = 'table{width:420px}th,td{border:2px solid #5645d4;padding:12px}th{background:#ede9fa}';
+export default [
+  ['text-variable-weights','typography','p{margin:0 0 12px}p:nth-child(1){font-weight:300}p:nth-child(2){font-weight:600}p:nth-child(3){font-weight:900}', `<p>${phrase}</p><p>${phrase}</p><p>${phrase}</p>`],
+  ['text-font-families','typography','p:nth-child(2){font-family:Lora}p:nth-child(3){font-family:"JetBrains Mono"}', `<p>${phrase}</p><p>${phrase}</p><p>${phrase}</p>`],
+  ['text-synthetic-italic','typography','p{font-style:italic;font-size:26px}',`<p>${phrase}</p>`],
+  ['text-letter-spacing','typography','p{font-size:24px;letter-spacing:3px}',`<p>${phrase}</p>`],
+  ['text-word-spacing','typography','p{font-size:24px;word-spacing:12px}',`<p>${phrase}</p>`],
+  ['text-explicit-line-height','typography','p{width:300px;font-size:20px;line-height:40px;background:#eee}',`<p>${paragraph}</p>`],
+  ['text-ligatures','typography','p{font-family:Lora;font-size:32px}p:nth-child(2){font-variant-ligatures:none}', '<p>office affine difficult ffi fi fl</p><p>office affine difficult ffi fi fl</p>'],
+  ['text-decoration','typography','p{font-size:24px;text-decoration:underline wavy #e5486a 2px;text-underline-offset:6px}',`<p>${phrase}</p>`],
+  ['inline-nested-emphasis','inline','p{width:360px}strong{font-weight:800}em{color:#e5486a;font-style:italic}', '<p>Before <strong>bold text with <em>nested emphasis</em> inside</strong> and normal text afterwards.</p>'],
+  ['inline-baseline-sup-sub','inline','p{font-size:32px}', '<p>H<sub>2</sub>O and x<sup>2</sup> + y<sup>2</sup></p>'],
+  ['inline-white-space-pre','inline','pre{font-family:"JetBrains Mono";white-space:pre;background:#eee}', '<pre>One    two\n  three\n    four\tend</pre>'],
+  ['inline-white-space-pre-wrap','inline','p{width:240px;white-space:pre-wrap;background:#eee}', '<p>Preserved   spaces\nand a line that wraps when it reaches the available width.</p>'],
+  ['inline-word-break','inline','p{width:180px;word-break:break-all;background:#eee}', '<p>Supercalifragilisticexpialidocious0123456789</p>'],
+  ['inline-ellipsis','inline','p{width:240px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:#eee}',`<p>${paragraph}</p>`],
+  ['inline-text-align-justify','inline','p{width:360px;text-align:justify}',`<p>${paragraph}</p>`],
+  ['inline-text-indent','inline','p{width:360px;text-indent:48px}',`<p>${paragraph}</p>`],
+  ['text-shadow','text-extra','p{font-size:36px;color:#5645d4;text-shadow:3px 4px 2px #e5486a88}', '<p>Kition typography</p>'],
+  ['text-transform','text-extra','p{text-transform:uppercase}p:nth-child(2){text-transform:capitalize}', '<p>Mixed Case text</p><p>the quick brown fox</p>'],
+  ['text-vertical-writing','text-extra','p{writing-mode:vertical-rl;height:300px;text-orientation:mixed;font-size:24px}',`<p>${phrase}</p>`],
+  ['text-direction-rtl','text-extra','p{direction:rtl;unicode-bidi:bidi-override;width:360px;font-size:28px}', '<p>ABC 123 DEF 456 GHI</p>'],
+  ['list-unordered-markers','text-extra','li{margin:12px}ul{list-style-type:square}', '<ul><li>First item</li><li>Second item<ul><li>Nested item</li></ul></li></ul>'],
+  ['list-ordered-counters','text-extra','ol{list-style-type:upper-roman}li{margin:12px}', '<ol start="3"><li>Design</li><li>Render</li><li>Compare</li></ol>'],
+  ['generated-before-after','text-extra','.label::before{content:"Before ";color:#5645d4}.label::after{content:" After";color:#e5486a}', '<p class="label">Middle</p>'],
+  ['generated-css-counter','text-extra','section{counter-reset:item}p{counter-increment:item}p::before{content:counter(item,decimal-leading-zero) ". ";color:#5645d4}', '<section><p>Design</p><p>Render</p><p>Compare</p></section>'],
+  ['table-collapse','table',tableStyle+'table{border-collapse:collapse}',table],
+  ['table-border-spacing','table',tableStyle+'table{border-collapse:separate;border-spacing:12px 8px}',table],
+  ['table-fixed-layout','table',tableStyle+'table{table-layout:fixed;border-collapse:collapse}th:first-child{width:220px}',table],
+  ['table-colspan-rowspan','table',tableStyle+'table{border-collapse:collapse}', '<table><tr><th colspan="2">Overview</th><th>Value</th></tr><tr><td rowspan="2">Group</td><td>Alpha</td><td>12</td></tr><tr><td>Beta</td><td>24</td></tr></table>'],
+  ['table-vertical-align','table',tableStyle+'td{height:120px;vertical-align:bottom}td:nth-child(2){vertical-align:middle}td:nth-child(3){vertical-align:top}',table],
+  ['table-caption-bottom','table',tableStyle+'caption{caption-side:bottom;padding:12px;color:#5645d4}',table],
+  ['table-colgroup','table',tableStyle+'table{border-collapse:collapse}', '<table><colgroup><col style="width:220px;background:#ede9fa"><col span="2" style="width:100px;background:#ffe8d4"></colgroup><tr><td>Design</td><td>12</td><td>24</td></tr><tr><td>Render</td><td>36</td><td>48</td></tr></table>'],
+  ['table-empty-cells','table',tableStyle+'table{empty-cells:hide;border-spacing:8px}', '<table><tr><td>Alpha</td><td></td><td>Beta</td></tr><tr><td></td><td>Center</td><td></td></tr></table>'],
+];

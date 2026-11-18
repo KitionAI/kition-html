@@ -1,0 +1,17 @@
+format: 1
+id: html.collab.replica/concurrent-edits
+feature: html.collab.replica
+intent: >-
+  Two replicas of one page that change different parts of the source at once converge on a page holding both edits, and the merged change is a new revision the preview sees.
+layer: unit
+source:
+  kind: synthetic
+  from: crates/kition-html-kit/src/replica_tests.rs (kit-matrix E2 and K3)
+  license: Apache-2.0
+input: []
+steps:
+  - cargo-test: { package: kition-html-kit, filter: "replica_tests::concurrent_edits_to_different_parts_of_the_page_both_survive" }
+expected:
+  - actual: out:exit
+    compare: exit
+since: "2026-11-16"

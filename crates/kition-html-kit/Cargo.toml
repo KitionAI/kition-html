@@ -1,0 +1,24 @@
+[package]
+name = "kition-html-kit"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version = "1.95"
+
+[lib]
+crate-type = ["rlib", "cdylib"]
+
+[dependencies]
+kition-html-engine = { path = "../kition-html-engine" }
+kition-kit.workspace = true
+serde_json.workspace = true
+
+[lints]
+workspace = true
+
+[dev-dependencies]
+# The showcase sample builder (examples/showcase.rs) saves its thumbnails.
+image = { version = "0.25", default-features = false, features = ["png"] }
+# The conformance fixtures' golden previews (src/conformance.rs).
+png.workspace = true

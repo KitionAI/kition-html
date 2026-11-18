@@ -1,0 +1,15 @@
+[package]
+name = "blitz-html"
+version = "0.3.0-beta.4"
+edition = "2024"
+license = "Apache-2.0 OR MIT"
+publish = false
+[features]
+accessibility = ["blitz-dom/accessibility"]
+tracing = ["dep:tracing", "blitz-dom/tracing"]
+[dependencies]
+blitz-dom = { git = "https://github.com/DioxusLabs/blitz", rev = "21edc92d90d8f8bedadd3f9ecb14b1ad950952eb", default-features = false }
+blitz-traits = { git = "https://github.com/DioxusLabs/blitz", rev = "21edc92d90d8f8bedadd3f9ecb14b1ad950952eb", default-features = false }
+html5ever = "0.40"
+xml5ever = "0.40"
+tracing = { version = "0.1", optional = true }

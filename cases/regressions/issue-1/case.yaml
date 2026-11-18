@@ -1,0 +1,23 @@
+format: 1
+id: regressions/issue-1
+feature: html.render.fonts
+intent: >-
+  A host adds fonts natively with `add_font` (`addFont` in the web build), and the CSS generic
+  families map to the faces it has: `serif` and `monospace` draw with the serif and monospace
+  faces added, Chinese and emoji with the Chinese and emoji faces, and a page already open picks
+  them up. A page's own font resources take the generic family their family name says. Before,
+  only Inter was available: serif and monospace stacks fell back to Inter, and Chinese and emoji
+  drew as boxes. Needs the kition-fonts checkout (KITION_FONTS_DIR, else ../kition-fonts).
+layer: gate
+source:
+  kind: issue
+  from: Kition HTML regression suite
+  license: owned
+  note: Showcase finding HT1
+input: []
+steps:
+  - cargo-test: { package: kition-html-kit, test: fonts }
+  - cargo-test: { package: kition-html-kit, test: font_resources }
+expected:
+  - { actual: "out:exit", compare: exit, value: 0 }
+since: "2026-11-16"

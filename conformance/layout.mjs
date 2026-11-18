@@ -1,0 +1,38 @@
+const blocks = '<div class="a"></div><div class="b"></div><div class="c"></div>';
+const cells = '<i>A</i><i>B</i><i>C</i><i>D</i><i>E</i><i>F</i>';
+const flex = 'section{display:flex;width:360px;height:180px;background:#eee}section>i{display:block;background:#5645d4;color:white;padding:12px;border:2px solid white}';
+const grid = 'section{display:grid;width:420px;gap:12px}section>i{display:block;background:#5645d4;color:white;padding:12px}';
+export default [
+  ['box-content-box','box-model','.a{box-sizing:content-box;width:180px;height:100px;padding:20px;border:8px solid #e5486a}', '<div class="a"></div>'],
+  ['box-border-box','box-model','.a{box-sizing:border-box;width:180px;height:100px;padding:20px;border:8px solid #e5486a}', '<div class="a"></div>'],
+  ['box-margin-collapse','box-model','.a{margin-bottom:32px}.b{margin-top:48px}',blocks],
+  ['box-negative-margin','box-model','.b{margin:-20px 0 0 48px}',blocks],
+  ['box-percent-sizing','box-model','section{width:400px;height:240px;background:#eee}.a{width:50%;height:50%;padding:5%}', '<section><div class="a"></div></section>'],
+  ['box-min-max-width','box-model','.a{width:80%;min-width:100px;max-width:240px}.b{width:10%;min-width:180px}',blocks],
+  ['box-aspect-ratio','box-model','.a{width:240px;height:auto;aspect-ratio:16/9}', '<div class="a"></div>'],
+  ['box-auto-centering','box-model','.a{margin:20px auto;width:240px}', '<div class="a"></div>'],
+  ['flex-row-gap','flex',flex+'section{gap:16px}',`<section>${cells}</section>`],
+  ['flex-column','flex',flex+'section{flex-direction:column;height:360px}',`<section>${cells}</section>`],
+  ['flex-wrap','flex',flex+'section{flex-wrap:wrap}i{width:110px}',`<section>${cells}</section>`],
+  ['flex-grow','flex',flex+'i{flex:1}i:nth-child(2){flex:3}',`<section>${cells}</section>`],
+  ['flex-shrink','flex',flex+'i{width:160px;flex-shrink:1}i:first-child{flex-shrink:0}',`<section>${cells}</section>`],
+  ['flex-space-between','flex',flex+'section{justify-content:space-between;width:540px}',`<section>${cells}</section>`],
+  ['flex-align-baseline','flex',flex+'section{align-items:baseline}i:nth-child(2){font-size:40px}',`<section>${cells}</section>`],
+  ['flex-order-reverse','flex',flex+'section{flex-direction:row-reverse}i:first-child{order:2}',`<section>${cells}</section>`],
+  ['grid-fr-tracks','grid',grid+'section{grid-template-columns:1fr 2fr 1fr}',`<section>${cells}</section>`],
+  ['grid-spanning','grid',grid+'section{grid-template-columns:repeat(3,1fr)}i:first-child{grid-column:span 2;grid-row:span 2}',`<section>${cells}</section>`],
+  ['grid-template-areas','grid',grid+'section{grid-template-areas:"head head" "side main";grid-template-columns:120px 1fr}i:nth-child(1){grid-area:head}i:nth-child(2){grid-area:side}i:nth-child(3){grid-area:main}', '<section><i>Header</i><i>Aside</i><i>Main</i></section>'],
+  ['grid-auto-fit','grid',grid+'section{grid-template-columns:repeat(auto-fit,minmax(110px,1fr))}',`<section>${cells}</section>`],
+  ['grid-dense-placement','grid',grid+'section{grid-template-columns:repeat(3,1fr);grid-auto-flow:dense}i:nth-child(2),i:nth-child(4){grid-column:span 2}',`<section>${cells}</section>`],
+  ['grid-align-items','grid',grid+'section{height:300px;grid-template-columns:repeat(3,1fr);align-items:center;justify-items:end}i:nth-child(2){align-self:stretch}',`<section>${cells}</section>`],
+  ['grid-minmax','grid',grid+'section{grid-template-columns:minmax(80px,120px) minmax(140px,1fr);grid-auto-rows:minmax(64px,auto)}',`<section>${cells}</section>`],
+  ['grid-subgrid','grid',grid+'section{grid-template-columns:80px 1fr 120px}article{display:grid;grid-column:span 3;grid-template-columns:subgrid}article>i{background:#e5486a}',`<section>${cells}<article><i>G</i><i>H</i><i>I</i></article></section>`],
+  ['position-relative','position','.b{position:relative;left:60px;top:-30px}',blocks],
+  ['position-absolute-inset','position','section{position:relative;width:320px;height:240px;background:#eee}.a{position:absolute;right:20px;bottom:30px}', '<section><div class="a"></div></section>'],
+  ['position-fixed','position','.a{position:fixed;right:24px;bottom:24px}', '<div class="a"></div>'],
+  ['position-stacking-context','position','section{position:relative}.a,.b,.c{position:absolute}.a{left:0;top:0;z-index:3}.b{left:50px;top:40px;z-index:1}.c{left:100px;top:80px;z-index:2}',`<section>${blocks}</section>`],
+  ['flow-float-wrap','flow','.a{float:left;margin:0 16px 12px 0}p{width:380px}', '<div class="a"></div><p>Text wraps around the floated rectangle. A second sentence makes several lines and tests the available inline width next to the float.</p>'],
+  ['flow-clear-float','flow','.a{float:left}.b{float:right}.c{clear:both}',blocks],
+  ['flow-multicolumn','flow','section{columns:3;column-gap:24px;column-rule:2px solid #5645d4;width:540px;height:200px}p{margin:0}', '<section><p>One two three four five six seven eight nine ten. The same paragraph flows through three columns with explicit gaps and column rules. Content continues into the next column without repeating. The final lines verify balanced column heights.</p></section>'],
+  ['flow-inline-block-baseline','flow','.a,.b,.c{display:inline-block;vertical-align:baseline}.b{height:100px}.c{vertical-align:top}',blocks],
+];
