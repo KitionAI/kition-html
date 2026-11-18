@@ -1,0 +1,118 @@
+[
+  {
+    "id": "measuretext-missing",
+    "script": "let errors=0;for(let n=0;n<1;n++)try{ctx.measureText(...['AB',16,40].slice(0,n))}catch(e){if(e instanceof TypeError)errors++}return errors===1"
+  },
+  {
+    "id": "measuretext-symbol",
+    "script": "try{ctx.measureText(Symbol('text'))}catch(e){return e instanceof TypeError}return false"
+  },
+  {
+    "id": "measuretext-receiver",
+    "script": "let calls=0;try{ctx.measureText.call({},{toString(){calls++;return 'AB'}})}catch(e){return e instanceof TypeError&&calls===0}return false"
+  },
+  {
+    "id": "measuretext-throw",
+    "script": "const sentinel={};try{ctx.measureText({toString(){canvas.width=canvas.width;throw sentinel}})}catch(e){return e===sentinel&&ctx.font==='10px sans-serif'}return false"
+  },
+  {
+    "id": "measuretext-text-resize",
+    "script": "const ref=document.createElement('canvas').getContext('2d');const result=ctx.measureText({toString(){canvas.width=canvas.width;return 'AB'}});return result.width===ref.measureText('AB').width"
+  },
+  {
+    "id": "filltext-missing",
+    "script": "let errors=0;for(let n=0;n<3;n++)try{ctx.fillText(...['AB',16,40].slice(0,n))}catch(e){if(e instanceof TypeError)errors++}return errors===3"
+  },
+  {
+    "id": "filltext-symbol",
+    "script": "try{ctx.fillText(Symbol('text'),16,40)}catch(e){return e instanceof TypeError}return false"
+  },
+  {
+    "id": "filltext-receiver",
+    "script": "let calls=0;try{ctx.fillText.call({},{toString(){calls++;return 'AB'}},16,40)}catch(e){return e instanceof TypeError&&calls===0}return false"
+  },
+  {
+    "id": "filltext-throw",
+    "script": "const sentinel={};try{ctx.fillText({toString(){canvas.width=canvas.width;throw sentinel}},16,40)}catch(e){return e===sentinel&&ctx.font==='10px sans-serif'}return false"
+  },
+  {
+    "id": "filltext-text-resize",
+    "script": "const ref=document.createElement('canvas').getContext('2d');const result=ctx.fillText({toString(){canvas.width=canvas.width;return 'AB'}},16,40);ref.fillText('AB',16,40);const a=ctx.getImageData(0,0,96,80).data,b=ref.getImageData(0,0,96,80).data;return a.every((v,i)=>v===b[i])"
+  },
+  {
+    "id": "stroketext-missing",
+    "script": "let errors=0;for(let n=0;n<3;n++)try{ctx.strokeText(...['AB',16,40].slice(0,n))}catch(e){if(e instanceof TypeError)errors++}return errors===3"
+  },
+  {
+    "id": "stroketext-symbol",
+    "script": "try{ctx.strokeText(Symbol('text'),16,40)}catch(e){return e instanceof TypeError}return false"
+  },
+  {
+    "id": "stroketext-receiver",
+    "script": "let calls=0;try{ctx.strokeText.call({},{toString(){calls++;return 'AB'}},16,40)}catch(e){return e instanceof TypeError&&calls===0}return false"
+  },
+  {
+    "id": "stroketext-throw",
+    "script": "const sentinel={};try{ctx.strokeText({toString(){canvas.width=canvas.width;throw sentinel}},16,40)}catch(e){return e===sentinel&&ctx.font==='10px sans-serif'}return false"
+  },
+  {
+    "id": "stroketext-text-resize",
+    "script": "const ref=document.createElement('canvas').getContext('2d');const result=ctx.strokeText({toString(){canvas.width=canvas.width;return 'AB'}},16,40);ref.strokeText('AB',16,40);const a=ctx.getImageData(0,0,96,80).data,b=ref.getImageData(0,0,96,80).data;return a.every((v,i)=>v===b[i])"
+  },
+  {
+    "id": "filltext-bigint",
+    "script": "let errors=0;for(const index of [1,2,3])for(const value of [1n,Object(1n)]){const args=['AB',16,40,100];args[index]=value;try{ctx.fillText(...args)}catch(e){if(e instanceof TypeError)errors++}}return errors===6"
+  },
+  {
+    "id": "filltext-coordinate-resize",
+    "script": "const ref=document.createElement('canvas').getContext('2d');ctx.fillText('AB',{valueOf(){canvas.height=canvas.height;return 16}},40);ref.fillText('AB',16,40);const a=ctx.getImageData(0,0,96,80).data,b=ref.getImageData(0,0,96,80).data;return a.every((v,i)=>v===b[i])"
+  },
+  {
+    "id": "filltext-order",
+    "script": "const order=[];ctx.fillText({toString(){order.push('text');return 'AB'}},{valueOf(){order.push('x');return 16}},{valueOf(){order.push('y');return 40}},{valueOf(){order.push('max');return 100}});return order.join(',')==='text,x,y,max'"
+  },
+  {
+    "id": "filltext-undefined-max",
+    "script": "const ref=document.createElement('canvas').getContext('2d');ref.font=ctx.font;ctx.fillText('AB',16,40,undefined);ref.fillText('AB',16,40);const a=ctx.getImageData(0,0,96,80).data,b=ref.getImageData(0,0,96,80).data;return a.every((v,i)=>v===b[i])"
+  },
+  {
+    "id": "filltext-extra",
+    "script": "let calls=0;ctx.fillText('AB',16,40,100,{valueOf(){calls++;return 1},toString(){calls++;return 'extra'}});return calls===0"
+  },
+  {
+    "id": "filltext-nonfinite-order",
+    "script": "let calls=0;const sentinel={};try{ctx.fillText('AB',NaN,{valueOf(){calls++;throw sentinel}})}catch(e){return e===sentinel&&calls===1}return false"
+  },
+  {
+    "id": "stroketext-bigint",
+    "script": "let errors=0;for(const index of [1,2,3])for(const value of [1n,Object(1n)]){const args=['AB',16,40,100];args[index]=value;try{ctx.strokeText(...args)}catch(e){if(e instanceof TypeError)errors++}}return errors===6"
+  },
+  {
+    "id": "stroketext-coordinate-resize",
+    "script": "const ref=document.createElement('canvas').getContext('2d');ctx.strokeText('AB',{valueOf(){canvas.height=canvas.height;return 16}},40);ref.strokeText('AB',16,40);const a=ctx.getImageData(0,0,96,80).data,b=ref.getImageData(0,0,96,80).data;return a.every((v,i)=>v===b[i])"
+  },
+  {
+    "id": "stroketext-order",
+    "script": "const order=[];ctx.strokeText({toString(){order.push('text');return 'AB'}},{valueOf(){order.push('x');return 16}},{valueOf(){order.push('y');return 40}},{valueOf(){order.push('max');return 100}});return order.join(',')==='text,x,y,max'"
+  },
+  {
+    "id": "stroketext-undefined-max",
+    "script": "const ref=document.createElement('canvas').getContext('2d');ref.font=ctx.font;ctx.strokeText('AB',16,40,undefined);ref.strokeText('AB',16,40);const a=ctx.getImageData(0,0,96,80).data,b=ref.getImageData(0,0,96,80).data;return a.every((v,i)=>v===b[i])"
+  },
+  {
+    "id": "stroketext-extra",
+    "script": "let calls=0;ctx.strokeText('AB',16,40,100,{valueOf(){calls++;return 1},toString(){calls++;return 'extra'}});return calls===0"
+  },
+  {
+    "id": "stroketext-nonfinite-order",
+    "script": "let calls=0;const sentinel={};try{ctx.strokeText('AB',NaN,{valueOf(){calls++;throw sentinel}})}catch(e){return e===sentinel&&calls===1}return false"
+  },
+  {
+    "id": "lengths",
+    "script": "return ctx.measureText.length===1&&ctx.fillText.length===3&&ctx.strokeText.length===3"
+  },
+  {
+    "id": "measure-scalars",
+    "script": "return ctx.measureText(undefined).width===ctx.measureText('undefined').width&&ctx.measureText(null).width===ctx.measureText('null').width&&ctx.measureText(123n).width===ctx.measureText('123').width"
+  }
+]

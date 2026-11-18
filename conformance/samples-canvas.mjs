@@ -1,0 +1,33 @@
+// Canvas drawing is executed by the engine, not by the host browser.
+const sample=(id,code,css='')=>['canvas-'+id,'javascript',`canvas{display:block}${css}`,`<canvas id="canvas" width="320" height="180"></canvas><script>const canvas=document.getElementById('canvas'),ctx=canvas.getContext('2d');${code}</script>`,{requires:'javascript'}];
+const base="ctx.fillStyle='#5645d4';ctx.fillRect(0,0,320,180);";
+export default [
+ sample('fill-rect',base),
+ sample('clear-rect',base+'ctx.clearRect(40,30,160,80);'),
+ sample('negative-rect',"ctx.fillStyle='#5645d4';ctx.fillRect(240,150,-180,-100);"),
+ sample('stroke-rect',"ctx.strokeStyle='#5645d4';ctx.lineWidth=8;ctx.strokeRect(24,24,240,120);"),
+ sample('path-triangle',"ctx.fillStyle='#5645d4';ctx.beginPath();ctx.moveTo(20,160);ctx.lineTo(160,20);ctx.lineTo(300,160);ctx.closePath();ctx.fill();"),
+ sample('path-circle',base+"ctx.fillStyle='#e5486a';ctx.beginPath();ctx.arc(160,90,64,0,Math.PI*2);ctx.fill();"),
+ sample('path-ellipse',"ctx.fillStyle='#5645d4';ctx.beginPath();ctx.ellipse(160,90,100,50,0,0,Math.PI*2);ctx.fill();"),
+ sample('path-quadratic',"ctx.strokeStyle='#5645d4';ctx.lineWidth=8;ctx.beginPath();ctx.moveTo(20,150);ctx.quadraticCurveTo(160,-80,300,150);ctx.stroke();"),
+ sample('path-bezier',"ctx.strokeStyle='#5645d4';ctx.lineWidth=8;ctx.beginPath();ctx.moveTo(20,90);ctx.bezierCurveTo(100,-40,220,220,300,90);ctx.stroke();"),
+ sample('transform-translate',"ctx.translate(40,30);ctx.fillStyle='#5645d4';ctx.fillRect(0,0,160,100);"),
+ sample('transform-scale',"ctx.scale(2,1.5);ctx.fillStyle='#5645d4';ctx.fillRect(20,20,100,80);"),
+ sample('transform-rotate',"ctx.translate(160,90);ctx.rotate(Math.PI/6);ctx.fillStyle='#5645d4';ctx.fillRect(-80,-40,160,80);"),
+ sample('save-restore',"ctx.fillStyle='#5645d4';ctx.save();ctx.translate(160,0);ctx.fillStyle='#e5486a';ctx.fillRect(0,0,160,180);ctx.restore();ctx.fillRect(0,0,160,180);"),
+ sample('clip-rect',"ctx.beginPath();ctx.rect(40,30,160,100);ctx.clip();"+base),
+ sample('clip-save-restore',"ctx.save();ctx.beginPath();ctx.rect(0,0,160,180);ctx.clip();"+base+"ctx.restore();ctx.fillStyle='#e5486a';ctx.fillRect(160,0,160,180);"),
+ sample('fill-evenodd',"ctx.fillStyle='#5645d4';ctx.beginPath();ctx.rect(20,20,280,140);ctx.rect(80,50,160,80);ctx.fill('evenodd');"),
+ sample('global-alpha',base+"ctx.globalAlpha=.5;ctx.fillStyle='#e5486a';ctx.fillRect(80,40,160,100);"),
+ sample('transparent-color',"ctx.fillStyle='rgba(86,69,212,.5)';ctx.fillRect(20,20,280,140);"),
+ sample('composite-destination-out',base+"ctx.globalCompositeOperation='destination-out';ctx.fillRect(80,40,160,100);"),
+ sample('line-dash',"ctx.strokeStyle='#5645d4';ctx.lineWidth=6;ctx.setLineDash([16,8]);ctx.beginPath();ctx.moveTo(20,90);ctx.lineTo(300,90);ctx.stroke();"),
+ sample('resize-clears',base+"canvas.width=320;ctx.fillStyle='#e5486a';ctx.fillRect(80,40,160,100);"),
+ sample('state-context-identity',"if(ctx===canvas.getContext('2d')&&ctx.canvas===canvas){"+base+"}"),
+ sample('pixel-readback',base+"const pixel=ctx.getImageData(0,0,1,1).data;if(pixel[0]!==86||pixel[1]!==69||pixel[2]!==212||pixel[3]!==255)ctx.clearRect(0,0,320,180);"),
+ sample('pixel-write',"const image=ctx.createImageData(160,96);for(let i=0;i<image.data.length;i+=4){image.data.set([86,69,212,255],i)}ctx.putImageData(image,40,30);"),
+ sample('linear-gradient',"const gradient=ctx.createLinearGradient(0,0,320,0);gradient.addColorStop(0,'#5645d4');gradient.addColorStop(1,'#e5486a');ctx.fillStyle=gradient;ctx.fillRect(0,0,320,180);"),
+ sample('radial-gradient',"const gradient=ctx.createRadialGradient(160,90,0,160,90,90);gradient.addColorStop(0,'#5645d4');gradient.addColorStop(1,'#e5486a');ctx.fillStyle=gradient;ctx.fillRect(0,0,320,180);"),
+ sample('path-transform-at-creation',"ctx.beginPath();ctx.rect(20,20,100,100);ctx.translate(140,0);ctx.rect(20,20,100,100);ctx.resetTransform();ctx.fillStyle='#5645d4';ctx.fill();"),
+ sample('scale-bitmap',base+"ctx.fillStyle='#e5486a';ctx.fillRect(10,10,20,20);",'canvas{width:480px;height:270px}'),
+];

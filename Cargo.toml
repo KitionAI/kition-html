@@ -1,0 +1,57 @@
+[workspace]
+resolver = "3"
+members = ["crates/kition-html-engine", "crates/kition-html-kit", "apps/kition-html"]
+exclude = ["vendor/blitz-html", "vendor/blitz-vibey-script", "vendor/blitz-paint", "vendor/blitz-dom", "vendor/glifo", "vendor/parley", "vendor/stylo", "vendor/vello_cpu", "vendor/boa_parser"]
+default-members = ["crates/kition-html-engine", "apps/kition-html"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.94"
+license = "Apache-2.0"
+repository = "https://github.com/KitionAI/kition-html"
+publish = false
+
+[workspace.dependencies]
+# kition-sdk, pinned by commit (one revision for every crate of it)
+kition-headless = { git = "https://github.com/KitionAI/kition-sdk", rev = "f5ea478430d1e85069b6c6c9fac1de6b8e5c5d57" }
+kition-kit-server = { git = "https://github.com/KitionAI/kition-sdk", rev = "f5ea478430d1e85069b6c6c9fac1de6b8e5c5d57" }
+kition-kit = { git = "https://github.com/KitionAI/kition-sdk", rev = "f5ea478430d1e85069b6c6c9fac1de6b8e5c5d57", features = ["session"] }
+blitz-dom = { git = "https://github.com/DioxusLabs/blitz", rev = "21edc92d90d8f8bedadd3f9ecb14b1ad950952eb", default-features = false, features = ["svg", "woff", "floats", "writing-mode"] }
+blitz-html = { git = "https://github.com/DioxusLabs/blitz", rev = "21edc92d90d8f8bedadd3f9ecb14b1ad950952eb", default-features = false }
+blitz-paint = { path = "vendor/blitz-paint", default-features = false, features = ["svg", "font-embolden"] }
+blitz-traits = { git = "https://github.com/DioxusLabs/blitz", rev = "21edc92d90d8f8bedadd3f9ecb14b1ad950952eb", default-features = false }
+anyrender = "=0.14.0"
+anyrender_vello_cpu = { version = "=0.18.0", default-features = false, features = ["filters"] }
+parley = { version = "=0.12.0", default-features = false, features = ["std"] }
+png = "0.18"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+unwrap_used = "deny"
+expect_used = "deny"
+
+[profile.dev]
+debug = 0
+incremental = false
+
+[profile.release]
+strip = true
+lto = "thin"
+
+[patch."https://github.com/DioxusLabs/blitz"]
+blitz-html = { path = "vendor/blitz-html" }
+blitz-dom = { path = "vendor/blitz-dom" }
+
+[patch.crates-io]
+boa_parser = { path = "vendor/boa_parser" }
+vello_cpu = { path = "vendor/vello_cpu" }
+glifo = { path = "vendor/glifo" }
+parley = { path = "vendor/parley" }
+
+[patch."https://github.com/DioxusLabs/stylo"]
+stylo = { path = "vendor/stylo" }

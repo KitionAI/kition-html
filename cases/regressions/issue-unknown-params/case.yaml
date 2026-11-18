@@ -1,0 +1,20 @@
+format: 1
+id: regressions/issue-unknown-params
+feature: html.agent.recover
+intent: >-
+  A command refuses a key its schema does not name and says which, with the parameter it resembles
+  and the ones the command takes (platform rule E7a), instead of running without it. Before, undo
+  and redo ran with an unknown key, and the other commands refused one only by complaining about
+  a key they need.
+layer: gate
+source:
+  kind: probe
+  from: unknown-parameter sweep
+  license: Apache-2.0
+input: []
+steps:
+  - cargo-test: { package: "kition-html-kit", test: "unknown_params" }
+expected:
+  - actual: out:exit
+    compare: exit
+since: "2026-11-16"

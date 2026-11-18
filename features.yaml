@@ -1,0 +1,91 @@
+format: 1
+kit: html
+updated: "2026-11-16"
+gate_budget_s: 600
+protected: []
+features:
+  - id: html.agent.observe
+    title: "An agent reads the page and writes what it found"
+    dimension: [ai]
+    priority: P0
+    status: has
+    requirements: [AX13]
+    cases: [html.agent.observe/concert-day]
+    since: "2026-11-16"
+  - id: html.agent.act
+    title: "An agent edits the page's style"
+    dimension: [ai]
+    priority: P0
+    status: has
+    requirements: [AX13]
+    cases: [html.agent.act/headline-colour]
+    since: "2026-11-16"
+  - id: html.agent.recover
+    title: "An agent fixes what the check reports"
+    dimension: [ai]
+    priority: P0
+    status: has
+    requirements: [AX13]
+    cases: [html.agent.recover/missing-image, regressions/issue-unknown-params]
+    since: "2026-11-16"
+  - id: html.agent.converse
+    title: "An agent follows up on its own edit over a conversation"
+    dimension: [ai]
+    priority: P1
+    status: has
+    requirements: [AX13]
+    cases: [html.agent.converse/ticket-price]
+    since: "2026-11-16"
+  - id: html.collab.replica
+    title: "The page is a KDM replica: byte-exact round trip, merged concurrent edits, undo per person and agent"
+    dimension: [collab, conversion, data-safety]
+    priority: P1
+    status: has
+    paths: [crates/kition-html-kit/src/model.rs, crates/kition-html-kit/src/lib.rs, crates/kition-html-kit/model/schema.json]
+    cases: [html.collab.replica/round-trip, html.collab.replica/concurrent-edits, html.collab.replica/agent-undo, regressions/issue-headless-features]
+    since: "2026-11-16"
+  - id: html.page.edit
+    title: "Edit the page's HTML, undo and redo, save it and reopen it as edited"
+    dimension: [function, conversion, data-safety]
+    priority: P0
+    status: has
+    commands: [html.setSource, edit.undo, edit.redo]
+    paths: [crates/kition-html-kit/src/lib.rs, crates/kition-html-kit/src/model.rs, crates/kition-html-kit/src/edit_tests.rs, vendor/blitz-dom/src/util.rs, crates/kition-html-engine/src/lib.rs]
+    target: "Chrome 147.0.7727.15 (Chrome for Testing)"
+    cases: [html.page.edit/save-reopen, regressions/issue-html-large-file, regressions/issue-reads-outside-workspace]
+    since: "2026-11-16"
+  - id: html.page.interact
+    title: "Click elements and advance time on the rendered page"
+    dimension: [function, fidelity]
+    priority: P1
+    status: partial
+    commands: [html.click, html.advance]
+    paths: [crates/kition-html-kit/src/lib.rs]
+    target: "Chrome 147.0.7727.15 (Chrome for Testing)"
+    gap: "Clicks and time steps run the page's scripts without changing the saved source; no case yet compares the rendered page after a click or a time step with Chrome's."
+    since: "2026-11-16"
+  - id: html.platform.display-modes
+    title: "The editor in every display mode: Single line and Classic open on Edit; Focus shows only the source and the preview"
+    dimension: [function, platform]
+    priority: P1
+    status: has
+    paths: [web/src/App.tsx, web/src/menus.ts, web/src/main.tsx, web/src/app.css, web/src/devHost.ts, web/dev.html, web/sample/Sample.htm, web/tests/modes.mjs]
+    cases: [html.platform.display-modes/mode-smoke, regressions/issue-focus-bar-covers-source]
+    since: "2026-11-16"
+  - id: html.render.fonts
+    title: "Text draws in the faces the page and the host supply: generic families, Chinese, emoji, SVG text"
+    dimension: [fidelity, platform]
+    priority: P1
+    status: has
+    paths: [crates/kition-html-engine/src/lib.rs, crates/kition-html-kit/src/lib.rs, vendor/blitz-dom/src/util.rs, vendor/blitz-dom/src/config.rs]
+    cases: [regressions/issue-1, regressions/issue-2]
+    since: "2026-11-16"
+  - id: html.render.inline-layout
+    title: "Inline elements take their horizontal margins, borders and paddings on the line"
+    dimension: [fidelity]
+    priority: P1
+    status: has
+    paths: [vendor/blitz-dom/src/layout/inline/build.rs]
+    target: "Chrome 147.0.7727.15 (Chrome for Testing)"
+    cases: [regressions/issue-3]
+    since: "2026-11-16"

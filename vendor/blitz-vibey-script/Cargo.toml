@@ -1,0 +1,37 @@
+[package]
+name = "blitz-vibey-script"
+version = "0.3.0-beta.4"
+edition = "2024"
+license = "Apache-2.0 OR MIT"
+publish = false
+
+[features]
+default = []
+tracing = ["dep:tracing", "blitz-dom/tracing"]
+
+[dependencies]
+cssparser = "=0.38.0"
+anyrender = "=0.14.0"
+anyrender_svg = "0.15.0"
+anyrender_vello_cpu = { version = "=0.18.0", default-features = false, features = ["filters"] }
+peniko = "0.6"
+color = "0.3"
+parley = { version = "=0.12.0", default-features = false, features = ["std"] }
+skrifa = "0.44"
+
+blitz-dom = { git = "https://github.com/DioxusLabs/blitz", rev = "21edc92d90d8f8bedadd3f9ecb14b1ad950952eb", default-features = false, features = ["autofocus", "svg"] }
+blitz-html = { git = "https://github.com/DioxusLabs/blitz", rev = "21edc92d90d8f8bedadd3f9ecb14b1ad950952eb", default-features = false }
+blitz-traits = { git = "https://github.com/DioxusLabs/blitz", rev = "21edc92d90d8f8bedadd3f9ecb14b1ad950952eb", default-features = false }
+boa_engine = { version = "0.22", features = ["annex-b", "fuzz", "js"] }
+boa_runtime = "0.22"
+boa_gc = "0.22"
+markup5ever = "0.40.0"
+style = { version = "0.22.0", git = "https://github.com/DioxusLabs/stylo", rev = "d6502e0002e9c40c43a0a4776f9e7eb93be360e3", package = "stylo" }
+icu_properties = { version = "2.3", default-features = false, features = ["compiled_data"] }
+keyboard-types = "0.8"
+log = "0.4"
+serde_json = "1"
+url = "2.5"
+data-url = "0.3"
+web-time = "1"
+tracing = { version = "0.1", optional = true }

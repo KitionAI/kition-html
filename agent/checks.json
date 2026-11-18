@@ -1,0 +1,26 @@
+[
+  {
+    "code": "html.resource-unavailable",
+    "fixture": "check-resource-unavailable.html",
+    "severity": "error",
+    "summary": "The page asks for an image, stylesheet or other file the kit cannot load, so it is missing."
+  },
+  {
+    "code": "html.javascript-error",
+    "fixture": "check-javascript-error.html",
+    "severity": "error",
+    "summary": "A script on the page threw an error, so what it should have done did not happen."
+  },
+  {
+    "code": "html.unsupported-filter",
+    "fixture": "check-unsupported-filter.html",
+    "severity": "warning",
+    "summary": "An element uses a CSS filter the renderer does not draw, so it shows unfiltered."
+  },
+  {
+    "code": "html.unsupported-backdrop-filter",
+    "fixture": "check-unsupported-backdrop-filter.html",
+    "severity": "warning",
+    "summary": "An element uses a backdrop filter the renderer does not draw, so the backdrop shows unfiltered."
+  }
+]

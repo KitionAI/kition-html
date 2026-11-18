@@ -1,0 +1,69 @@
+Kition HTML
+Copyright (c) 2026 the Kition authors.
+
+Includes Blitz, AnyRender, Vello CPU, and the Kition SDK. vendor/ holds modified copies of
+Blitz (blitz-dom, blitz-html, blitz-paint and blitz-vibey-script at revision
+21edc92d90d8f8bedadd3f9ecb14b1ad950952eb), Boa's parser, Glifo, Parley, Stylo and Vello CPU,
+each with its upstream license files; vendor/README.md lists every changed file, and
+docs/attribution.md each copy's source and license. The package includes dependency
+licenses in engine/licenses/ and the bundled Inter font's OFL in fonts/.
+
+Loro (https://github.com/loro-dev/loro), Copyright (c) 2023 Zixuan Chen, is under the MIT License
+(below). The engine links its Rust crates (loro 1.16.2, through kition-sdk's Loro dependency in
+kition-kdm) from KitionPkg/loro (https://github.com/KitionPkg/loro, MIT, revision c0f64d39: upstream
+Loro at 45708d05 with a persistent map of its own in place of the MPL-2.0 im), so no MPL-2.0 crate
+comes with Loro in the engine. The editor bundles Loro as loro-crdt 1.16.4 (the upstream build,
+through @kition/kit-editor), which contains the MPL-2.0 crates im, sized-chunks and bitmaps listed
+below.
+
+MPL-2.0 components (source at each repository; the licence text is in
+vendor/stylo/LICENSE-MPL-2.0):
+- stylo 0.22.0 (vendored and modified in vendor/stylo; changes in vendor/README.md) - MPL-2.0, https://github.com/servo/stylo
+- selectors 0.41.0 - MPL-2.0, https://github.com/servo/stylo
+- stylo_atoms 0.22.0 - MPL-2.0, https://github.com/servo/stylo
+- stylo_derive 0.22.0 - MPL-2.0, https://github.com/servo/stylo
+- stylo_dom 0.22.0 - MPL-2.0, https://github.com/servo/stylo
+- stylo_static_prefs 0.22.0 - MPL-2.0, https://github.com/servo/stylo
+- stylo_traits 0.22.0 - MPL-2.0, https://github.com/servo/stylo
+- to_shmem 0.6.0 - MPL-2.0, https://github.com/servo/stylo
+- to_shmem_derive 0.2.0 - MPL-2.0, https://github.com/servo/stylo
+- app_units 0.7.8 - MPL-2.0, https://github.com/servo/app_units
+- cssparser 0.38.0 - MPL-2.0, https://github.com/servo/rust-cssparser
+- cssparser-macros 0.7.1 - MPL-2.0, https://github.com/servo/rust-cssparser
+- dtoa-short 0.3.5 - MPL-2.0, https://github.com/upsuper/dtoa-short
+- uluru 3.1.0 - MPL-2.0, https://github.com/servo/uluru
+- im 15.1.0 (in the editor's loro-crdt, not the engine) - MPL-2.0 or later, https://github.com/bodil/im-rs
+- bitmaps 2.1.0 (in the editor's loro-crdt, not the engine) - MPL-2.0 or later, https://github.com/bodil/bitmaps
+- sized-chunks 0.6.5 (in the editor's loro-crdt, not the engine) - MPL-2.0 or later, https://github.com/bodil/sized-chunks
+- default.css, the user-agent style sheet Blitz takes from Mozilla (vendored and modified in
+  vendor/blitz-dom/assets/default.css and compiled into the engine; changes in vendor/README.md) -
+  MPL-2.0, https://github.com/DioxusLabs/blitz
+
+SIL Open Font License 1.1 components:
+- moz-bullet-font.ttf (vendor/blitz-dom/assets), also embedded as WOFF2 in
+  vendor/blitz-dom/assets/default.css - Mozilla Bullet 1.1 by Mozilla (designer Mats Palmgren),
+  from Mozilla Gecko (mozilla-central layout/style/res, changeset 7d5056c95c12),
+  https://hg.mozilla.org/mozilla-central; the font names the SIL Open Font License, whose text is
+  in vendor/blitz-dom/assets/moz-bullet-font.LICENSE.md
+
+MIT License (Loro)
+
+Copyright (c) 2023 Zixuan Chen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

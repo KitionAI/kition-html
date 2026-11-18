@@ -1,0 +1,8 @@
+/target/
+/node_modules/
+/artifacts/
+/engine/
+.DS_Store
+/web/node_modules/
+/web/dist/
+/web/public/

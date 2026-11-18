@@ -1,0 +1,190 @@
+[
+  {
+    "id": "fillrect-missing",
+    "script": "let errors=0;for(let n=0;n<4;n++)try{ctx.fillRect(...[8.5, 8.5, 16, 12].slice(0,n))}catch(e){if(e instanceof TypeError)errors++}return errors===4"
+  },
+  {
+    "id": "fillrect-bigint",
+    "script": "let errors=0;for(let i=0;i<4;i++)for(const value of [1n,Object(1n)]){const args=[8.5, 8.5, 16, 12];args[i]=value;try{ctx.fillRect(...args)}catch(e){if(e instanceof TypeError)errors++}}return errors===8"
+  },
+  {
+    "id": "fillrect-receiver",
+    "script": "let calls=0;try{ctx.fillRect.call({transform(){calls++}},...[8.5, 8.5, 16, 12].map(v=>({valueOf(){calls++;return v}})))}catch(e){return e instanceof TypeError&&calls===0}return false"
+  },
+  {
+    "id": "fillrect-order",
+    "script": "const seen=[];ctx.fillRect(...[8.5, 8.5, 16, 12].map((v,i)=>({valueOf(){seen.push(i);return v}})));return seen.join(',')==='0,1,2,3'"
+  },
+  {
+    "id": "fillrect-resize",
+    "script": "const ref=document.createElement('canvas').getContext('2d'),args=[8.5, 8.5, 16, 12];ctx.translate(40,30);ctx.fillStyle='#5645d4';ctx.strokeStyle='#5645d4';ctx.lineWidth=5;const first=args[0];args[0]={valueOf(){canvas.width=canvas.width;return first}};ctx.fillRect(...args);ref.fillRect(...[8.5, 8.5, 16, 12]);const a=ctx.getImageData(0,0,64,64).data,b=ref.getImageData(0,0,64,64).data;return a.every((v,i)=>v===b[i])"
+  },
+  {
+    "id": "fillrect-nonfinite-order",
+    "script": "const sentinel={},args=[8.5, 8.5, 16, 12];args[0]=NaN;args[3]={valueOf(){throw sentinel}};try{ctx.fillRect(...args)}catch(e){return e===sentinel}return false"
+  },
+  {
+    "id": "strokerect-missing",
+    "script": "let errors=0;for(let n=0;n<4;n++)try{ctx.strokeRect(...[8.5, 8.5, 16, 12].slice(0,n))}catch(e){if(e instanceof TypeError)errors++}return errors===4"
+  },
+  {
+    "id": "strokerect-bigint",
+    "script": "let errors=0;for(let i=0;i<4;i++)for(const value of [1n,Object(1n)]){const args=[8.5, 8.5, 16, 12];args[i]=value;try{ctx.strokeRect(...args)}catch(e){if(e instanceof TypeError)errors++}}return errors===8"
+  },
+  {
+    "id": "strokerect-receiver",
+    "script": "let calls=0;try{ctx.strokeRect.call({transform(){calls++}},...[8.5, 8.5, 16, 12].map(v=>({valueOf(){calls++;return v}})))}catch(e){return e instanceof TypeError&&calls===0}return false"
+  },
+  {
+    "id": "strokerect-order",
+    "script": "const seen=[];ctx.strokeRect(...[8.5, 8.5, 16, 12].map((v,i)=>({valueOf(){seen.push(i);return v}})));return seen.join(',')==='0,1,2,3'"
+  },
+  {
+    "id": "strokerect-resize",
+    "script": "const ref=document.createElement('canvas').getContext('2d'),args=[8.5, 8.5, 16, 12];ctx.translate(40,30);ctx.fillStyle='#5645d4';ctx.strokeStyle='#5645d4';ctx.lineWidth=5;const first=args[0];args[0]={valueOf(){canvas.width=canvas.width;return first}};ctx.strokeRect(...args);ref.strokeRect(...[8.5, 8.5, 16, 12]);const a=ctx.getImageData(0,0,64,64).data,b=ref.getImageData(0,0,64,64).data;return a.every((v,i)=>v===b[i])"
+  },
+  {
+    "id": "strokerect-nonfinite-order",
+    "script": "const sentinel={},args=[8.5, 8.5, 16, 12];args[0]=NaN;args[3]={valueOf(){throw sentinel}};try{ctx.strokeRect(...args)}catch(e){return e===sentinel}return false"
+  },
+  {
+    "id": "clearrect-missing",
+    "script": "let errors=0;for(let n=0;n<4;n++)try{ctx.clearRect(...[8.5, 8.5, 16, 12].slice(0,n))}catch(e){if(e instanceof TypeError)errors++}return errors===4"
+  },
+  {
+    "id": "clearrect-bigint",
+    "script": "let errors=0;for(let i=0;i<4;i++)for(const value of [1n,Object(1n)]){const args=[8.5, 8.5, 16, 12];args[i]=value;try{ctx.clearRect(...args)}catch(e){if(e instanceof TypeError)errors++}}return errors===8"
+  },
+  {
+    "id": "clearrect-receiver",
+    "script": "let calls=0;try{ctx.clearRect.call({transform(){calls++}},...[8.5, 8.5, 16, 12].map(v=>({valueOf(){calls++;return v}})))}catch(e){return e instanceof TypeError&&calls===0}return false"
+  },
+  {
+    "id": "clearrect-order",
+    "script": "const seen=[];ctx.clearRect(...[8.5, 8.5, 16, 12].map((v,i)=>({valueOf(){seen.push(i);return v}})));return seen.join(',')==='0,1,2,3'"
+  },
+  {
+    "id": "clearrect-resize",
+    "script": "const ref=document.createElement('canvas').getContext('2d'),args=[8.5, 8.5, 16, 12];ctx.translate(40,30);ctx.fillStyle='#5645d4';ctx.strokeStyle='#5645d4';ctx.lineWidth=5;const first=args[0];args[0]={valueOf(){canvas.width=canvas.width;return first}};ctx.clearRect(...args);ref.clearRect(...[8.5, 8.5, 16, 12]);const a=ctx.getImageData(0,0,64,64).data,b=ref.getImageData(0,0,64,64).data;return a.every((v,i)=>v===b[i])"
+  },
+  {
+    "id": "clearrect-nonfinite-order",
+    "script": "const sentinel={},args=[8.5, 8.5, 16, 12];args[0]=NaN;args[3]={valueOf(){throw sentinel}};try{ctx.clearRect(...args)}catch(e){return e===sentinel}return false"
+  },
+  {
+    "id": "translate-missing",
+    "script": "let errors=0;for(let n=0;n<2;n++)try{ctx.translate(...[24, 16].slice(0,n))}catch(e){if(e instanceof TypeError)errors++}return errors===2"
+  },
+  {
+    "id": "translate-bigint",
+    "script": "let errors=0;for(let i=0;i<2;i++)for(const value of [1n,Object(1n)]){const args=[24, 16];args[i]=value;try{ctx.translate(...args)}catch(e){if(e instanceof TypeError)errors++}}return errors===4"
+  },
+  {
+    "id": "translate-receiver",
+    "script": "let calls=0;try{ctx.translate.call({transform(){calls++}},...[24, 16].map(v=>({valueOf(){calls++;return v}})))}catch(e){return e instanceof TypeError&&calls===0}return false"
+  },
+  {
+    "id": "translate-order",
+    "script": "const seen=[];ctx.translate(...[24, 16].map((v,i)=>({valueOf(){seen.push(i);return v}})));return seen.join(',')==='0,1'"
+  },
+  {
+    "id": "translate-resize",
+    "script": "const ref=document.createElement('canvas').getContext('2d'),args=[24, 16];ctx.translate(40,30);ctx.fillStyle='#5645d4';ctx.strokeStyle='#5645d4';ctx.lineWidth=5;const first=args[0];args[0]={valueOf(){canvas.width=canvas.width;return first}};ctx.translate(...args);ref.translate(...[24, 16]);const a=ctx.getTransform(),b=ref.getTransform();return ['a','b','c','d','e','f'].every(k=>Math.abs(a[k]-b[k])<1e-12)"
+  },
+  {
+    "id": "translate-nonfinite-order",
+    "script": "const sentinel={},args=[24, 16];args[0]=NaN;args[1]={valueOf(){throw sentinel}};try{ctx.translate(...args)}catch(e){return e===sentinel}return false"
+  },
+  {
+    "id": "scale-missing",
+    "script": "let errors=0;for(let n=0;n<2;n++)try{ctx.scale(...[2, 3].slice(0,n))}catch(e){if(e instanceof TypeError)errors++}return errors===2"
+  },
+  {
+    "id": "scale-bigint",
+    "script": "let errors=0;for(let i=0;i<2;i++)for(const value of [1n,Object(1n)]){const args=[2, 3];args[i]=value;try{ctx.scale(...args)}catch(e){if(e instanceof TypeError)errors++}}return errors===4"
+  },
+  {
+    "id": "scale-receiver",
+    "script": "let calls=0;try{ctx.scale.call({transform(){calls++}},...[2, 3].map(v=>({valueOf(){calls++;return v}})))}catch(e){return e instanceof TypeError&&calls===0}return false"
+  },
+  {
+    "id": "scale-order",
+    "script": "const seen=[];ctx.scale(...[2, 3].map((v,i)=>({valueOf(){seen.push(i);return v}})));return seen.join(',')==='0,1'"
+  },
+  {
+    "id": "scale-resize",
+    "script": "const ref=document.createElement('canvas').getContext('2d'),args=[2, 3];ctx.translate(40,30);ctx.fillStyle='#5645d4';ctx.strokeStyle='#5645d4';ctx.lineWidth=5;const first=args[0];args[0]={valueOf(){canvas.width=canvas.width;return first}};ctx.scale(...args);ref.scale(...[2, 3]);const a=ctx.getTransform(),b=ref.getTransform();return ['a','b','c','d','e','f'].every(k=>Math.abs(a[k]-b[k])<1e-12)"
+  },
+  {
+    "id": "scale-nonfinite-order",
+    "script": "const sentinel={},args=[2, 3];args[0]=NaN;args[1]={valueOf(){throw sentinel}};try{ctx.scale(...args)}catch(e){return e===sentinel}return false"
+  },
+  {
+    "id": "rotate-missing",
+    "script": "let errors=0;for(let n=0;n<1;n++)try{ctx.rotate(...[0.5].slice(0,n))}catch(e){if(e instanceof TypeError)errors++}return errors===1"
+  },
+  {
+    "id": "rotate-bigint",
+    "script": "let errors=0;for(let i=0;i<1;i++)for(const value of [1n,Object(1n)]){const args=[0.5];args[i]=value;try{ctx.rotate(...args)}catch(e){if(e instanceof TypeError)errors++}}return errors===2"
+  },
+  {
+    "id": "rotate-receiver",
+    "script": "let calls=0;try{ctx.rotate.call({transform(){calls++}},...[0.5].map(v=>({valueOf(){calls++;return v}})))}catch(e){return e instanceof TypeError&&calls===0}return false"
+  },
+  {
+    "id": "rotate-order",
+    "script": "const seen=[];ctx.rotate(...[0.5].map((v,i)=>({valueOf(){seen.push(i);return v}})));return seen.join(',')==='0'"
+  },
+  {
+    "id": "rotate-resize",
+    "script": "const ref=document.createElement('canvas').getContext('2d'),args=[0.5];ctx.translate(40,30);ctx.fillStyle='#5645d4';ctx.strokeStyle='#5645d4';ctx.lineWidth=5;const first=args[0];args[0]={valueOf(){canvas.width=canvas.width;return first}};ctx.rotate(...args);ref.rotate(...[0.5]);const a=ctx.getTransform(),b=ref.getTransform();return ['a','b','c','d','e','f'].every(k=>Math.abs(a[k]-b[k])<1e-12)"
+  },
+  {
+    "id": "transform-missing",
+    "script": "let errors=0;for(let n=0;n<6;n++)try{ctx.transform(...[2, 0, 0, 3, 24, 16].slice(0,n))}catch(e){if(e instanceof TypeError)errors++}return errors===6"
+  },
+  {
+    "id": "transform-bigint",
+    "script": "let errors=0;for(let i=0;i<6;i++)for(const value of [1n,Object(1n)]){const args=[2, 0, 0, 3, 24, 16];args[i]=value;try{ctx.transform(...args)}catch(e){if(e instanceof TypeError)errors++}}return errors===12"
+  },
+  {
+    "id": "transform-receiver",
+    "script": "let calls=0;try{ctx.transform.call({transform(){calls++}},...[2, 0, 0, 3, 24, 16].map(v=>({valueOf(){calls++;return v}})))}catch(e){return e instanceof TypeError&&calls===0}return false"
+  },
+  {
+    "id": "transform-order",
+    "script": "const seen=[];ctx.transform(...[2, 0, 0, 3, 24, 16].map((v,i)=>({valueOf(){seen.push(i);return v}})));return seen.join(',')==='0,1,2,3,4,5'"
+  },
+  {
+    "id": "transform-resize",
+    "script": "const ref=document.createElement('canvas').getContext('2d'),args=[2, 0, 0, 3, 24, 16];ctx.translate(40,30);ctx.fillStyle='#5645d4';ctx.strokeStyle='#5645d4';ctx.lineWidth=5;const first=args[0];args[0]={valueOf(){canvas.width=canvas.width;return first}};ctx.transform(...args);ref.transform(...[2, 0, 0, 3, 24, 16]);const a=ctx.getTransform(),b=ref.getTransform();return ['a','b','c','d','e','f'].every(k=>Math.abs(a[k]-b[k])<1e-12)"
+  },
+  {
+    "id": "transform-nonfinite-order",
+    "script": "const sentinel={},args=[2, 0, 0, 3, 24, 16];args[0]=NaN;args[5]={valueOf(){throw sentinel}};try{ctx.transform(...args)}catch(e){return e===sentinel}return false"
+  },
+  {
+    "id": "translate-override",
+    "script": "const ref=document.createElement('canvas').getContext('2d');let calls=0;ctx.transform=()=>calls++;ctx.translate(...[24, 16]);ref.translate(...[24, 16]);const a=ctx.getTransform(),b=ref.getTransform();return calls===0&&['a','b','c','d','e','f'].every(k=>Math.abs(a[k]-b[k])<1e-12)"
+  },
+  {
+    "id": "scale-override",
+    "script": "const ref=document.createElement('canvas').getContext('2d');let calls=0;ctx.transform=()=>calls++;ctx.scale(...[2, 3]);ref.scale(...[2, 3]);const a=ctx.getTransform(),b=ref.getTransform();return calls===0&&['a','b','c','d','e','f'].every(k=>Math.abs(a[k]-b[k])<1e-12)"
+  },
+  {
+    "id": "rotate-override",
+    "script": "const ref=document.createElement('canvas').getContext('2d');let calls=0;ctx.transform=()=>calls++;ctx.rotate(...[0.5]);ref.rotate(...[0.5]);const a=ctx.getTransform(),b=ref.getTransform();return calls===0&&['a','b','c','d','e','f'].every(k=>Math.abs(a[k]-b[k])<1e-12)"
+  },
+  {
+    "id": "transform-extra",
+    "script": "let calls=0;ctx.transform(1,0,0,1,24,16,{valueOf(){calls++;return 1}});return calls===0&&ctx.getTransform().e===24&&ctx.getTransform().f===16"
+  },
+  {
+    "id": "lengths",
+    "script": "return ['fillRect','strokeRect','clearRect'].every(op=>ctx[op].length===4)&&ctx.translate.length===2&&ctx.scale.length===2&&ctx.rotate.length===1&&ctx.transform.length===6"
+  },
+  {
+    "id": "transform-nested",
+    "script": "ctx.transform({valueOf(){ctx.translate(10,20);return 2}},0,0,2,4,6);const m=ctx.getTransform();return m.a===2&&m.d===2&&m.e===14&&m.f===26"
+  }
+]

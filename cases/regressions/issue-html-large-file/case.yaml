@@ -1,0 +1,20 @@
+format: 1
+id: regressions/issue-html-large-file
+feature: html.page.edit
+intent: >-
+  A real web page of a few megabytes opens, edits and saves: the kit takes pages of up to 8 MiB
+  (it took 1 MiB, so a 2.3 MB page could not open). A larger page, opened or written, is refused
+  with a reason that starts with `too-large:` and names the limit, so a host can say the file is
+  too large instead of calling it damaged.
+layer: unit
+source:
+  kind: probe
+  from: performance baseline (html refused a 2.3 MB page as damaged)
+  license: Apache-2.0
+input: []
+steps:
+  - cargo-test: { package: kition-html-kit, filter: "size_tests::" }
+expected:
+  - actual: out:exit
+    compare: exit
+since: "2026-11-16"

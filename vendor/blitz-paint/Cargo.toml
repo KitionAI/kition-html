@@ -1,0 +1,52 @@
+[package]
+name = "blitz-paint"
+description = "Paint a Blitz Document using anyrender"
+documentation = "https://docs.rs/blitz-paint"
+version = "0.3.0-beta.4"
+license = "MIT OR Apache-2.0"
+homepage = "https://github.com/dioxuslabs/blitz"
+repository = "https://github.com/dioxuslabs/blitz"
+categories = ["gui"]
+edition = "2024"
+rust-version = "1.91.0"
+
+[features]
+default = ["svg"]
+tracing = ["dep:tracing"]
+svg = ["dep:anyrender_svg", "dep:usvg", "blitz-dom/svg"]
+custom-widget = ["blitz-dom/custom-widget"]
+font-embolden = []
+apple-font-embolden = []
+# Paint overlay scrollbar thumbs on scroll containers, and enable their
+# drag/hover interaction in blitz-dom (off by default while the feature
+# matures).
+scrollbars = ["blitz-dom/scrollbars"]
+
+[dependencies]
+# Blitz dependencies
+anyrender = { version = "0.14.0" }
+anyrender_svg = { version = "0.15.0", optional = true }
+blitz-traits = { version = "=0.3.0-beta.4", default-features = false, git = "https://github.com/DioxusLabs/blitz", rev = "21edc92d90d8f8bedadd3f9ecb14b1ad950952eb" }
+blitz-dom = { version = "=0.3.0-beta.4", default-features = false, git = "https://github.com/DioxusLabs/blitz", rev = "21edc92d90d8f8bedadd3f9ecb14b1ad950952eb" }
+
+# Servo dependencies
+style = { version = "0.22.0", git = "https://github.com/DioxusLabs/stylo", rev = "d6502e0002e9c40c43a0a4776f9e7eb93be360e3", package = "stylo" }
+euclid = { version = "0.22" }
+
+# DioxusLabs dependencies
+taffy = { git = "https://github.com/DioxusLabs/taffy", rev = "802e497b69689e1c93be2d16e9d53a973971bcb2", default-features = false, features = ["std", "flexbox", "flexbox_balance", "grid", "block_layout", "content_size", "calc", "detailed_layout_info"] }
+
+# Linebender + WGPU dependencies
+parley = { version = "0.12", default-features = false, features = ["std", "bytemuck"] }
+skrifa = { version = "0.44", default-features = false, features = ["std"] }
+color = { version = "0.3" }
+peniko = { version = "0.6.0" }
+kurbo = { version = "0.13.1" }
+usvg = { version = "0.48.1", optional = true }
+
+# Other dependencies
+bytemuck = { version = "1" }
+smallvec = { version = "1" }
+tracing = { version = "0.1.40", optional = true }
+
+[workspace]

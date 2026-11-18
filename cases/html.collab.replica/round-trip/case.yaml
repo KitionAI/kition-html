@@ -1,0 +1,17 @@
+format: 1
+id: html.collab.replica/round-trip
+feature: html.collab.replica
+intent: >-
+  A page opened from a file and kept as a KDM replica (schema kit.html v1) saves back byte for byte, a byte order mark, CRLF and non-ASCII text included, and its snapshot loads under the schema; reopened from the snapshot it keeps its document id.
+layer: unit
+source:
+  kind: synthetic
+  from: crates/kition-html-kit/src/replica_tests.rs (kit-matrix E2 and K3)
+  license: Apache-2.0
+input: []
+steps:
+  - cargo-test: { package: kition-html-kit, filter: "replica_tests::a_page_round_trips_through_its_replica_byte_for_byte" }
+expected:
+  - actual: out:exit
+    compare: exit
+since: "2026-11-16"

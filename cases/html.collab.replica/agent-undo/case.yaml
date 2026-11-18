@@ -1,0 +1,17 @@
+format: 1
+id: html.collab.replica/agent-undo
+feature: html.collab.replica
+intent: >-
+  An agent's source change is its own undo step: undo in the agent scope takes back only the agent's change and leaves the person's, which the person can still undo and redo.
+layer: unit
+source:
+  kind: synthetic
+  from: crates/kition-html-kit/src/replica_tests.rs (kit-matrix E2 and K3)
+  license: Apache-2.0
+input: []
+steps:
+  - cargo-test: { package: kition-html-kit, filter: "replica_tests::an_agent_step_undoes_in_the_agent_scope_only" }
+expected:
+  - actual: out:exit
+    compare: exit
+since: "2026-11-16"

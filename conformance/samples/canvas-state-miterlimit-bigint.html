@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>canvas-state-miterlimit-bigint</title><style>
+@font-face{font-family:Inter;src:url(../assets/Inter-Variable.ttf);font-weight:100 900}
+@font-face{font-family:Lora;src:url(../assets/Lora-Variable.ttf);font-weight:400 700}
+@font-face{font-family:"JetBrains Mono";src:url(../assets/JetBrainsMono-Variable.ttf);font-weight:100 800}
+html,body{margin:0;padding:0;background:white;color:#1a1a1a;font:16px/1.5 Inter}
+#stage{box-sizing:border-box;width:100%;min-height:480px;padding:24px}
+.box{width:160px;height:96px;background:#e5486a}.tile{display:inline-block;width:120px;height:80px;margin:0 12px 12px 0;vertical-align:top}
+
+canvas{display:none}.result{width:240px;height:96px;background:#e5486a}</style></head><body><main id="stage"><canvas id="canvas"></canvas><div class="result"></div><script>document.fonts.load('32px Inter').then(()=>{const canvas=document.getElementById('canvas'),ctx=canvas.getContext('2d');ctx.font='32px Inter';if((()=>{const key='miterLimit';ctx[key]=4;let errors=0;for(const v of [1n,Object(1n)])try{ctx[key]=v}catch(e){if(e instanceof TypeError)errors++}return errors===2&&ctx[key]===4})())document.querySelector('.result').style.background='#5645d4';document.body.dataset.ready='true'})</script></main></body></html>

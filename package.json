@@ -1,0 +1,17 @@
+{
+  "name": "kition-html",
+  "private": true,
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "samples": "node tools/generate-samples.mjs",
+    "fixtures": "node tools/generate-cases.mjs",
+    "compare": "node tools/compare.mjs",
+    "test": "node --test tools/*.test.mjs",
+    "test:javascript:wasm": "node tools/check-javascript.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.59.1",
+    "pngjs": "7.0.0"
+  }
+}

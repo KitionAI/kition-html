@@ -1,0 +1,33 @@
+const row='<tr><td><i style="width:20px"></i></td><td><i style="width:40px"></i></td><td><i style="width:60px"></i></td></tr>';
+const table=(id,css,columns='',rows=row)=>[id,'table',`table{width:480px;border-spacing:0}td{padding:0;background:#5645d4}td:nth-child(2){background:#e5486a}td:nth-child(3){background:#1f9d4c}i{display:block;height:48px}${css}`,`<table>${columns}${rows}</table>`];
+const gradient=(id,css)=>[id,'paint',`.box{width:320px;height:180px;background-color:#d9f3e1;${css}}`,'<div class="box"></div>'];
+export default [
+  table('table-percent-intrinsic-content','td:first-child{width:20%}td:nth-child(2){width:30%}'),
+  table('table-percent-overcommitted','td:first-child{width:80%}td:nth-child(2){width:80%}'),
+  table('table-percent-all-columns','td:first-child{width:10%}td:nth-child(2){width:20%}td:last-child{width:30%}'),
+  table('table-percent-length-auto','td:first-child{width:20%}td:nth-child(2){width:180px}'),
+  table('table-percent-content-minima','table{width:100px}td:first-child{width:20%}td:nth-child(2){width:30%}'),
+  table('table-percent-cell-padding','td{padding:10px;border:2px solid #1a1a1a}td:first-child{width:20%}td:nth-child(2){width:30%}'),
+  table('table-percent-border-spacing','table{border-spacing:8px}td:first-child{width:20%}td:nth-child(2){width:30%}'),
+  table('table-percent-auto-width','table{width:auto}td:first-child{width:20%}td:nth-child(2){width:30%}'),
+  table('table-percent-auto-one','table{width:auto}td:first-child{width:20%}'),
+  table('table-percent-auto-full','table{width:auto}td:first-child{width:100%}'),
+  table('table-percent-colgroup-span','','<colgroup><col span="2" style="width:25%"><col></colgroup>'),
+  table('table-percent-later-rows','tr:last-child td:first-child{width:20%}tr:last-child td:nth-child(2){width:30%}','',row+row),
+  table('table-percent-colspan','tr:first-child td:first-child{width:60%}','','<tr><td colspan="2"><i style="width:60px"></i></td><td><i style="width:60px"></i></td></tr>'+row),
+  table('table-percent-collapsed-borders','table{border-collapse:collapse}td{border:2px solid white;padding:8px}td:first-child{width:20%}td:nth-child(2){width:30%}'),
+  table('table-cell-height-stretch','table{height:240px}td{height:40px}'),
+  table('table-cell-height-rowspan','table{border-spacing:8px}td{height:40px}td[rowspan]{height:160px}','','<tr><td rowspan="2"></td><td></td></tr><tr><td></td></tr>'),
+  gradient('paint-gradient-tile-angle','background-image:linear-gradient(90deg,#5645d4 50%,#e5486a 50%);background-size:64px 100%'),
+  gradient('paint-gradient-tile-keyword','background-image:linear-gradient(to right,#5645d4 50%,#e5486a 50%);background-size:64px 100%'),
+  gradient('paint-gradient-tile-vertical','background-image:linear-gradient(180deg,#5645d4 50%,#e5486a 50%);background-size:100% 36px'),
+  gradient('paint-gradient-tile-diagonal','background-image:linear-gradient(45deg,#5645d4 50%,#e5486a 50%);background-size:64px 36px'),
+  gradient('paint-gradient-small-no-repeat','background-image:linear-gradient(90deg,#5645d4,#e5486a);background-size:120px 80px;background-repeat:no-repeat;background-position:center'),
+  gradient('paint-gradient-content-origin','box-sizing:content-box;padding:20px;border:12px dashed #e5486a;background-image:linear-gradient(90deg,#5645d4,#1f9d4c);background-origin:content-box;background-repeat:no-repeat'),
+  gradient('paint-gradient-layers-alpha','background-image:linear-gradient(90deg,transparent 50%,#e5486a 50%),linear-gradient(0deg,#5645d4,#1f9d4c);background-size:64px 100%,100% 100%'),
+  gradient('paint-gradient-layers-offset','background-image:linear-gradient(90deg,#5645d4 50%,transparent 50%),linear-gradient(180deg,#e5486a 50%,#1f9d4c 50%);background-size:80px 80px,100% 60px;background-position:20px 10px,0 0'),
+  gradient('paint-gradient-rounded-layers','border-radius:24px;background-image:linear-gradient(90deg,transparent 50%,#e5486a 50%),linear-gradient(#5645d4,#1f9d4c);background-size:64px 100%,100% 100%'),
+  gradient('paint-gradient-round-tiles','background-image:linear-gradient(90deg,#5645d4 50%,#e5486a 50%);background-size:70px 100%;background-repeat:round'),
+  gradient('paint-gradient-space-tiles','background-image:linear-gradient(90deg,#5645d4 50%,#e5486a 50%);background-size:70px 60px;background-repeat:space'),
+  gradient('paint-gradient-transformed-tiles','transform:translate(20px,20px) scale(.8);transform-origin:0 0;background-image:linear-gradient(90deg,#5645d4 50%,#e5486a 50%);background-size:64px 100%'),
+];

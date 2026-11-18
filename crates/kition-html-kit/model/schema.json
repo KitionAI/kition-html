@@ -1,0 +1,13 @@
+{
+  "kdm": 1,
+  "kit": "kit.html",
+  "schemaVersion": 1,
+  "root": "Page",
+  "types": {
+    "Page": {
+      "fields": {
+        "source": { "kind": "text" }
+      }
+    }
+  }
+}

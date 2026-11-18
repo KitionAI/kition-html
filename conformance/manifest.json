@@ -1,0 +1,1282 @@
+[
+  {
+    "id": "box-content-box",
+    "category": "box-model",
+    "file": "cases/box-content-box.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "box-border-box",
+    "category": "box-model",
+    "file": "cases/box-border-box.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "box-margin-collapse",
+    "category": "box-model",
+    "file": "cases/box-margin-collapse.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "box-negative-margin",
+    "category": "box-model",
+    "file": "cases/box-negative-margin.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "box-percent-sizing",
+    "category": "box-model",
+    "file": "cases/box-percent-sizing.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "box-min-max-width",
+    "category": "box-model",
+    "file": "cases/box-min-max-width.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "box-aspect-ratio",
+    "category": "box-model",
+    "file": "cases/box-aspect-ratio.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "box-auto-centering",
+    "category": "box-model",
+    "file": "cases/box-auto-centering.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "flex-row-gap",
+    "category": "flex",
+    "file": "cases/flex-row-gap.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "flex-column",
+    "category": "flex",
+    "file": "cases/flex-column.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "flex-wrap",
+    "category": "flex",
+    "file": "cases/flex-wrap.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "flex-grow",
+    "category": "flex",
+    "file": "cases/flex-grow.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "flex-shrink",
+    "category": "flex",
+    "file": "cases/flex-shrink.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "flex-space-between",
+    "category": "flex",
+    "file": "cases/flex-space-between.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "flex-align-baseline",
+    "category": "flex",
+    "file": "cases/flex-align-baseline.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "flex-order-reverse",
+    "category": "flex",
+    "file": "cases/flex-order-reverse.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "grid-fr-tracks",
+    "category": "grid",
+    "file": "cases/grid-fr-tracks.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "grid-spanning",
+    "category": "grid",
+    "file": "cases/grid-spanning.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "grid-template-areas",
+    "category": "grid",
+    "file": "cases/grid-template-areas.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "grid-auto-fit",
+    "category": "grid",
+    "file": "cases/grid-auto-fit.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "grid-dense-placement",
+    "category": "grid",
+    "file": "cases/grid-dense-placement.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "grid-align-items",
+    "category": "grid",
+    "file": "cases/grid-align-items.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "grid-minmax",
+    "category": "grid",
+    "file": "cases/grid-minmax.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "grid-subgrid",
+    "category": "grid",
+    "file": "cases/grid-subgrid.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "position-relative",
+    "category": "position",
+    "file": "cases/position-relative.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "position-absolute-inset",
+    "category": "position",
+    "file": "cases/position-absolute-inset.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "position-fixed",
+    "category": "position",
+    "file": "cases/position-fixed.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "position-stacking-context",
+    "category": "position",
+    "file": "cases/position-stacking-context.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "flow-float-wrap",
+    "category": "flow",
+    "file": "cases/flow-float-wrap.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "flow-clear-float",
+    "category": "flow",
+    "file": "cases/flow-clear-float.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "flow-multicolumn",
+    "category": "flow",
+    "file": "cases/flow-multicolumn.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "flow-inline-block-baseline",
+    "category": "flow",
+    "file": "cases/flow-inline-block-baseline.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "border-individual-sides",
+    "category": "border",
+    "file": "cases/border-individual-sides.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "border-dashed",
+    "category": "border",
+    "file": "cases/border-dashed.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "border-dotted",
+    "category": "border",
+    "file": "cases/border-dotted.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "border-double",
+    "category": "border",
+    "file": "cases/border-double.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "border-radius-elliptical",
+    "category": "border",
+    "file": "cases/border-radius-elliptical.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "border-radius-asymmetric",
+    "category": "border",
+    "file": "cases/border-radius-asymmetric.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "border-outline-offset",
+    "category": "border",
+    "file": "cases/border-outline-offset.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "border-image",
+    "category": "border",
+    "file": "cases/border-image.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "background-linear-gradient",
+    "category": "background",
+    "file": "cases/background-linear-gradient.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "background-radial-gradient",
+    "category": "background",
+    "file": "cases/background-radial-gradient.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "background-conic-gradient",
+    "category": "background",
+    "file": "cases/background-conic-gradient.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "background-repeating-gradient",
+    "category": "background",
+    "file": "cases/background-repeating-gradient.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "background-multiple-layers",
+    "category": "background",
+    "file": "cases/background-multiple-layers.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "background-clip-padding",
+    "category": "background",
+    "file": "cases/background-clip-padding.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "background-cover-position",
+    "category": "background",
+    "file": "cases/background-cover-position.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "background-blend-mode",
+    "category": "background",
+    "file": "cases/background-blend-mode.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "effects-box-shadow",
+    "category": "effects",
+    "file": "cases/effects-box-shadow.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "effects-inset-shadow",
+    "category": "effects",
+    "file": "cases/effects-inset-shadow.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "effects-multiple-shadows",
+    "category": "effects",
+    "file": "cases/effects-multiple-shadows.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "effects-group-opacity",
+    "category": "effects",
+    "file": "cases/effects-group-opacity.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "effects-filter-blur",
+    "category": "effects",
+    "file": "cases/effects-filter-blur.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "effects-filter-color",
+    "category": "effects",
+    "file": "cases/effects-filter-color.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "effects-clip-path",
+    "category": "effects",
+    "file": "cases/effects-clip-path.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "effects-mix-blend-mode",
+    "category": "effects",
+    "file": "cases/effects-mix-blend-mode.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "transform-translate",
+    "category": "transform",
+    "file": "cases/transform-translate.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "transform-rotate",
+    "category": "transform",
+    "file": "cases/transform-rotate.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "transform-scale-origin",
+    "category": "transform",
+    "file": "cases/transform-scale-origin.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "transform-skew",
+    "category": "transform",
+    "file": "cases/transform-skew.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "svg-path-stroke",
+    "category": "svg",
+    "file": "cases/svg-path-stroke.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "svg-gradient",
+    "category": "svg",
+    "file": "cases/svg-gradient.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "svg-clipping",
+    "category": "svg",
+    "file": "cases/svg-clipping.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "svg-use-viewbox",
+    "category": "svg",
+    "file": "cases/svg-use-viewbox.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "text-variable-weights",
+    "category": "typography",
+    "file": "cases/text-variable-weights.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "text-font-families",
+    "category": "typography",
+    "file": "cases/text-font-families.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "text-synthetic-italic",
+    "category": "typography",
+    "file": "cases/text-synthetic-italic.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "text-letter-spacing",
+    "category": "typography",
+    "file": "cases/text-letter-spacing.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "text-word-spacing",
+    "category": "typography",
+    "file": "cases/text-word-spacing.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "text-explicit-line-height",
+    "category": "typography",
+    "file": "cases/text-explicit-line-height.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "text-ligatures",
+    "category": "typography",
+    "file": "cases/text-ligatures.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "text-decoration",
+    "category": "typography",
+    "file": "cases/text-decoration.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "inline-nested-emphasis",
+    "category": "inline",
+    "file": "cases/inline-nested-emphasis.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "inline-baseline-sup-sub",
+    "category": "inline",
+    "file": "cases/inline-baseline-sup-sub.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "inline-white-space-pre",
+    "category": "inline",
+    "file": "cases/inline-white-space-pre.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "inline-white-space-pre-wrap",
+    "category": "inline",
+    "file": "cases/inline-white-space-pre-wrap.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "inline-word-break",
+    "category": "inline",
+    "file": "cases/inline-word-break.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "inline-ellipsis",
+    "category": "inline",
+    "file": "cases/inline-ellipsis.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "inline-text-align-justify",
+    "category": "inline",
+    "file": "cases/inline-text-align-justify.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "inline-text-indent",
+    "category": "inline",
+    "file": "cases/inline-text-indent.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "text-shadow",
+    "category": "text-extra",
+    "file": "cases/text-shadow.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "text-transform",
+    "category": "text-extra",
+    "file": "cases/text-transform.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "text-vertical-writing",
+    "category": "text-extra",
+    "file": "cases/text-vertical-writing.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "text-direction-rtl",
+    "category": "text-extra",
+    "file": "cases/text-direction-rtl.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "list-unordered-markers",
+    "category": "text-extra",
+    "file": "cases/list-unordered-markers.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "list-ordered-counters",
+    "category": "text-extra",
+    "file": "cases/list-ordered-counters.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "generated-before-after",
+    "category": "text-extra",
+    "file": "cases/generated-before-after.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "generated-css-counter",
+    "category": "text-extra",
+    "file": "cases/generated-css-counter.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "table-collapse",
+    "category": "table",
+    "file": "cases/table-collapse.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "table-border-spacing",
+    "category": "table",
+    "file": "cases/table-border-spacing.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "table-fixed-layout",
+    "category": "table",
+    "file": "cases/table-fixed-layout.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "table-colspan-rowspan",
+    "category": "table",
+    "file": "cases/table-colspan-rowspan.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "table-vertical-align",
+    "category": "table",
+    "file": "cases/table-vertical-align.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "table-caption-bottom",
+    "category": "table",
+    "file": "cases/table-caption-bottom.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "table-colgroup",
+    "category": "table",
+    "file": "cases/table-colgroup.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "table-empty-cells",
+    "category": "table",
+    "file": "cases/table-empty-cells.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "cascade-specificity",
+    "category": "cascade",
+    "file": "cases/cascade-specificity.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "cascade-important",
+    "category": "cascade",
+    "file": "cases/cascade-important.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "cascade-custom-properties",
+    "category": "cascade",
+    "file": "cases/cascade-custom-properties.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "cascade-inherited-currentcolor",
+    "category": "cascade",
+    "file": "cases/cascade-inherited-currentcolor.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "cascade-attribute-selector",
+    "category": "cascade",
+    "file": "cases/cascade-attribute-selector.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "cascade-nth-child",
+    "category": "cascade",
+    "file": "cases/cascade-nth-child.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "cascade-has-selector",
+    "category": "cascade",
+    "file": "cases/cascade-has-selector.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "cascade-layers",
+    "category": "cascade",
+    "file": "cases/cascade-layers.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "responsive-media-width",
+    "category": "responsive",
+    "file": "cases/responsive-media-width.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "responsive-media-dark",
+    "category": "responsive",
+    "file": "cases/responsive-media-dark.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": true,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "responsive-viewport-units",
+    "category": "responsive",
+    "file": "cases/responsive-viewport-units.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "responsive-calc",
+    "category": "responsive",
+    "file": "cases/responsive-calc.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "responsive-clamp",
+    "category": "responsive",
+    "file": "cases/responsive-clamp.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "responsive-container-query",
+    "category": "responsive",
+    "file": "cases/responsive-container-query.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "responsive-logical-properties",
+    "category": "responsive",
+    "file": "cases/responsive-logical-properties.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "responsive-supports",
+    "category": "responsive",
+    "file": "cases/responsive-supports.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "image-intrinsic-size",
+    "category": "media",
+    "file": "cases/image-intrinsic-size.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "image-object-fit-contain",
+    "category": "media",
+    "file": "cases/image-object-fit-contain.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "image-object-fit-cover",
+    "category": "media",
+    "file": "cases/image-object-fit-cover.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "image-data-url",
+    "category": "media",
+    "file": "cases/image-data-url.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "overflow-hidden-radius",
+    "category": "media",
+    "file": "cases/overflow-hidden-radius.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "overflow-clip",
+    "category": "media",
+    "file": "cases/overflow-clip.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "external-stylesheet",
+    "category": "media",
+    "file": "cases/external-stylesheet.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "external-css-import",
+    "category": "media",
+    "file": "cases/external-css-import.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "control-input-text",
+    "category": "platform",
+    "file": "cases/control-input-text.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "control-checkbox-radio",
+    "category": "platform",
+    "file": "cases/control-checkbox-radio.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "control-button",
+    "category": "platform",
+    "file": "cases/control-button.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "control-details-open",
+    "category": "platform",
+    "file": "cases/control-details-open.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "static-html-css"
+  },
+  {
+    "id": "script-dom-mutation",
+    "category": "javascript",
+    "file": "cases/script-dom-mutation.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "javascript"
+  },
+  {
+    "id": "script-generated-content",
+    "category": "javascript",
+    "file": "cases/script-generated-content.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "javascript"
+  },
+  {
+    "id": "script-canvas-2d",
+    "category": "javascript",
+    "file": "cases/script-canvas-2d.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "javascript"
+  },
+  {
+    "id": "script-custom-element",
+    "category": "javascript",
+    "file": "cases/script-custom-element.html",
+    "width": 640,
+    "height": 480,
+    "scale": 1,
+    "dark": false,
+    "requires": "javascript"
+  }
+]

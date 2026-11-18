@@ -1,0 +1,30 @@
+{
+  "run": "baseline-59",
+  "similarityPolicy": {
+    "version": 1,
+    "threshold": 0.999,
+    "metric": "1 - sum(max(abs(referenceRGBA - actualRGBA))) / (255 * foregroundPixels)",
+    "foreground": "union of pixels other than opaque white in either image",
+    "scope": "every case independently; render errors fail; no exclusions or alignment"
+  },
+  "summary": {
+    "nativeChrome": {
+      "total": 128,
+      "passed": 76,
+      "failed": 52,
+      "minimumForegroundSimilarity": 0.2705882352941177
+    },
+    "wasmChrome": {
+      "total": 128,
+      "passed": 76,
+      "failed": 52,
+      "minimumForegroundSimilarity": 0.2705882352941177
+    },
+    "nativeWasm": {
+      "total": 128,
+      "passed": 128,
+      "failed": 0,
+      "minimumForegroundSimilarity": 0.9999984932497589
+    }
+  }
+}
