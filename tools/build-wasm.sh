@@ -3,6 +3,8 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 TOOLCHAIN="${KITION_RUST_TOOLCHAIN:-1.95.0}"
+# The pinned toolchain needs its own wasm32 target; a runner that only adds it to stable has none.
+rustup target add --toolchain "$TOOLCHAIN" wasm32-unknown-unknown
 export RUSTC="$(rustup which --toolchain "$TOOLCHAIN" rustc)"
 export RUSTDOC="$(rustup which --toolchain "$TOOLCHAIN" rustdoc)"
 # A release engine: the debug build was 70 MB and rendered a 2 MB page about twelve times slower.
