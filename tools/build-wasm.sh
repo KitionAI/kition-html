@@ -11,6 +11,21 @@ export RUSTDOC="$(rustup which --toolchain "$TOOLCHAIN" rustdoc)"
 rustup run "$TOOLCHAIN" cargo build --locked --release -p kition-html-kit \
   --target wasm32-unknown-unknown --target-dir target/wasm-build
 BINDGEN="${WASM_BINDGEN:-wasm-bindgen}"
+# Where no wasm-bindgen is installed (a GitHub runner), fetch the released 0.2.129 executable.
+if ! command -v "$BINDGEN" >/dev/null 2>&1; then
+  case "$(uname -s)-$(uname -m)" in
+    Linux-x86_64) TRIPLE=x86_64-unknown-linux-musl ;;
+    Linux-aarch64) TRIPLE=aarch64-unknown-linux-musl ;;
+    Darwin-arm64) TRIPLE=aarch64-apple-darwin ;;
+    Darwin-x86_64) TRIPLE=x86_64-apple-darwin ;;
+    *) echo 'wasm-bindgen 0.2.129 is not installed. Set WASM_BINDGEN to that executable.' >&2; exit 1 ;;
+  esac
+  TOOLS="target/tools/wasm-bindgen-0.2.129"
+  mkdir -p "$TOOLS"
+  curl -fsSL "https://github.com/wasm-bindgen/wasm-bindgen/releases/download/0.2.129/wasm-bindgen-0.2.129-$TRIPLE.tar.gz" \
+    | tar -xz --strip-components=1 -C "$TOOLS"
+  BINDGEN="$TOOLS/wasm-bindgen"
+fi
 if [[ "$("$BINDGEN" --version)" != 'wasm-bindgen 0.2.129' ]]; then
   echo 'Cargo.lock requires wasm-bindgen-cli 0.2.129. Set WASM_BINDGEN to that executable.' >&2
   exit 1
