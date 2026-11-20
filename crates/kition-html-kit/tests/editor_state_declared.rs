@@ -4,8 +4,8 @@
 
 #[test]
 fn kit_json_declares_the_engines_editor_state() {
-    let manifest: serde_json::Value =
-        serde_json::from_str(include_str!("../../../kit.json")).unwrap();
+    let manifest: serde_json::Value = serde_json::from_str(include_str!("../../../kit.json"))
+        .unwrap_or_else(|error| panic!("kit.json: {error}"));
     assert_eq!(
         manifest["engine"]["editorState"],
         serde_json::json!(kition_html_kit::EDITOR_STATE),

@@ -3,7 +3,7 @@
 //! (`model.open`, `model.import`, `model.export`, `model.save`) over the engine's change exchange.
 //! `kit.json` lists exactly the features `kit.initialize` answers (platform rule K9), so a host
 //! knows them before it starts the executable.
-use kition_headless::{Headless, KitInfo};
+use kition_headless::{FileIdentity, Headless, KitInfo};
 use kition_html_kit::HtmlDocument;
 use kition_kit::KitDocument;
 use kition_kit::session::KitSessionDocument;
@@ -17,11 +17,10 @@ const NAME: &str = "page.html";
 
 /// The backend `main` serves, built from the same manifest with the same arguments.
 fn kit() -> Result<Headless<HtmlDocument>> {
-    Ok(Headless::with_replica_port(KitInfo::from_manifest(
-        MANIFEST,
-        &[],
-        &["width", "height"],
-    )?))
+    Ok(
+        Headless::with_replica_port(KitInfo::from_manifest(MANIFEST, &[], &["width", "height"])?)
+            .with_file_identity(FileIdentity::NotEmbedded),
+    )
 }
 
 fn call(kit: &mut Headless<HtmlDocument>, method: &str, params: Value) -> Result<Value> {
@@ -74,8 +73,15 @@ fn kit_json_lists_the_features_kit_initialize_answers() -> Result {
     let manifest: Value = serde_json::from_str(MANIFEST)?;
     let mut kit = kit()?;
     let serves = kit.serves_model();
-    // What `kit.initialize` answers in `capabilities.features`.
-    let answered = with_model_features(kit.capabilities(), serves)["features"].clone();
+    // What `kit.initialize` answers in `capabilities.features`: the server adds the object
+    // model's features, then `document.identity` for a backend that says how its files carry
+    // their identity (Kit Process Protocol section 5.6).
+    let mut answered = with_model_features(kit.capabilities(), serves)["features"].clone();
+    if kit.file_identity().is_some()
+        && let Some(features) = answered.as_array_mut()
+    {
+        features.push(json!("document.identity"));
+    }
     assert_eq!(manifest["headless"]["features"], answered);
     Ok(())
 }

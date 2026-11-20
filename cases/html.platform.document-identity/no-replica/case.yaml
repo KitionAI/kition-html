@@ -1,0 +1,22 @@
+format: 1
+id: html.platform.document-identity/no-replica
+feature: html.platform.document-identity
+intent: >-
+  Through the real kition-html process: a saved page is its HTML source alone and embeds no
+  replica, so document.identity answers no docId for a page and for an empty file, and
+  document.fork writes the page's bytes unchanged under the new name with no docId; the fork
+  opens as a page, a fork of the fork is the same bytes again, and a fork never replaces an
+  existing file.
+layer: gate
+source:
+  kind: synthetic
+  from: apps/kition-html/tests/identity.rs (a_page_carries_no_identity_and_forks_into_the_same_bytes)
+  license: Apache-2.0
+input: []
+steps:
+  - cargo-test: { package: kition-html, test: identity, filter: a_page_carries_no_identity_and_forks_into_the_same_bytes }
+expected:
+  - actual: out:cargo-test
+    compare: exit
+    value: 0
+since: "2026-11-20"

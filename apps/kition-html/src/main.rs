@@ -183,13 +183,31 @@ fn run() -> Result<(), String> {
     Ok(())
 }
 
+/// The kit served headless (`--kition-kit`), as `kit.json` declares it, with the object model and
+/// the replica methods over the engine's change exchange, and the identity a file carries
+/// (`document.identity`, `document.fork`): a saved page is its HTML source alone, with no replica
+/// in it, so a file carries no identity and its fork is the same bytes.
+fn headless() -> ExitCode {
+    let kit = match kition_headless::KitInfo::from_manifest(
+        include_str!("../../../kit.json"),
+        &[],
+        kition_html_kit::EDITOR_STATE,
+    ) {
+        Ok(kit) => kit,
+        Err(error) => {
+            eprintln!("kit: {error}");
+            return ExitCode::from(2);
+        }
+    };
+    let backend =
+        kition_headless::Headless::<kition_html_kit::HtmlDocument>::with_replica_port(kit.clone())
+            .with_file_identity(kition_headless::FileIdentity::NotEmbedded);
+    kition_headless::serve_backend(&kit, backend)
+}
+
 fn main() -> ExitCode {
     if std::env::args().nth(1).as_deref() == Some("--kition-kit") {
-        return kition_headless::run_manifest_model::<kition_html_kit::HtmlDocument>(
-            include_str!("../../../kit.json"),
-            &[],
-            kition_html_kit::EDITOR_STATE,
-        );
+        return headless();
     }
     match run() {
         Ok(()) => ExitCode::SUCCESS,
