@@ -14,6 +14,11 @@ use serde_json::{Value, json};
 use std::cell::RefCell;
 use std::sync::Arc;
 
+/// The editor state `inspect()` reports: the viewport the page is laid out in (`width` and
+/// `height`), which the editor sets, not the page. kition-headless leaves it out of what an agent
+/// reads (its volatile keys), and `kit.json` declares the same list as `engine.editorState`.
+pub const EDITOR_STATE: &[&str] = &["width", "height"];
+
 pub mod check;
 #[cfg(test)]
 mod conformance;

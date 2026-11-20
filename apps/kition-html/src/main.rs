@@ -188,7 +188,7 @@ fn main() -> ExitCode {
         return kition_headless::run_manifest_model::<kition_html_kit::HtmlDocument>(
             include_str!("../../../kit.json"),
             &[],
-            &["width", "height"],
+            kition_html_kit::EDITOR_STATE,
         );
     }
     match run() {
