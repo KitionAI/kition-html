@@ -3,6 +3,12 @@
 Changes to Kition HTML, newest first. A version is the kit package version in `kit.json`;
 each package is published with a `package-v<version>` tag.
 
+## 0.1.1
+
+- `kit.json` declares the engine's editor state (`engine.editorState`), so a host that does not run the engine's Rust code reads `inspect()` without it.
+- The package is built and published on GitHub with Kition's `kit-package.yml`.
+- README: an agent connects with `npm install -g @kition/cli` and `kition agent add`.
+
 ## 0.1.0
 
 First public release of the source, under the Apache License 2.0. It contains:

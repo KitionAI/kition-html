@@ -181,7 +181,7 @@ diagnostics are new or resolved. The agent's guide is [agent/guide.md](agent/gui
 
 ## Maturity
 
-Preview: early, expect gaps. Version 0.1.0 · KHP 1.0, conformance level `basic`.
+Preview: early, expect gaps. Version 0.1.1 · KHP 1.0, conformance level `basic`.
 
 | Works today | Partly there | Not yet |
 | --- | --- | --- |

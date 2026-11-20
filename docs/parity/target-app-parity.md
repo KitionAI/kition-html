@@ -19,7 +19,7 @@ accepting a case at 99.9% content similarity:
 
 ## Catalogue
 
-[features.yaml](../../features.yaml) has ten features for version 0.1.0 (`kit.json`). Nine are
+[features.yaml](../../features.yaml) has ten features for version 0.1.1 (`kit.json`). Nine are
 `has`: the four agent features (observe, act, recover, P0; converse, P1), the page as a KDM
 replica, editing the page's HTML with undo, save and reopen (P0), the display modes, the faces
 text draws in, and inline elements' margins, borders and paddings. One is `partial`: clicking and
