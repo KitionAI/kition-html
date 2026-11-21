@@ -7,6 +7,7 @@ each package is published with a `package-v<version>` tag.
 
 - A host asks an HTML file for its document id (`document.identity`) and forks it (`document.fork`), Kit Process Protocol section 5.6 (kition-sdk 6b4d471): a saved page is its HTML source alone and embeds no replica, so it carries no id and its fork is the same bytes.
 - The headless program speaks Kit Process Protocol version 1 (`headless.protocol` is `kition-kit/1`), as hosts on kition-sdk from bb1b07b require.
+- kition-sdk 6672663: KDM undo and redo pass over a group whose changes came to nothing, so an undo step that changed nothing no longer stops undo.
 
 ## 0.1.1
 
