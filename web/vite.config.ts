@@ -5,9 +5,9 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   base: './',
   plugins: [react()],
-  resolve: { dedupe: ['react', 'react-dom'], alias: [{ find: /^loro-crdt$/, replacement: 'loro-crdt/browser' }] },
+  resolve: { dedupe: ['react', 'react-dom'] },
   optimizeDeps: {
-    exclude: ['@kition/sdk', 'loro-crdt'],
+    exclude: ['@kition/sdk'],
     // The published kit editor reaches a CommonJS shim (through its UI library); excluded above, it
     // is not scanned, so the shim is named here to be converted for the browser.
     include: ['@kition/sdk > use-sync-external-store/shim'],
