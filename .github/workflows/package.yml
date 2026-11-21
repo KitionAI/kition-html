@@ -8,6 +8,17 @@ name: Package
 
 on:
   workflow_dispatch:
+    inputs:
+      scope:
+        description: The npm scope to publish to (another scope than @kition is a rehearsal, with the secret NPM_TOKEN_STAGE)
+        required: false
+        default: '@kition'
+        type: string
+      platforms:
+        description: Only these platforms (separated by commas); empty for every platform
+        required: false
+        default: ''
+        type: string
 
 permissions:
   contents: read
@@ -18,5 +29,8 @@ jobs:
     uses: KitionAI/kition/.github/workflows/kit-package.yml@main
     with:
       kit: html
+      scope: ${{ inputs.scope }}
+      platforms: ${{ inputs.platforms }}
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      NPM_TOKEN_STAGE: ${{ secrets.NPM_TOKEN_STAGE }}
