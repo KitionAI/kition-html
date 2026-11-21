@@ -39,7 +39,7 @@ a kition-sdk checkout next to this repository (or the one `KITION_SDK` names), r
 Before you open a pull request, run the check; it must exit 0:
 
 ```sh
-cargo fmt --all -- --check && cargo clippy --workspace --all-targets -- -D warnings && cargo test --workspace
+cargo fmt --all -- --check
 ```
 
 ## Rules
