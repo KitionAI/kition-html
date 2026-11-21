@@ -1,6 +1,6 @@
 # Editor and Kition integration
 
-The self-contained editor in `web/` uses `@kition/kit-editor` and renders
+The self-contained editor in `web/` uses `@kition/sdk/editor` and renders
 HTML/CSS/JavaScript in a Web Worker. It edits source, previews the engine's raster, reports
 rendering diagnostics, and shares undo/redo, save, read-only handling, and
 on-disk conflict detection with other kits. HTML source is UTF-8, limited to

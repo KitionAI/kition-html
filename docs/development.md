@@ -9,7 +9,7 @@ HTML in your own app, start with the [README](../README.md).
 |---|---|
 | `crates/` | The engine (Rust): `kition-html-engine` (the renderer, with JavaScript in Boa) and `kition-html-kit` (the shared WASM engine behind the `KitDocument` contract) |
 | `apps/` | `kition-html`: the native executable (`render`, `preview`, and the headless KHP server) |
-| `web/` | The kit's editor on `@kition/kit-editor` |
+| `web/` | The kit's editor on `@kition/sdk/editor` |
 | `vendor/` | Modified copies of upstream crates ([vendor/README.md](../vendor/README.md)) |
 | `agent/` | The agent guide and the check catalogue |
 | `conformance/` | The pixel comparison corpus against Chrome ([conformance/README.md](../conformance/README.md)) |
@@ -34,13 +34,17 @@ The first three commands are the check every change passes ([quality.md](quality
 guides in [features/](features/) describe the native renderer, the WebAssembly build, the Chrome
 comparison and the editor.
 
-By default `pnpm install` in `web/` installs the published `@kition/*` packages from npm, at the
-versions the committed `web/pnpm-lock.yaml` pins, so the editor needs no other checkout. To work
-against a local kition-sdk checkout instead, run `KITION_LINK=1 pnpm install` in `web/`:
-`web/.pnpmfile.cjs` then links `@kition/kdm`, `@kition/kit-dev-host`, `@kition/kit-editor`,
-`@kition/kit-host` and `@kition/kit-ui-protocol` from the kition-sdk checkout next to this
-repository (or the one `KITION_SDK` names), each one whose package is there. The linked install
-rewrites `web/pnpm-lock.yaml`; do not commit that lockfile.
+By default `pnpm install` in `web/` installs the published `@kition/sdk` and `@kition/tessera`
+from npm, at the versions the committed `web/pnpm-lock.yaml` pins, so the editor needs no other
+checkout. Until their first release on the `@kition` scope, `web/package.json` names them as npm
+aliases of the rehearsal copies (`npm:@kitionstage/sdk@...`, `npm:@kitionstage/tessera@...`), so
+the code already imports the final names. To work against local checkouts instead, run
+`KITION_LINK=1 pnpm install` in `web/`: `web/.pnpmfile.cjs` then links `@kition/sdk` from the
+kition-sdk checkout next to this repository (`packages/sdk`, or the checkout `KITION_SDK` names)
+and `@kition/tessera` from the kition-tessera checkout (`packages/tessera`, or `KITION_TESSERA`),
+each one whose package is there. Both packages' exports point at their `dist/`, so build them
+first (`pnpm --filter @kition/sdk build` in kition-sdk, `pnpm build` in kition-tessera's
+`packages/tessera`). The linked install rewrites `web/pnpm-lock.yaml`; do not commit that lockfile.
 
 `pnpm engine` runs `tools/build-wasm.sh`, which builds the WebAssembly engine
 (`crates/kition-html-kit`) into `web/public/engine/` and needs wasm-bindgen-cli 0.2.129 (set

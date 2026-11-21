@@ -12,7 +12,7 @@ Thank you for contributing; every change keeps the checks green.
 | `crates/kition-html-engine` | The renderer (Blitz and Vello CPU), with JavaScript in Boa |
 | `crates/kition-html-kit` | The shared WASM engine behind Kition's `KitDocument` contract |
 | `apps/kition-html` | The native executable: `render`, `preview`, and the headless KHP server |
-| `web/` | The kit's editor (on kition-sdk's `@kition/kit-editor`) |
+| `web/` | The kit's editor (on kition-sdk's `@kition/sdk/editor`) |
 | `conformance/` | The pixel comparison corpus against Chrome |
 | `tools/` | The comparison, sample, and WebAssembly build scripts |
 | `kit.json` | The kit manifest (KHP) |

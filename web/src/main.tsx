@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client'
-import { connectHost, defineKitUi } from '@kition/kit-editor'
-import '@kition/kit-editor/styles.css'
+import { connectHost, defineKitUi } from '@kition/sdk/editor'
+import '@kition/sdk/editor/styles.css'
 import './app.css'
 import { App } from './App'
 import { HTML_MENUS } from './menus'

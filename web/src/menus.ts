@@ -3,7 +3,7 @@
  * `EditorFrame` in every display mode. Declared here, not built from the engine's command list, so
  * the frame has its Edit tab from the first drawing (it would show Menus until the engine answered).
  */
-import type { MenuRow } from '@kition/kit-editor'
+import type { MenuRow } from '@kition/sdk/editor'
 
 const EDIT = ['Edit']
 

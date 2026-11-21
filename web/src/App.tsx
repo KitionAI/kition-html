@@ -3,7 +3,7 @@ import {
   Button, EditorFrame, FrameChrome, KitDocumentCanvas, KitEditorProvider, KitElement,
   catalogTabs, createKitStrings, useFrameMode, useKitEditor, useKitEditorState, useKitSession, useUi,
   type HostConnection, type KitCanvasHandle, type KitEngineInfo, type KitTool,
-} from '@kition/kit-editor'
+} from '@kition/sdk/editor'
 import { EDIT_TAB, HTML_MENUS, PRIMARY_ROWS } from './menus'
 
 type HtmlState = { source: string }
