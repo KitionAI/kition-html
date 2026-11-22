@@ -5,10 +5,11 @@ import {
   type HostConnection, type KitCanvasHandle, type KitEngineInfo, type KitTool,
 } from '@kition/sdk/editor'
 import { EDIT_TAB, HTML_MENUS, PRIMARY_ROWS } from './menus'
+import { CanvasScrollbars, createViewStore, pageScrollArea } from './CanvasScrollbars'
 
 type HtmlState = { source: string }
 const describe = (info: KitEngineInfo): HtmlState => ({ source: String(info.inspected.source ?? '') })
-const catalogs = { 'en-US': { source: 'HTML source', preview: 'Preview', limits: 'HTML, CSS and JavaScript preview', noDiagnostics: 'No rendering diagnostics', previewFailed: 'Could not update preview', sourceFailed: 'Could not update HTML', fileChanged: 'This file changed on disk. Your unsaved edits have been kept.', keepMine: 'Keep my edits', reloadFile: 'Load saved version' } }
+const catalogs = { 'en-US': { source: 'HTML source', preview: 'Preview', limits: 'HTML, CSS and JavaScript preview', noDiagnostics: 'No rendering diagnostics', previewFailed: 'Could not update preview', verticalScroll: 'Vertical scroll', horizontalScroll: 'Horizontal scroll', sourceFailed: 'Could not update HTML', fileChanged: 'This file changed on disk. Your unsaved edits have been kept.', keepMine: 'Keep my edits', reloadFile: 'Load saved version' } }
 
 export function App({ host }: { host: HostConnection }) {
   const manifest = useMemo(() => ({ kitId: 'kit.html', base: new URL('./engine/', document.baseURI).href, module: 'kition_html_kit', documentClass: 'HtmlDocument' }), [])
@@ -33,6 +34,12 @@ function HtmlEditor({ session, pendingSource }: { session: Session; pendingSourc
   const ui = useUi()
   const canvas = useRef<KitCanvasHandle | null>(null)
   const [zoom, setZoom] = useState(1)
+  // The preview scrolls only a margin past the page, and has a scrollbar while the page is longer than the view.
+  const views = useMemo(createViewStore, [])
+  const pageWidth = session.doc?.width ?? 0
+  const pageHeight = session.doc?.height ?? 0
+  const panBounds = useMemo(() => pageScrollArea(pageWidth, pageHeight, zoom), [pageWidth, pageHeight, zoom])
+  const previewPanel = useRef<HTMLElement>(null)
   const [source, setSource] = useState('')
   const [pending, setPending] = useState(0)
   const inFlight = useRef(0)
@@ -132,11 +139,18 @@ function HtmlEditor({ session, pendingSource }: { session: Session; pendingSourc
               }} />
           </section>
         </KitElement>
-        <section className="html-preview-panel" aria-label={editor.t('preview')}>
+        <section className="html-preview-panel" aria-label={editor.t('preview')} ref={previewPanel} data-testid="html-preview-panel" data-picture={pageWidth > 0 ? `${pageWidth} ${pageHeight}` : undefined}>
           <FrameChrome>
             <div className="html-panel-heading">{editor.t('preview')}</div>
           </FrameChrome>
-          <KitDocumentCanvas tool={previewTool} canvas={canvas} testId="html-preview" onView={(view) => setZoom(view.zoom)} />
+          <KitDocumentCanvas tool={previewTool} canvas={canvas} testId="html-preview" panBounds={panBounds} onView={(view) => {
+            setZoom(view.zoom)
+            views.set(view)
+            // The view, for the scroll test's checks (zoom and the document point at the top left).
+            previewPanel.current?.setAttribute('data-view', `${view.zoom} ${view.x} ${view.y}`)
+          }}>
+            <CanvasScrollbars views={views} content={(view) => pageScrollArea(pageWidth, pageHeight, view.zoom)} canvas={canvas} />
+          </KitDocumentCanvas>
           <FrameChrome>
             <div className="html-diagnostics" data-testid="html-diagnostics" role="status">
               {diagnostics.length ? diagnostics.map((item, index) => <div key={`${index}:${item}`}>{item}</div>) : editor.t('noDiagnostics')}

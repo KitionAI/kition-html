@@ -1,0 +1,25 @@
+format: 1
+id: regressions/issue-scroll-past-page
+feature: html.editor.preview-scroll
+intent: >-
+  The wheel scrolls the preview only a margin (32 screen pixels, the margin a fitted page has) past the page: on
+  every side the view stops there, at the opening zoom and zoomed in, and a view larger than the page and its
+  margin keeps it centred. A scrollbar is over the preview's right or bottom edge only while the page and its
+  margin are longer than the view there, at the view's position, and moves the view (Home, End). Before, the
+  preview had no scroll limits and no scrollbar, so the view moved any distance past the page and showed only
+  empty canvas (owner report, 2026-11-22).
+layer: gate
+dimension: function
+source:
+  kind: probe
+  from: web/tests/scroll.mjs
+  license: owned
+input: []
+steps:
+  - exec:
+      cmd: [node, web/tests/scroll.mjs, chromium]
+expected:
+  - { actual: "out:exec", compare: exit, value: 0 }
+since: "2026-11-22"
+timeout_s: 120
+requires: [chromium]

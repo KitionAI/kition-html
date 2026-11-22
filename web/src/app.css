@@ -16,3 +16,34 @@ html, body, #root { margin: 0; width: 100%; height: 100%; overflow: hidden; font
 .html-conflict span { flex: 1; }
 /* Focus: the panes end above the Focus bar (its 12 px offset, its height, and a margin). */
 .html-editor-focus { padding-bottom: 56px; }
+
+/* The canvas's scrollbars, over its right and bottom edges; there only while the content is longer than the view. */
+.html-scrollbars {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.html-scrollbars > .kui-scrollbar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  pointer-events: auto;
+}
+
+.html-scrollbars > .kui-scrollbar[aria-orientation='horizontal'] {
+  top: auto;
+  left: 0;
+}
+
+/* Both: each stops short of the corner they share. */
+.html-scrollbars[data-both] > .kui-scrollbar[aria-orientation='vertical'] {
+  bottom: 14px;
+}
+
+.html-scrollbars[data-both] > .kui-scrollbar[aria-orientation='horizontal'] {
+  right: 14px;
+}

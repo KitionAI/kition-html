@@ -64,6 +64,15 @@ features:
     target: "Chrome 147.0.7727.15 (Chrome for Testing)"
     gap: "Clicks and time steps run the page's scripts without changing the saved source; no case yet compares the rendered page after a click or a time step with Chrome's."
     since: "2026-11-16"
+  - id: html.editor.preview-scroll
+    title: "Scrolling the preview stops a margin past the page; a view larger than the page and its margin keeps it centred, so a fitted page does not scroll; a scrollbar is over the preview's right or bottom edge only while the page and its margin are longer than the view there"
+    dimension: [function]
+    priority: P1
+    status: has
+    paths: [web/src/App.tsx, web/src/CanvasScrollbars.tsx, web/src/app.css, web/tests/scroll.mjs]
+    gap: "The margin is 32 screen pixels on every side."
+    cases: [regressions/issue-scroll-past-page]
+    since: "2026-11-22"
   - id: html.platform.display-modes
     title: "The editor in every display mode: Single line and Classic open on Edit; Focus shows only the source and the preview"
     dimension: [function, platform]
