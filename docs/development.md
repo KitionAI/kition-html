@@ -30,9 +30,13 @@ pnpm install && pnpm test             # node --test tools/*.test.mjs
 cd web && pnpm install && pnpm engine
 ```
 
-The first three commands are the check every change passes ([quality.md](quality.md)). The
-guides in [features/](features/) describe the native renderer, the WebAssembly build, the Chrome
-comparison and the editor.
+On your machine, run only the fast checks: `cargo fmt --all -- --check`, `cargo check -p
+<touched crates> --all-targets`, the wasm `cargo check` and `pnpm typecheck` in `web/`. Clippy,
+`cargo test --workspace` and every `test`/`test:*` script run in the kit's CI run on GitHub
+(`.github/workflows/ci.yml` calls Kition's reusable kit CI); a change is done when the CI run of
+HEAD passes and HEAD is on `origin/main` (Kition's `scripts/kit-ci.sh` `push`, `wait`, `land`;
+[quality.md](quality.md)). The guides in [features/](features/) describe the native renderer,
+the WebAssembly build, the Chrome comparison and the editor.
 
 By default `pnpm install` in `web/` installs the published `@kition/sdk` and `@kition/tessera`
 from npm, at the versions the committed `web/pnpm-lock.yaml` pins, so the editor needs no other

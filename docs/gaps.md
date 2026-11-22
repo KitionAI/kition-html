@@ -25,4 +25,4 @@ that need the rest do not run as in a browser.
 ## G4 Rendering has no feature entries
 
 [features.yaml](../features.yaml) catalogues the agent features and the page's replica
-(`html.collab.replica`). Rendering, scripting and the editor have no feature entries, statuses or gate cases of their own; the corpora measure them.
+(`html.collab.replica`). Rendering, scripting and the editor have no feature entries, statuses or gating tests of their own; the corpora measure them.

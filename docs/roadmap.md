@@ -15,4 +15,4 @@
 
 1. Close the pixel differences against Chrome, using the per-case diagnostics `pnpm compare` writes ([findings.md](parity/findings.md)) (gap G1).
 2. Finish the form controls (G2) and the browser APIs pages depend on (G3).
-3. Catalogue rendering, scripting and the editor as features with gate cases (G4).
+3. Catalogue rendering, scripting and the editor as features with gating tests (G4).
