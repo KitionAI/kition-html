@@ -1,6 +1,6 @@
 //! The KHP conformance fixtures beside the renderer's own cases in `conformance/`: `basic.html`
 //! (no diagnostics), `edit.json` (steps that change it), one `check-<code>.html` per catalogue code,
-//! `golden/` previews of `basic`, and the check catalogue
+//! `expected/` previews of `basic`, and the check catalogue
 //! (`agent/checks.json`, from [`crate::check::CATALOGUE`]).
 //!
 //! `KITION_WRITE_CONFORMANCE=1 cargo test -p kition-html-kit conformance` writes them; without the
@@ -80,20 +80,20 @@ fn every_fixture_reports_its_code_and_basic_is_clean() {
     let basic = HtmlDocument::open("basic.html", BASIC.as_bytes()).expect("basic");
     assert_eq!(codes(&basic), Vec::<String>::new(), "basic.html is clean");
     if write {
-        std::fs::create_dir_all(out.join("golden")).expect("conformance/golden");
+        std::fs::create_dir_all(out.join("expected")).expect("conformance/expected");
         std::fs::create_dir_all(repo().join("agent")).expect("agent");
         std::fs::write(out.join("basic.html"), BASIC).expect("basic");
         std::fs::write(out.join("edit.json"), format!("{:#}\n", edit())).expect("edit.json");
-        std::fs::write(out.join("golden/basic.png"), png(&basic, 1.0)).expect("golden");
-        std::fs::write(out.join("golden/basic-scale-2.png"), png(&basic, 2.0))
-            .expect("golden scale 2");
+        std::fs::write(out.join("expected/basic.png"), png(&basic, 1.0)).expect("expected");
+        std::fs::write(out.join("expected/basic-scale-2.png"), png(&basic, 2.0))
+            .expect("expected scale 2");
         let tolerance = json!({
             "maxChannelDelta": 2,
             "maxDifferentPixels": 1500,
             "note": "The kit's own renderer draws the preview; glyph edges may differ by a step between platforms and fonts."
         });
         std::fs::write(
-            out.join("golden/tolerance.json"),
+            out.join("expected/tolerance.json"),
             format!("{tolerance:#}\n"),
         )
         .expect("tolerance");

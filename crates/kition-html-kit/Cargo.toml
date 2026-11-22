@@ -20,5 +20,5 @@ workspace = true
 [dev-dependencies]
 # The showcase sample builder (examples/showcase.rs) saves its thumbnails.
 image = { version = "0.25", default-features = false, features = ["png"] }
-# The conformance fixtures' golden previews (src/conformance.rs).
+# The conformance fixtures' expected previews (src/conformance.rs).
 png.workspace = true

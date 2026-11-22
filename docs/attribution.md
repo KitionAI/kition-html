@@ -34,5 +34,5 @@ changed in each is listed in [vendor/README.md](../vendor/README.md).
 | `conformance/assets/Lora-Variable.ttf` | The Lora Project Authors | [Lora](https://github.com/cyrealtype/Lora-Cyrillic) | SIL Open Font License 1.1 | `conformance/assets/Lora-OFL.txt` |
 | `conformance/assets/` (other files: `external.css`, `imported.css`, `sample-canvas.png`, `sample-canvas.svg`, `sample-data.json`, `sample-export*.js`, `sample-palette.js`, `shape.svg`) | Kition HTML contributors | written for the corpus | Apache-2.0 | Inputs the corpus pages load |
 | `conformance/cases/`, `conformance/samples/`, `conformance/basic.html` | Kition HTML contributors | written for this repository (`tools/generate-cases.mjs`, `tools/generate-samples.mjs`) | Apache-2.0 | The conformance and supplementary corpora |
-| `conformance/golden/` | Kition HTML contributors | rendered by this repository's tools | Apache-2.0 | Reference images and data for the golden cases |
+| `conformance/expected/` | Kition HTML contributors | rendered by this repository's tools | Apache-2.0 | Reference images and data for the expected previews |
 | `cases/**/input/` | Kition HTML contributors | written for the cases | Apache-2.0 | Case inputs |
