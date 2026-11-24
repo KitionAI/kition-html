@@ -10,7 +10,9 @@
     "build": "tsc --noEmit && vite build",
     "dev": "vite",
     "typecheck": "tsc --noEmit",
-    "test:history": "node tests/history.mjs chromium && node tests/history.mjs webkit"
+    "test:history": "node tests/history.mjs chromium && node tests/history.mjs webkit",
+    "test:modes": "node tests/modes.mjs chromium && node tests/modes.mjs webkit",
+    "test:scroll": "node tests/scroll.mjs chromium && node tests/scroll.mjs webkit"
   },
   "dependencies": {
     "@kition/sdk": "npm:@kitionstage/sdk@0.5.2-stage.19",
