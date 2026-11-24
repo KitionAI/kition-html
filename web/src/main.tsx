@@ -13,7 +13,7 @@ document.fonts.add(font)
 void font.load().catch(() => undefined)
 const alone = window.setTimeout(() => root.render(<p className="kui-message">Open an HTML file from your workspace to use this editor.</p>), 3000)
 void connectHost({
-  id: manifest.id, version: manifest.version, capabilities: ['ai'], brand: manifest.ui.brand, display: manifest.ui.display,
+  id: manifest.id, version: manifest.version, capabilities: ['ai', 'replica'], brand: manifest.ui.brand, display: manifest.ui.display,
   ui: defineKitUi({ menus: HTML_MENUS, tools: [], panels: [{ id: 'panel:source', label: 'HTML source' }], tabs: [], groups: [], controls: [] }),
 }).then((host) => {
   window.clearTimeout(alone)

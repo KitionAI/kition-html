@@ -44,6 +44,15 @@ features:
     paths: [crates/kition-html-kit/src/model.rs, crates/kition-html-kit/src/lib.rs, crates/kition-html-kit/model/schema.json]
     cases: [html.collab.replica/round-trip, html.collab.replica/concurrent-edits, html.collab.replica/agent-undo, regressions/issue-headless-features]
     since: "2026-11-16"
+  - id: html.collab.host-history
+    title: "The editor keeps the page's history with the host: it opens on the stored replica and writes it on each save (capability `replica`); a file changed outside Kition is merged into the stored replica as one import change, keeping the replica's id (replicaMergesFile, UI-R1)"
+    dimension: [collab, data-safety]
+    priority: P1
+    status: has
+    paths: [web/src/App.tsx, web/src/main.tsx, web/tests/history.mjs, crates/kition-html-kit/src/lib.rs, crates/kition-html-kit/src/replica_tests.rs]
+    gap: "Undo steps live in the session, not in the replica: after a reload or an outside change the page opens with no undo history."
+    cases: [html.collab.host-history/reload-and-outside-change]
+    since: "2026-11-24"
   - id: html.page.edit
     title: "Edit the page's HTML, undo and redo, save it and reopen it as edited"
     dimension: [function, conversion, data-safety]

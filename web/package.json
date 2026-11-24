@@ -9,15 +9,17 @@
     "engine": "bash scripts/build-engine.sh",
     "build": "tsc --noEmit && vite build",
     "dev": "vite",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:history": "node tests/history.mjs chromium && node tests/history.mjs webkit"
   },
   "dependencies": {
-    "@kition/sdk": "npm:@kitionstage/sdk@0.5.2-stage.16",
+    "@kition/sdk": "npm:@kitionstage/sdk@0.5.2-stage.19",
     "@kition/tessera": "npm:@kitionstage/tessera@0.1.1-stage.2",
     "react": "19.2.5",
     "react-dom": "19.2.5"
   },
   "devDependencies": {
+    "@playwright/test": "1.59.1",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.0",
