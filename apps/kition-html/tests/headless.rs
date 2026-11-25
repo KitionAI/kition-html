@@ -134,7 +134,7 @@ fn the_page_is_served_through_its_object_model_and_replica() -> Result {
     assert_eq!(text(&peer)?, "<h1>Title</h1><p>Body text</p>");
     let since = peer.session().version();
     peer.execute(
-        "html.setSource",
+        "file.setSource",
         json!({ "source": "<h1>New title</h1><p>Body text</p>" }),
     )?;
     let changes = peer

@@ -21,7 +21,7 @@ fn every_command_refuses_an_unknown_parameter() {
 #[test]
 fn a_misspelled_parameter_names_the_one_it_resembles() {
     let error = doc()
-        .execute("html.setSource", json!({ "sourec": "<p>Hi</p>" }))
+        .execute("file.setSource", json!({ "sourec": "<p>Hi</p>" }))
         .unwrap_err();
     assert!(
         error.contains("`sourec`") && error.contains("did you mean `source`"),

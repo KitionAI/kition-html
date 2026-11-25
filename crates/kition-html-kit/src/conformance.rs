@@ -42,7 +42,7 @@ fn fixture(code: &str) -> String {
 
 fn edit() -> Value {
     json!({ "steps": [
-        { "command": "html.setSource", "params": { "source": BASIC.replace("Saturday 8 pm", "Sunday 6 pm") } },
+        { "command": "file.setSource", "params": { "source": BASIC.replace("Saturday 8 pm", "Sunday 6 pm") } },
     ] })
 }
 

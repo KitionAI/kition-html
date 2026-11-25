@@ -35,17 +35,17 @@ No schema states a default; the parameter descriptions name the defaults that ex
 
 ### Edit
 
-- `html.setSource` (writes): Replaces the whole page with `source` (an HTML document, at most 1 MiB) as one undo step; answers `changed: false` when the source is already the same. The only way to edit the page.
+- `file.setSource` (writes): Replaces the whole page with `source` (an HTML document, at most 1 MiB) as one undo step; answers `changed: false` when the source is already the same. The only way to edit the page.
   - `source` string
-- `edit.undo` (writes): Puts back the source as it was before the last `html.setSource`. No parameters.
-- `edit.redo` (writes): Applies again the `html.setSource` the last undo took back. No parameters.
+- `edit.undo` (writes): Puts back the source as it was before the last `file.setSource`. No parameters.
+- `edit.redo` (writes): Applies again the `file.setSource` the last undo took back. No parameters.
 
 ### (no menu)
 
-- `html.click` (reads): Clicks the rendered page at `x`, `y` (CSS pixels from the page's top-left) so its scripts react, without changing the saved source; answers whether the rendered page changed.
+- `preview.click` (reads): Clicks the rendered page at `x`, `y` (CSS pixels from the page's top-left) so its scripts react, without changing the saved source; answers whether the rendered page changed.
   - `x` number
   - `y` number
-- `html.advance` (reads): Runs the page's timers and animations forward by `millis` milliseconds (a whole number), without changing the saved source; answers whether the rendered page changed.
+- `preview.advance` (reads): Runs the page's timers and animations forward by `millis` milliseconds (a whole number), without changing the saved source; answers whether the rendered page changed.
   - `millis` integer
 
 ## Examples
@@ -57,7 +57,7 @@ From [`agent/guide.md`](../agent/guide.md).
 ```json
 html_inspect {"path": "index.html"}
 → details.source: "<!doctype html>…<div class=\"card\"><p>Saturday 8 pm, Town Hall</p></div></body></html>\n"
-html_run {"path": "index.html", "steps": [{"command": "html.setSource", "params": {"source":
+html_run {"path": "index.html", "steps": [{"command": "file.setSource", "params": {"source":
   "<!doctype html>…<div class=\"card\"><p>Saturday 8 pm, Town Hall</p><p><a href=\"tickets.html\">Tickets</a></p></div></body></html>\n"}}]}
 html_check {"path": "index.html"}
 → {"diagnostics": []}
@@ -77,7 +77,7 @@ The kit does not load linked files, even ones in the workspace, so replace the i
 placeholder (or the picture as a `data:` URL):
 
 ```json
-html_run {"path": "poster.html", "steps": [{"command": "html.setSource", "params": {"source":
+html_run {"path": "poster.html", "steps": [{"command": "file.setSource", "params": {"source":
   "…<div style=\"width:120px;height:80px;background:#5645d4\" role=\"img\" aria-label=\"Poster\"></div></body></html>\n"}}]}
 html_check {"path": "poster.html"}
 → {"diagnostics": []}
@@ -92,4 +92,4 @@ html_check {"path": "title.html"}
 ```
 
 Define the value or replace `missingTitle` with the text (`"Spring concert 2026"`) in the script,
-send the whole source with `html.setSource`, and check again: `{"diagnostics": []}`.
+send the whole source with `file.setSource`, and check again: `{"diagnostics": []}`.

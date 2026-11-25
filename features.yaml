@@ -58,7 +58,7 @@ features:
     dimension: [function, conversion, data-safety]
     priority: P0
     status: has
-    commands: [html.setSource, edit.undo, edit.redo]
+    commands: [file.setSource, edit.undo, edit.redo]
     paths: [crates/kition-html-kit/src/lib.rs, crates/kition-html-kit/src/model.rs, crates/kition-html-kit/src/edit_tests.rs, vendor/blitz-dom/src/util.rs, crates/kition-html-engine/src/lib.rs]
     target: "Chrome 147.0.7727.15 (Chrome for Testing)"
     cases: [html.page.edit/save-reopen, regressions/issue-html-large-file, regressions/issue-reads-outside-workspace]
@@ -68,7 +68,7 @@ features:
     dimension: [function, fidelity]
     priority: P1
     status: partial
-    commands: [html.click, html.advance]
+    commands: [preview.click, preview.advance]
     paths: [crates/kition-html-kit/src/lib.rs]
     target: "Chrome 147.0.7727.15 (Chrome for Testing)"
     gap: "Clicks and time steps run the page's scripts without changing the saved source; no case yet compares the rendered page after a click or a time step with Chrome's."

@@ -26,7 +26,7 @@ Kition's New menu includes HTML when this package is built. It creates
 `PUT /v1/kits/files`; `.html` and `.htm` open in the kit's own editor in
 `KitFrame`. The native `kition-html` also serves the headless Kit Harness Protocol
 when launched with `--kition-kit`, preserving its `render` and `preview` CLI
-commands. Agent tools use the same `html.setSource`, undo/redo, and diagnostics.
+commands. Agent tools use the same `file.setSource`, undo/redo, and diagnostics.
 
 Kition's `kits/kits.lock.json` pins the published package, and Kition's `kits/modules.json` lists
 the kit as optional. Local builds are explicitly marked

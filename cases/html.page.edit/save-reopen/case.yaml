@@ -2,7 +2,7 @@ format: 1
 id: html.page.edit/save-reopen
 feature: html.page.edit
 intent: >-
-  A new page edited through html.setSource (a title, a style sheet, non-ASCII and emoji text, a
+  A new page edited through file.setSource (a title, a style sheet, non-ASCII and emoji text, a
   list), with an undo and a redo, saves to .html as exactly the last edit; reopened from those
   bytes it has the same source, the same described page and the same rendered pixels, and it
   edits on from there.

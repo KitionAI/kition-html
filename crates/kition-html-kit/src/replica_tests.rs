@@ -55,7 +55,7 @@ fn a_page_round_trips_through_its_replica_byte_for_byte() -> Result<(), String> 
 fn an_unchanged_page_saves_the_same_bytes_and_reopens_with_the_same_object_ids()
 -> Result<(), String> {
     let mut doc = HtmlDocument::open("page.html", PAGE.as_bytes())?;
-    doc.execute("html.setSource", json!({ "source": "<p>Edited</p>" }))?;
+    doc.execute("file.setSource", json!({ "source": "<p>Edited</p>" }))?;
     let saved = doc.save(None)?;
     doc.mark_saved();
     assert_eq!(
@@ -129,9 +129,9 @@ fn a_stored_replica_takes_in_the_file_as_it_is_now() -> Result<(), String> {
 fn an_agent_step_undoes_in_the_agent_scope_only() -> Result<(), String> {
     let agent = Origin::agent("agent:test");
     let mut doc = HtmlDocument::open("page.html", b"<p>One</p>")?;
-    doc.execute("html.setSource", json!({ "source": "<p>Two</p>" }))?;
+    doc.execute("file.setSource", json!({ "source": "<p>Two</p>" }))?;
     doc.execute_as(
-        "html.setSource",
+        "file.setSource",
         json!({ "source": "<p>Two</p><p>Agent</p>" }),
         &agent,
     )?;
@@ -173,7 +173,7 @@ fn an_imported_change_is_a_new_revision_the_preview_and_inspect_see() -> Result<
     let mut b = HtmlDocument::open_with_replica("page.html", &[], &snapshot, &[])?;
     let base = a.session().version();
     a.execute(
-        "html.setSource",
+        "file.setSource",
         json!({ "source": "<h1>New title</h1><p>Body text</p>" }),
     )?;
     let changes = a
@@ -208,12 +208,12 @@ fn an_agents_merged_draft_is_one_undo_step_of_the_person_and_undoes_exactly() ->
     let agent = Origin::agent("agent:test");
     let mut doc = HtmlDocument::open("page.html", b"<h1>Title</h1><p>Body</p>")?;
     doc.execute(
-        "html.setSource",
+        "file.setSource",
         json!({ "source": "<h1>Title</h1><p>Body</p><p>Mine</p>" }),
     )?;
     let (mut draft, since) = draft_of(&doc)?;
     draft.execute_as(
-        "html.setSource",
+        "file.setSource",
         json!({ "source": "<h1>New title</h1><p>Body</p><p>Mine</p>" }),
         &agent,
     )?;
@@ -274,12 +274,12 @@ fn a_draft_on_a_page_edited_meanwhile_is_refused_and_changes_nothing() -> Result
     let mut doc = HtmlDocument::open("page.html", b"<h1>Title</h1><p>Body</p>")?;
     let (mut draft, since) = draft_of(&doc)?;
     draft.execute_as(
-        "html.setSource",
+        "file.setSource",
         json!({ "source": "<h1>New title</h1><p>Body</p>" }),
         &Origin::agent("agent:test"),
     )?;
     doc.execute(
-        "html.setSource",
+        "file.setSource",
         json!({ "source": "<h1>Title</h1><p>Body text</p>" }),
     )?;
     let changes = kition_kit::session::__export_changes(&draft, &since)?;
@@ -303,7 +303,7 @@ fn a_restored_state_is_one_undo_step_and_undoes_exactly() -> Result<(), String> 
     let person = Origin::person("user:test");
     let mut doc = HtmlDocument::open("page.html", b"<p>One</p>")?;
     let earlier = doc.session().snapshot().map_err(|e| e.to_string())?;
-    doc.execute("html.setSource", json!({ "source": "<p>Two</p>" }))?;
+    doc.execute("file.setSource", json!({ "source": "<p>Two</p>" }))?;
     let before = doc.session().state_hash().map_err(|e| e.to_string())?;
     let revision = doc.revision();
     KitSessionDocument::restore_state(&mut doc, &earlier, &person)?;

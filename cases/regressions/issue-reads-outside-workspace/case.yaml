@@ -9,7 +9,7 @@ intent: >-
   show any attempt), connect to no server, write nothing in the process's folders, and report
   each SVG picture they did not draw as html.resource-unavailable (KHP A29, A37, A42, section
   10.6). An audit found by reading code that usvg's default resolver read an SVG <image href> by
-  path, relative to the process's folder, so html.setSource and a preview showed a picture from
+  path, relative to the process's folder, so file.setSource and a preview showed a picture from
   anywhere on the machine.
 layer: gate
 tags: [headless, security]

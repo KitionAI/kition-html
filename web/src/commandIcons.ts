@@ -5,5 +5,5 @@
 import { registerCommandIcons, TesseraIcons } from '@kition/sdk/editor'
 
 registerCommandIcons({
-  'html.setSource': TesseraIcons.CodeIcon,
+  'file.setSource': TesseraIcons.CodeIcon,
 })

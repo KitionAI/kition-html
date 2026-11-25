@@ -76,7 +76,7 @@ Every sample is built with HTML's own commands. [See all of them](https://github
 | `.html`, `.htm` | `.html` | — |
 
 A page is its source text. Editing means changing that text: in the editor you type in the source,
-and an agent replaces the whole source with the `html.setSource` command, one undo step each time.
+and an agent replaces the whole source with the `file.setSource` command, one undo step each time.
 The file is saved as that text.
 
 ## Quick start
@@ -157,7 +157,7 @@ Opened `newsletter.html`: 640 × 480
 {…,"details":{…,"source":"<!doctype html>\n<html lang=\"en\">\n<head><meta charset=\"utf-8\">
   <title>Crumb &amp; Hearth: the November loaf letter</title></head>…"},…,"revision":"vpu0",…}
 
-> html_run {"path":"newsletter.html","basis":"vpu0","steps":[{"command":"html.setSource","params":{"source":
+> html_run {"path":"newsletter.html","basis":"vpu0","steps":[{"command":"file.setSource","params":{"source":
     "<!doctype html>…Rye season is back: book your Saturday loaf…
      <img src=\"images/rye-loaf.jpg\" alt=\"A rye loaf\" width=\"536\"><br>Hello neighbour,…"}}]}
 Ran 1 commands on `newsletter.html` (saved): 640 × 480 Changes: objects 1 changed; 1 new diagnostic(s), 0 resolved.
@@ -167,7 +167,7 @@ Checked `newsletter.html`: 1 error, no warnings, no notes.
 {"diagnostics":[{"code":"html.resource-unavailable","message":"The page asks for `images/rye-loaf.jpg`,
   which the kit cannot load, so it is missing.","severity":"error","target":{}}]}
 
-> html_run {"path":"newsletter.html","basis":"vpu1","steps":[{"command":"html.setSource","params":{"source":
+> html_run {"path":"newsletter.html","basis":"vpu1","steps":[{"command":"file.setSource","params":{"source":
     "<!doctype html>…<svg width=\"536\" height=\"120\" role=\"img\" aria-label=\"A rye loaf\">…</svg>
      <br>Hello neighbour,…"}}]}
 Ran 1 commands on `newsletter.html` (saved): 640 × 480 Changes: objects 1 changed; 0 new diagnostic(s), 1 resolved.

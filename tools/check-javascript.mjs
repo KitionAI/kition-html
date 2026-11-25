@@ -19,16 +19,16 @@ check(source("Promise.resolve().then(()=>document.body.style.background='#5645d4
   assert.deepEqual(diagnostics(doc),[]);
 });
 check(source("let n=0;document.body.onclick=()=>{document.body.style.background=++n===2?'#5645d4':'blue'}"),doc=>{
-  doc.execute('html.click','{"x":4,"y":4}');
+  doc.execute('preview.click','{"x":4,"y":4}');
   doc.render(0,0,2,8,8);
-  doc.execute('html.click','{"x":4,"y":4}');
+  doc.execute('preview.click','{"x":4,"y":4}');
   assert.deepEqual(frame(doc),purple);
   assert.equal(doc.dirty,false);
   assert.match(new TextDecoder().decode(doc.save()),/let n=0/);
 });
 check(source("setTimeout(()=>document.body.style.background='#5645d4',100)"),doc=>{
   assert.deepEqual(frame(doc),[255,0,0,255]);
-  doc.execute('html.advance','{"millis":100}');
+  doc.execute('preview.advance','{"millis":100}');
   assert.deepEqual(frame(doc),purple);
 });
 check(source('')+'<script type="module" src="/assets/main.js"></script>',doc=>{
@@ -104,7 +104,7 @@ verify(`const input=document.createElement('input');input.type='NUMBER';const nu
 check('<!doctype html><style>body{margin:0}select{font:20px Inter;appearance:none;border:0;padding:0;color:black;width:64px;height:32px}</style><select id="choice"><option>Ready</option><option>Next</option></select><script>setTimeout(()=>document.getElementById("choice").selectedIndex=-1,100)</script>',doc=>{
   const hasInk=pixels=>pixels.some((channel,index)=>index%4!==3&&channel<128);
   assert.ok(hasInk(doc.render(0,0,1,64,32)));
-  doc.execute('html.advance','{"millis":100}');
+  doc.execute('preview.advance','{"millis":100}');
   assert.equal(hasInk(doc.render(0,0,1,64,32)),false);
   assert.deepEqual(diagnostics(doc),[]);
 });

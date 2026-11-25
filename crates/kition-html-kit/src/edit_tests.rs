@@ -1,4 +1,4 @@
-//! Editing a page end to end: a new page, a sequence of `html.setSource` edits with undo and
+//! Editing a page end to end: a new page, a sequence of `file.setSource` edits with undo and
 //! redo, saved to `.html`, reopened from those bytes, and compared with what was edited.
 use super::*;
 
@@ -25,13 +25,13 @@ fn an_edited_page_saves_and_reopens_as_edited() -> Result<(), String> {
     let mut doc = HtmlDocument::create("Fair.html", 640, 480)?;
     for page in [TITLE, SECTION, LIST] {
         assert_eq!(
-            doc.execute("html.setSource", json!({ "source": page }))?["changed"],
+            doc.execute("file.setSource", json!({ "source": page }))?["changed"],
             true
         );
     }
     // The same source again is no step at all.
     assert_eq!(
-        doc.execute("html.setSource", json!({ "source": LIST }))?["changed"],
+        doc.execute("file.setSource", json!({ "source": LIST }))?["changed"],
         false
     );
     assert_eq!(doc.execute("edit.undo", json!({}))?["done"], true);
@@ -53,7 +53,7 @@ fn an_edited_page_saves_and_reopens_as_edited() -> Result<(), String> {
     assert_eq!(reopened.render_png()?, doc.render_png()?);
 
     // The reopened page edits on: one more step, undone, is the saved page again.
-    reopened.execute("html.setSource", json!({ "source": TITLE }))?;
+    reopened.execute("file.setSource", json!({ "source": TITLE }))?;
     assert_eq!(reopened.execute("edit.undo", json!({}))?["done"], true);
     assert_eq!(reopened.save(None)?, saved);
     Ok(())

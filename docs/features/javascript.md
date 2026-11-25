@@ -4,7 +4,7 @@ Inline and supplied external classic scripts, ES modules, DOM/CSSOM mutations,
 Promise jobs, load events, click listeners, timers, and requestAnimationFrame run
 in Boa. The editor forwards clicks and advances virtual time in 100 ms steps.
 Native PNG capture includes initial scripts and the first 16 ms of timers. The
-SDK exposes non-document-mutating `html.click` and `html.advance` commands; DOM
+SDK exposes non-document-mutating `preview.click` and `preview.advance` commands; DOM
 state persists across frames and zoom changes. Saved bytes remain the HTML source.
 Changing source, resources, or viewport starts a fresh script session.
 

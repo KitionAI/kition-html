@@ -364,21 +364,21 @@ impl KitDocument for HtmlDocument {
     fn commands(&self) -> Vec<KitCommand> {
         let mut commands = [
             (
-                "html.setSource",
+                "file.setSource",
                 "Replace HTML",
                 "Replaces the whole page with `source` (an HTML document, at most 8 MiB) as one undo step; answers `changed: false` when the source is already the same. The only way to edit the page.",
                 true,
                 Some("{\"source\":string}"),
             ),
             (
-                "html.click",
+                "preview.click",
                 "Click preview",
                 "Clicks the rendered page at `x`, `y` (CSS pixels from the page's top-left) so its scripts react, without changing the saved source; answers whether the rendered page changed.",
                 true,
                 Some("{\"x\":number,\"y\":number}"),
             ),
             (
-                "html.advance",
+                "preview.advance",
                 "Advance preview time",
                 "Runs the page's timers and animations forward by `millis` milliseconds (a whole number), without changing the saved source; answers whether the rendered page changed.",
                 true,
@@ -387,14 +387,14 @@ impl KitDocument for HtmlDocument {
             (
                 "edit.undo",
                 "Undo",
-                "Takes back the caller's last `html.setSource` (the person's or, with `scope: \"agent\"`, the agent's) without touching the other's edits.",
+                "Takes back the caller's last `file.setSource` (the person's or, with `scope: \"agent\"`, the agent's) without touching the other's edits.",
                 self.session.can_undo(),
                 Some("{ scope?: \"person\" | \"agent\" }"),
             ),
             (
                 "edit.redo",
                 "Redo",
-                "Applies again the `html.setSource` the caller's last undo took back, in the same scope as `edit.undo`.",
+                "Applies again the `file.setSource` the caller's last undo took back, in the same scope as `edit.undo`.",
                 self.session.can_redo(),
                 Some("{ scope?: \"person\" | \"agent\" }"),
             ),
@@ -405,15 +405,15 @@ impl KitDocument for HtmlDocument {
                 id: id.into(),
                 title: title.into(),
                 description: description.into(),
-                output_schema: matches!(id, "html.click" | "html.advance").then(|| {
+                output_schema: matches!(id, "preview.click" | "preview.advance").then(|| {
                     json!({"type":"object","additionalProperties":false,"properties":{"changed":{"type":"boolean","required":true,"description":"whether the rendered page changed"}}})
                 }),
-                menu: if matches!(id, "html.click" | "html.advance") {
+                menu: if matches!(id, "preview.click" | "preview.advance") {
                     None
                 } else {
                     Some(vec!["Edit".into()])
                 },
-                mutates: !matches!(id, "html.click" | "html.advance"),
+                mutates: !matches!(id, "preview.click" | "preview.advance"),
                 enabled,
                 params: params.map(str::to_owned),
                 ..Default::default()
@@ -471,8 +471,8 @@ impl KitSessionDocument for HtmlDocument {
             kition_kit::schema::refuse_unknown(command, schema, &params)?;
         }
         match command {
-            "html.advance" | "html.click" => {
-                let changed = if command == "html.advance" {
+            "preview.advance" | "preview.click" => {
+                let changed = if command == "preview.advance" {
                     let millis = params
                         .get("millis")
                         .and_then(Value::as_u64)
@@ -494,7 +494,7 @@ impl KitSessionDocument for HtmlDocument {
                 }
                 Ok(json!({"changed":changed}))
             }
-            "html.setSource" => {
+            "file.setSource" => {
                 let source = params
                     .get("source")
                     .and_then(Value::as_str)
@@ -687,9 +687,9 @@ mod tests {
     fn script_state_survives_frames_without_changing_saved_source() -> Result<(), String> {
         let source = b"<!doctype html><style>body{margin:0}div{width:64px;height:64px;background:red}</style><div></div><script>let n=0;document.querySelector('div').onclick=()=>{n++;document.querySelector('div').style.background=n===2?'#5645d4':'blue'}</script>";
         let mut doc = HtmlDocument::open("script.html", source)?;
-        doc.execute("html.click", json!({"x":4,"y":4}))?;
+        doc.execute("preview.click", json!({"x":4,"y":4}))?;
         doc.render(0.0, 0.0, 2.0, 32, 32)?;
-        doc.execute("html.click", json!({"x":4,"y":4}))?;
+        doc.execute("preview.click", json!({"x":4,"y":4}))?;
         assert_eq!(
             &doc.render(0.0, 0.0, 1.0, 32, 32)?[..4],
             &[86, 69, 212, 255]
@@ -703,10 +703,10 @@ mod tests {
     #[test]
     fn source_editing_can_clear_and_replace_a_document() -> Result<(), String> {
         let mut doc = HtmlDocument::open("PAGE.HTML", b"<p>Original</p>")?;
-        doc.execute("html.setSource", json!({"source": ""}))?;
+        doc.execute("file.setSource", json!({"source": ""}))?;
         assert_eq!(doc.save(Some("PAGE.HTML"))?, b"");
         doc.execute(
-            "html.setSource",
+            "file.setSource",
             json!({"source": "<p>Replacement HTML</p>"}),
         )?;
         assert_eq!(doc.save(Some("PAGE.HTM"))?, b"<p>Replacement HTML</p>");
@@ -723,7 +723,7 @@ mod tests {
             b"<!doctype html><style>body{margin:0;background:white}</style><div></div>",
             "fixture.html",
             |doc| {
-                doc.execute("html.setSource",json!({"source":"<!doctype html><style>body{margin:0;background:#5645d4}</style><div></div>"})).map(|_|())
+                doc.execute("file.setSource",json!({"source":"<!doctype html><style>body{margin:0;background:#5645d4}</style><div></div>"})).map(|_|())
             },
         )
     }
@@ -758,9 +758,9 @@ mod tests {
     #[test]
     fn saved_bytes_and_new_edits_have_distinct_dirty_states() -> Result<(), String> {
         let mut doc = HtmlDocument::open("fixture.html", b"<div>One</div>")?;
-        doc.execute("html.setSource", json!({"source":"<div>Two</div>"}))?;
+        doc.execute("file.setSource", json!({"source":"<div>Two</div>"}))?;
         doc.save(None)?;
-        doc.execute("html.setSource", json!({"source":"<div>Three</div>"}))?;
+        doc.execute("file.setSource", json!({"source":"<div>Three</div>"}))?;
         doc.mark_saved();
         assert!(doc.dirty());
         doc.execute("edit.undo", json!({}))?;

@@ -34,7 +34,7 @@ fn a_page_at_the_limit_opens_edits_and_saves() -> Result<(), String> {
         .map_err(|e| e.to_string())?
         .replacen("Big page", "Big page, edited", 1)
         .replacen("Lorem ipsum dolor sit amet. ", "", 1);
-    doc.execute("html.setSource", json!({ "source": edited }))?;
+    doc.execute("file.setSource", json!({ "source": edited }))?;
     assert_eq!(doc.save(None)?, edited.into_bytes());
     Ok(())
 }
@@ -53,7 +53,7 @@ fn an_edit_over_the_limit_is_refused_as_too_large() -> Result<(), String> {
     let mut doc = HtmlDocument::open("small.html", &page(1024))?;
     let source = String::from_utf8(page(LIMIT + 1)).map_err(|e| e.to_string())?;
     let error = doc
-        .execute("html.setSource", json!({ "source": source }))
+        .execute("file.setSource", json!({ "source": source }))
         .err()
         .unwrap_or_default();
     assert_too_large(&error);

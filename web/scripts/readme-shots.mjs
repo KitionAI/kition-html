@@ -71,7 +71,7 @@ const SHOTS = [
     steps: async (page, kit) => {
       const before = await source(kit).inputValue()
       const after = before.replaceAll('#8c4a2f', '#2f5d50').replaceAll('#f5c9a5', '#bfe3d0')
-      await page.evaluate(async (text) => window.devHost.connection().ai.run([{ command: 'html.setSource', params: { source: text } }], false), after)
+      await page.evaluate(async (text) => window.devHost.connection().ai.run([{ command: 'file.setSource', params: { source: text } }], false), after)
       await settled(page)
       await selectInSource(kit, '#2f5d50')
     },

@@ -6,7 +6,7 @@
 
 - Version 0.1.1 (`kit.json`), KHP level `basic`, engine contract 2: the page is a KDM replica, so
   replicas exchange changes in order and undo is per person and per agent. One command edits the
-  page: `html.setSource` writes the source as one undo step ([writing-format.md](writing-format.md)).
+  page: `file.setSource` writes the source as one undo step ([writing-format.md](writing-format.md)).
 - Ten catalogued features in [features.yaml](../features.yaml): nine `has`, and one `partial`
   (clicking and advancing time on the rendered page); the rendering corpora are measured in
   [target-app-parity.md](parity/target-app-parity.md).

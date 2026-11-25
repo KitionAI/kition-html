@@ -5,7 +5,7 @@
 //! or add), the preview loads nothing but the page's own resources: no file of the machine is
 //! opened, no server asked, and each picture not drawn is reported (`html.resource-unavailable`).
 //! A workspace-escape audit found by reading code that an SVG `<image href>` was read by path
-//! (usvg's default resolver, relative to the process's folder), so `html.setSource` and a preview
+//! (usvg's default resolver, relative to the process's folder), so `file.setSource` and a preview
 //! showed a picture from anywhere.
 //!
 //! The test runs itself again as a child process whose current folder, `HOME` and `TMPDIR` are
@@ -231,20 +231,20 @@ fn act(root: &Path) -> Result<Vec<String>> {
     let mut wrong = Vec::new();
 
     let source = json!({ "source": hostile(&outside, port) });
-    let set = kit.execute(&id, "html.setSource", params(source.clone()), Origin::Agent);
+    let set = kit.execute(&id, "file.setSource", params(source.clone()), Origin::Agent);
     if let Err(error) = set {
-        wrong.push(format!("html.setSource refused the page: {error:?}"));
+        wrong.push(format!("file.setSource refused the page: {error:?}"));
     }
     let again = format!(
         "{}<!-- again -->",
         source["source"].as_str().unwrap_or_default()
     );
-    let op = json!({ "op": "command", "id": "html.setSource", "params": { "source": again } });
+    let op = json!({ "op": "command", "id": "file.setSource", "params": { "source": again } });
     let batch = json!({ "documentId": id, "ops": [op] });
     let _ = kit.model("model.batch", batch);
     for millis in [16, 500, 1000] {
         let step = params(json!({ "millis": millis }));
-        let _ = kit.execute(&id, "html.advance", step, Origin::Agent);
+        let _ = kit.execute(&id, "preview.advance", step, Origin::Agent);
     }
     let shot = kit
         .screenshot(

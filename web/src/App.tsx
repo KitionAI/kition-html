@@ -49,7 +49,7 @@ function HtmlEditor({ session, pendingSource }: { session: Session; pendingSourc
   const inFlight = useRef(0)
   const [diagnostics, setDiagnostics] = useState<string[]>([])
   const tabs = useMemo(() => catalogTabs(HTML_MENUS, { phrase: editor.phrase, primary: PRIMARY_ROWS }), [editor.phrase])
-  const readOnly = editor.host.readOnly || ui.state('command:html.setSource', ['Edit']).denied
+  const readOnly = editor.host.readOnly || ui.state('command:file.setSource', ['Edit']).denied
 
   // Local typing stays in the field until every queued command has reached the engine.
   // Agent edits, undo, and a clean on-disk reload then update it from the same session.
@@ -73,7 +73,7 @@ function HtmlEditor({ session, pendingSource }: { session: Session; pendingSourc
     let timer: ReturnType<typeof setTimeout>
     const tick = async () => {
       try {
-        const result = await session.run('html.advance', { millis: 100 }, null, { refresh: 'none' })
+        const result = await session.run('preview.advance', { millis: 100 }, null, { refresh: 'none' })
         if (!stopped && result && JSON.parse(result).changed) {
           await canvas.current?.retryRender()
           const items = await session.doc!.check()
@@ -93,7 +93,7 @@ function HtmlEditor({ session, pendingSource }: { session: Session; pendingSourc
     id: 'Interact', cursor: 'default',
     begin: (start) => ({ end: (point) => {
       if (Math.hypot(point.clientX - start.clientX, point.clientY - start.clientY) > 4) return
-      void session.run('html.click', { x: point.x, y: point.y }, null, { refresh: 'repaint' })
+      void session.run('preview.click', { x: point.x, y: point.y }, null, { refresh: 'repaint' })
         .then(async () => {
           const items = await session.doc?.check()
           if (items) setDiagnostics(items.map((item) => `${item.code}: ${item.message}`))
@@ -106,7 +106,7 @@ function HtmlEditor({ session, pendingSource }: { session: Session; pendingSourc
     setSource(next)
     inFlight.current += 1
     setPending(inFlight.current)
-    const applied = session.run('html.setSource', { source: next })
+    const applied = session.run('file.setSource', { source: next })
     pendingSource.current = applied
     void applied.catch((error: unknown) => {
       editor.report(editor.t('sourceFailed'), error)

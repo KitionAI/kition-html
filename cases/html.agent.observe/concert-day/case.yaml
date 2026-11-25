@@ -30,6 +30,6 @@ expected:
       contains: ["<h1>Spring concert</h1>", "Saturday 8 pm, Town Hall", "border-radius:12px"]
 solution:
   - tool: html_run
-    args: { path: concert.html, steps: [{ command: html.setSource, params: { source: "<!doctype html>\n<html><head><style>body{margin:24px;font-family:sans-serif;background:#fff}h1{color:#5645d4}.card{border:1px solid #ddd;border-radius:12px;padding:16px}</style></head>\n<body><h1>Spring concert</h1><div class=\"card\"><p>Saturday 8 pm, Town Hall</p><p>Day: Saturday</p></div></body></html>\n" } }] }
+    args: { path: concert.html, steps: [{ command: file.setSource, params: { source: "<!doctype html>\n<html><head><style>body{margin:24px;font-family:sans-serif;background:#fff}h1{color:#5645d4}.card{border:1px solid #ddd;border-radius:12px;padding:16px}</style></head>\n<body><h1>Spring concert</h1><div class=\"card\"><p>Saturday 8 pm, Town Hall</p><p>Day: Saturday</p></div></body></html>\n" } }] }
 since: "2026-11-16"
 timeout_s: 600

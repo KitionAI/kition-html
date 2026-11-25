@@ -8,7 +8,7 @@ import type { MenuRow } from '@kition/sdk/editor'
 const EDIT = ['Edit']
 
 export const HTML_MENUS: readonly MenuRow[] = [
-  { path: EDIT, label: 'Replace HTML…', command: 'html.setSource' },
+  { path: EDIT, label: 'Replace HTML…', command: 'file.setSource' },
   { path: EDIT, label: '---', command: '---' },
   { path: EDIT, label: 'Undo', command: 'edit.undo' },
   { path: EDIT, label: 'Redo', command: 'edit.redo' },
@@ -19,5 +19,5 @@ export const EDIT_TAB = 'Edit'
 
 /** Single line's row: every Edit row (the engine has these three commands). */
 export const PRIMARY_ROWS: Readonly<Record<string, readonly string[]>> = {
-  Edit: ['html.setSource', 'edit.undo', 'edit.redo'],
+  Edit: ['file.setSource', 'edit.undo', 'edit.redo'],
 }
