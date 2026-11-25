@@ -26,18 +26,16 @@ Third-party material
 - Mozilla Bullet 1.1 (vendor/blitz-dom/assets/moz-bullet-font.ttf, also as WOFF2 in default.css):
   Mozilla (designer Mats Palmgren), SIL Open Font License 1.1 (below).
 - Inter, JetBrains Mono and Lora (conformance/assets/*-Variable.ttf): SIL Open Font License 1.1 (below).
-- Loro (https://github.com/loro-dev/loro): Copyright (c) 2023 Zixuan Chen, MIT License (below).
 - MPL-2.0 crates used unmodified (source on crates.io): selectors, stylo_atoms, stylo_derive, stylo_dom,
   stylo_static_prefs, stylo_traits, to_shmem, to_shmem_derive, app_units, cssparser, cssparser-macros,
-  dtoa-short, uluru, im, sized-chunks, bitmaps.
+  dtoa-short, uluru.
 
-MIT License (Blitz, Boa parser, Glifo, Vello CPU, Parley, Loro)
+MIT License (Blitz, Boa parser, Glifo, Vello CPU, Parley)
 
 Copyright (c) 2019 Jason Williams
 Copyright 2025 the Vello Authors
 Copyright 2020 the Vello Authors
 Copyright 2020 the Parley Authors
-Copyright (c) 2023 Zixuan Chen
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

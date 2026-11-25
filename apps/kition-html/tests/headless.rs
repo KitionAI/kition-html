@@ -122,11 +122,20 @@ fn the_page_is_served_through_its_object_model_and_replica() -> Result {
     )?;
     assert_eq!(read(&mut kit)?, "<h1>Title</h1><p>Body text</p>");
 
-    // The collaborator's concurrent edit comes in, and the kit's goes out: both converge.
+    // The kit's edit goes out to the collaborator, then the collaborator's edit comes in: one line
+    // of changes, and both hold both edits.
+    let exported = call(
+        &mut kit,
+        "model.export",
+        json!({ "documentId": id, "since": encode(&peer.session().version().encode()) }),
+    )?;
+    let changes = decode(exported["changes"].as_str().ok_or("no changes")?)?;
+    KitSessionDocument::import_changes(&mut peer, &changes)?;
+    assert_eq!(text(&peer)?, "<h1>Title</h1><p>Body text</p>");
     let since = peer.session().version();
     peer.execute(
         "html.setSource",
-        json!({ "source": "<h1>New title</h1><p>Body</p>" }),
+        json!({ "source": "<h1>New title</h1><p>Body text</p>" }),
     )?;
     let changes = peer
         .session()
@@ -137,13 +146,7 @@ fn the_page_is_served_through_its_object_model_and_replica() -> Result {
         "model.import",
         json!({ "documentId": id, "changes": encode(&changes) }),
     )?;
-    let exported = call(
-        &mut kit,
-        "model.export",
-        json!({ "documentId": id, "since": encode(&peer.session().version().encode()) }),
-    )?;
-    let changes = decode(exported["changes"].as_str().ok_or("no changes")?)?;
-    KitSessionDocument::import_changes(&mut peer, &changes)?;
+    assert_eq!(read(&mut kit)?, "<h1>New title</h1><p>Body text</p>");
     assert_eq!(text(&peer)?, "<h1>New title</h1><p>Body text</p>");
 
     let saved = call(&mut kit, "model.save", json!({ "documentId": id }))?;

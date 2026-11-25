@@ -1,22 +1,24 @@
 // The page on the host's stored replica (kition-sdk Kit UI protocol 7 and UI-R1; an HTML file holds
 // the page, the host keeps its replica beside it): node tests/history.mjs [chromium|webkit].
-// Opens the sample under the development host with the replica store on and the engine's merge
-// declared (`?replica=1&replica-merges-file=1`), edits the source, saves, and finds the replica
-// stored; reloads the document as its save left it (`devHost.reload()`), which opens on the stored
-// replica: the edit is there and the replica's id is the same. Then another program changes the
-// file (`devHost.reopenChanged(bytes)`): the editor opens it with the stored replica, shows the
-// outside change, keeps the replica's id, and the change is one `system` `import` change on the
-// replica's history (read from the replica stored at the next save). Last, the file opened alone
+// Opens the sample under the development host with the replica store on (`?replica=1`), edits the
+// source, saves, and finds the replica stored; reloads the document as its save left it
+// (`devHost.reload()`), which opens on the stored replica: the edit is there and the replica's id is
+// the same. Then another program changes the file (`devHost.reopenChanged(bytes)`): the editor opens
+// it with the stored replica, shows the outside change, keeps the replica's id, and the change is one
+// `system` `import` change on the replica's line of changes (the changes the engine exports since the
+// version first stored, up to the replica stored at the next save). Last, the file opened alone
 // (`devHost.open`) is a replica of its own.
 // Undo is not checked across a reload: undo steps live in the session (kition-kdm's UndoManager),
 // not in the replica, so a session opened on the stored replica starts with none.
 // Needs the engine and fonts built into public/ (pnpm run engine). Run it with no HTTP proxy set.
 import { chromium, webkit } from '@playwright/test'
 import { createServer } from 'vite'
-import { Replica } from '@kition/sdk/kdm'
+import { readFileSync } from 'node:fs'
+import { decodeCommit, parseSchema, Replica, Version } from '@kition/sdk/kdm'
 
 const which = process.argv[2] ?? 'chromium'
 const FILE = 'Sample.htm'
+const SCHEMA = parseSchema(readFileSync(new URL('../../crates/kition-html-kit/model/schema.json', import.meta.url), 'utf8'))
 const EDITED = '<!doctype html><body><h1>Edited in Kition</h1></body>'
 const OUTSIDE = '<!doctype html><body><h1>Edited in Kition</h1><p>Changed outside</p></body>'
 const MORE = '<!doctype html><body><h1>Edited in Kition</h1><p>Changed outside</p><p>And here again</p></body>'
@@ -60,8 +62,23 @@ const storedSnapshot = async () => {
   }, FILE)
   return bytes ? new Uint8Array(bytes) : null
 }
-/** How many of the stored replica's changes are the system's `import` (a file taken in). */
-const imports = (snapshot) => Replica.snapshotOrigins(snapshot).filter((origin) => origin?.kind === 'system' && origin.label === 'import').length
+/** The version a stored snapshot holds. */
+const versionOf = (snapshot) => Replica.load(SCHEMA, snapshot).version()
+/**
+ * The origins of the changes the editor's engine exports after `since` (a version), or null when it
+ * answers a snapshot rather than changes (`since` is not on its line of changes).
+ */
+const originsSince = async (since) => {
+  const bytes = await page.evaluate(async (since) => {
+    const answer = await window.devHost.connection().replica.exportChanges(new Uint8Array(since).buffer)
+    return [...new Uint8Array(answer.changes)]
+  }, [...since.encode()])
+  const list = JSON.parse(new TextDecoder().decode(new Uint8Array(bytes)))
+  if (!Array.isArray(list.changes)) return null
+  return list.changes.map((change) => decodeCommit(JSON.stringify(change.origin))?.origin ?? null)
+}
+/** How many of `origins` are the system's `import` (a file taken in). */
+const imports = (origins) => (origins ?? []).filter((origin) => origin?.kind === 'system' && origin.label === 'import').length
 /** Waits for the editor in the frame to open the document again after `reopen` ran, showing `text`. */
 const reopened = async (reopen, arg, text) => {
   const frame = await (await page.$('#kit')).contentFrame()
@@ -81,7 +98,7 @@ const save = async (text) => {
 }
 
 try {
-  await page.goto(`${origin}/dev.html?locale=en-US&replica=1&replica-merges-file=1`)
+  await page.goto(`${origin}/dev.html?locale=en-US&replica=1`)
   await page.waitForFunction(() => document.getElementById('status')?.textContent?.includes(' open in '), null, { timeout: 90000 })
   await until(async () => source.isEnabled(), 300)
   step('the editor lists the replica capability', (await page.evaluate(() => window.devHost.connection().capabilities)).includes('replica'))
@@ -93,7 +110,7 @@ try {
   step('the edit reaches the engine', await until(async () => (await engineSource()) === EDITED))
   step('saves the file through the host', await save(EDITED), `file version ${await fileVersion()}`)
   step('the host stores the replica', await until(async () => (await storedSnapshot()) != null))
-  const savedImports = imports(await storedSnapshot())
+  const savedVersion = versionOf(await storedSnapshot())
 
   // Reloaded as the save left it: the editor opens on the stored replica.
   await reopened(() => window.devHost.reload(), null, EDITED)
@@ -101,7 +118,7 @@ try {
   step('the reloaded page is the same replica', (await docId()) === id, `${await docId()} vs ${id}`)
   step('the stored replica is still kept after the reload', (await storedSnapshot()) != null)
 
-  // Another program changes the file: the editor merges it into the stored replica.
+  // Another program changes the file: the editor writes it on the stored replica.
   await reopened((text) => window.devHost.reopenChanged(new TextEncoder().encode(text).buffer), OUTSIDE, OUTSIDE)
   step('the outside change shows', (await engineSource()) === OUTSIDE, await engineSource())
   step('the page is still the same replica', (await docId()) === id, `${await docId()} vs ${id}`)
@@ -110,7 +127,13 @@ try {
   await source.fill(MORE)
   step('an edit after the outside change reaches the engine', await until(async () => (await engineSource()) === MORE))
   step('saves again', await save(MORE))
-  step('the stored replica has the outside change as one import change', await until(async () => imports(await storedSnapshot()) === savedImports + 1), `${savedImports} imports before, ${imports(await storedSnapshot())} after`)
+  /** The engine's version now (`replica/version`). */
+  const engineVersion = async () => Version.decode(new Uint8Array(await page.evaluate(async () => [...new Uint8Array(await window.devHost.connection().replica.version())])))
+  step('the host stores the replica as saved', await until(async () => versionOf(await storedSnapshot()).equals(await engineVersion())))
+  const stored = versionOf(await storedSnapshot())
+  step('the stored replica continues the first one\'s line', stored.lineage === savedVersion.lineage && stored.includes(savedVersion) && stored.seq > savedVersion.seq, `${savedVersion.lineage}:${savedVersion.seq} then ${stored.lineage}:${stored.seq}`)
+  const after = await originsSince(savedVersion)
+  step('the stored replica has the outside change as one import change', after != null && imports(after) === 1, JSON.stringify(after))
 
   // The saved file opened alone (no stored replica): the same page, as a replica of its own.
   await reopened((path) => window.devHost.open(path, window.devHost.files.get(path).bytes), FILE, MORE)

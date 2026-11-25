@@ -1,0 +1,19 @@
+format: 1
+id: html.collab.replica/unchanged-save
+feature: html.collab.replica
+intent: >-
+  An unchanged page saves the same bytes twice, and reopened on its stored replica with the file it
+  saved it holds the same objects under the same ids and the same state, records no change, and
+  saves the same bytes again.
+layer: unit
+source:
+  kind: synthetic
+  from: crates/kition-html-kit/src/replica_tests.rs (plain document model, kition-sdk 91cf510)
+  license: Apache-2.0
+input: []
+steps:
+  - cargo-test: { package: kition-html-kit, filter: "replica_tests::an_unchanged_page_saves_the_same_bytes_and_reopens_with_the_same_object_ids" }
+expected:
+  - actual: out:exit
+    compare: exit
+since: "2026-11-25"

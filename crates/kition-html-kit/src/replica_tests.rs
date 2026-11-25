@@ -1,7 +1,6 @@
 //! Engine contract 2: the page lives in a KDM replica (schema `kit.html` v1, `model/schema.json`).
 use super::*;
 use kition_kit::kdm::{ActorId, Origin, Replica};
-use kition_kit::session::KitSessionDocument;
 use kition_kit::session::model::ReplicaPort;
 
 /// A byte order mark, CRLF line ends and non-ASCII text: all of it must come back unchanged.
@@ -52,6 +51,55 @@ fn a_page_round_trips_through_its_replica_byte_for_byte() -> Result<(), String> 
 }
 
 #[test]
+fn an_unchanged_page_saves_the_same_bytes_and_reopens_with_the_same_object_ids()
+-> Result<(), String> {
+    let mut doc = HtmlDocument::open("page.html", PAGE.as_bytes())?;
+    doc.execute("html.setSource", json!({ "source": "<p>Edited</p>" }))?;
+    let saved = doc.save(None)?;
+    doc.mark_saved();
+    assert_eq!(
+        doc.save(None)?,
+        saved,
+        "an unchanged page saves the same bytes"
+    );
+    let snapshot = doc
+        .session()
+        .snapshot()
+        .map_err(|error| error.to_string())?;
+    let objects = |doc: &HtmlDocument| -> Vec<String> {
+        let mut ids: Vec<String> = doc
+            .session()
+            .replica()
+            .objects_of_type("Page")
+            .iter()
+            .map(ToString::to_string)
+            .collect();
+        ids.sort();
+        ids
+    };
+    // Reopened on its stored replica with the file it saved: the same objects under the same ids,
+    // the same state, no change recorded, and the same bytes saved again.
+    let reopened = HtmlDocument::open_with_replica("page.html", &saved, &snapshot, &[])?;
+    assert!(!objects(&doc).is_empty());
+    assert_eq!(objects(&reopened), objects(&doc));
+    assert_eq!(
+        reopened
+            .session()
+            .replica()
+            .state_json()
+            .map_err(|e| e.to_string())?,
+        doc.session()
+            .replica()
+            .state_json()
+            .map_err(|e| e.to_string())?
+    );
+    assert_eq!(reopened.session().version(), doc.session().version());
+    assert_eq!(reopened.save(None)?, saved);
+    assert!(!reopened.dirty());
+    Ok(())
+}
+
+#[test]
 fn a_stored_replica_takes_in_the_file_as_it_is_now() -> Result<(), String> {
     let doc = HtmlDocument::open("page.html", b"<p>Before</p>")?;
     let snapshot = doc
@@ -94,39 +142,6 @@ fn an_agent_step_undoes_in_the_agent_scope_only() -> Result<(), String> {
     assert_eq!(text(&doc)?, "<p>One</p>");
     assert_eq!(doc.execute("edit.redo", json!({}))?["done"], true);
     assert_eq!(text(&doc)?, "<p>Two</p>");
-    Ok(())
-}
-
-#[test]
-fn concurrent_edits_to_different_parts_of_the_page_both_survive() -> Result<(), String> {
-    let mut a = HtmlDocument::open("page.html", b"<h1>Title</h1><p>Body</p>")?;
-    let snapshot = a.session().snapshot().map_err(|error| error.to_string())?;
-    let mut b = HtmlDocument::open_with_replica("page.html", &[], &snapshot, &[])?;
-    let base = a.session().version();
-    a.execute(
-        "html.setSource",
-        json!({ "source": "<h1>New title</h1><p>Body</p>" }),
-    )?;
-    b.execute(
-        "html.setSource",
-        json!({ "source": "<h1>Title</h1><p>Body text</p>" }),
-    )?;
-    let from_a = a
-        .session()
-        .export_changes(&base)
-        .map_err(|error| error.to_string())?;
-    let from_b = b
-        .session()
-        .export_changes(&base)
-        .map_err(|error| error.to_string())?;
-    let revision = a.revision();
-    KitSessionDocument::import_changes(&mut a, &from_b)?;
-    KitSessionDocument::import_changes(&mut b, &from_a)?;
-    assert_eq!(text(&a)?, "<h1>New title</h1><p>Body text</p>");
-    assert_eq!(text(&a)?, text(&b)?);
-    // The imported change is a new revision the preview and inspect see.
-    assert!(a.revision() > revision);
-    assert_eq!(a.inspect()?["source"], "<h1>New title</h1><p>Body text</p>");
     Ok(())
 }
 

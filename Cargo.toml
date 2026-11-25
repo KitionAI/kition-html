@@ -14,11 +14,11 @@ publish = false
 
 [workspace.dependencies]
 # kition-sdk, pinned by commit (one revision for every crate of it)
-kition-headless = { git = "https://github.com/KitionAI/kition-sdk", rev = "2d79991519247ea15b9d06a4dfcd2f648f097a90" }
-kition-kit-server = { git = "https://github.com/KitionAI/kition-sdk", rev = "2d79991519247ea15b9d06a4dfcd2f648f097a90" }
-kition-kit = { git = "https://github.com/KitionAI/kition-sdk", rev = "2d79991519247ea15b9d06a4dfcd2f648f097a90", features = ["session"] }
+kition-headless = { git = "https://github.com/KitionAI/kition-sdk", rev = "91cf510cd2e0ed2f9414693fd916959776a1a2f6" }
+kition-kit-server = { git = "https://github.com/KitionAI/kition-sdk", rev = "91cf510cd2e0ed2f9414693fd916959776a1a2f6" }
+kition-kit = { git = "https://github.com/KitionAI/kition-sdk", rev = "91cf510cd2e0ed2f9414693fd916959776a1a2f6", features = ["session"] }
 # A host of kit processes (`HeadlessKit`), for the `document.identity` tests.
-kition-kit-host = { git = "https://github.com/KitionAI/kition-sdk", rev = "2d79991519247ea15b9d06a4dfcd2f648f097a90" }
+kition-kit-host = { git = "https://github.com/KitionAI/kition-sdk", rev = "91cf510cd2e0ed2f9414693fd916959776a1a2f6" }
 blitz-dom = { git = "https://github.com/DioxusLabs/blitz", rev = "21edc92d90d8f8bedadd3f9ecb14b1ad950952eb", default-features = false, features = ["svg", "woff", "floats", "writing-mode"] }
 blitz-html = { git = "https://github.com/DioxusLabs/blitz", rev = "21edc92d90d8f8bedadd3f9ecb14b1ad950952eb", default-features = false }
 blitz-paint = { path = "vendor/blitz-paint", default-features = false, features = ["svg", "font-embolden"] }

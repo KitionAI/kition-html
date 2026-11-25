@@ -3,6 +3,10 @@
 Changes to Kition HTML, newest first. A version is the kit package version in `kit.json`;
 each package is published with a `package-v<version>` tag.
 
+## Unreleased
+
+- The engine runs on kition-sdk's plain document model (no CRDT, kition-sdk 91cf510): Kition Desktop is for one person, so pages are no longer merged from concurrent edits; replicas exchange changes in order. A file changed outside Kition opens on the stored replica with what the file holds now written as one import change. Loro is no longer linked.
+
 ## 0.1.3
 
 - The same kit as 0.1.2, built on kition-sdk 6672663 (the replica's undo passes over an undo group whose changes came to nothing): the 0.1.2 package was built on kition-sdk 6b4d471.

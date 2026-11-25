@@ -11,14 +11,13 @@ type HtmlState = { source: string }
 const describe = (info: KitEngineInfo): HtmlState => ({ source: String(info.inspected.source ?? '') })
 const catalogs = { 'en-US': { source: 'HTML source', preview: 'Preview', limits: 'HTML, CSS and JavaScript preview', noDiagnostics: 'No rendering diagnostics', previewFailed: 'Could not update preview', verticalScroll: 'Vertical scroll', horizontalScroll: 'Horizontal scroll', sourceFailed: 'Could not update HTML', fileChanged: 'This file changed on disk. Your unsaved edits have been kept.', keepMine: 'Keep my edits', reloadFile: 'Load saved version' } }
 
-const SESSION_OPTIONS = { replicaMergesFile: true }
-
 export function App({ host }: { host: HostConnection }) {
   const manifest = useMemo(() => ({ kitId: 'kit.html', base: new URL('./engine/', document.baseURI).href, module: 'kition_html_kit', documentClass: 'HtmlDocument' }), [])
   // The page opens with the replica the host stored for it (capability `replica`) and the editor
   // writes it back on each save. A file changed outside Kition does not start the history over: the
-  // engine merges it into the stored replica as one `import` change (`openWithReplica`, UI-R1).
-  const base = useKitSession(host, manifest, describe, SESSION_OPTIONS)
+  // engine writes what the file holds now on the stored replica as one `import` change
+  // (`openWithReplica`, UI-R1).
+  const base = useKitSession(host, manifest, describe)
   const pendingSource = useRef<Promise<unknown>>(Promise.resolve())
   const session = {
     ...base,

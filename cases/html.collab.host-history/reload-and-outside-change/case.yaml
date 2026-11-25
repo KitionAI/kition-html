@@ -3,11 +3,10 @@ id: html.collab.host-history/reload-and-outside-change
 feature: html.collab.host-history
 intent: >-
   The editor opens the page with the replica the host stored for it and writes the replica back on
-  each save (capability `replica`), through the development host with the replica store on and the
-  engine's merge declared: after an edit and a save the replica is stored; reloaded as the save left
+  each save (capability `replica`), through the development host with the replica store on: after an edit and a save the replica is stored; reloaded as the save left
   it, the page has the edit and the same replica id, and the stored replica is still kept; after
   another program changed the file, the page shows the change, keeps the replica id, and the change
-  is one `system` `import` change on the stored replica (UI-R1); the file opened alone is a replica
+  is one `system` `import` change on the stored replica's line of changes (UI-R1); the file opened alone is a replica
   of its own. Undo is not checked across a reload: undo steps live in the session, not the replica.
 layer: gate
 dimension: data-safety
