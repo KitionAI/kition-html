@@ -285,8 +285,11 @@ fn a_draft_on_a_page_edited_meanwhile_is_refused_and_changes_nothing() -> Result
     let changes = kition_kit::session::__export_changes(&draft, &since)?;
     let before = doc.session().state_hash().map_err(|e| e.to_string())?;
     let revision = doc.revision();
-    let error = KitSessionDocument::merge_changes(&mut doc, &changes, &Origin::agent("agent:test"))
-        .unwrap_err();
+    let Err(error) =
+        KitSessionDocument::merge_changes(&mut doc, &changes, &Origin::agent("agent:test"))
+    else {
+        return Err("the merge was taken".into());
+    };
     assert!(error.starts_with("stale: "), "{error}");
     assert!(error.contains("rule D5"), "{error}");
     assert_eq!(
