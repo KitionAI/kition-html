@@ -530,6 +530,30 @@ impl KitSessionDocument for HtmlDocument {
         Ok(damage)
     }
 
+    /// A draft merged in (`mergeChanges`, one step of the person's Undo, M12a): a new revision the
+    /// preview and `inspect` see, as after a command.
+    fn merge_changes(&mut self, bytes: &[u8], origin: &Origin) -> Result<Damage, String> {
+        let damage = self.session.merge_changes(bytes, origin)?;
+        self.changed(&damage);
+        Ok(damage)
+    }
+
+    /// An earlier state written over the page (`restoreState`), taken in as a merged draft is.
+    fn restore_state(&mut self, snapshot: &[u8], origin: &Origin) -> Result<Damage, String> {
+        let damage = self.session.restore_state(snapshot, origin)?;
+        self.changed(&damage);
+        Ok(damage)
+    }
+
+    /// The engine's `undo()` and `redo()` members: the person's, keeping the revision current.
+    fn undo(&mut self) -> Result<(bool, Damage), String> {
+        self.undo_in(kition_kit::kdm::UndoScope::Person)
+    }
+
+    fn redo(&mut self) -> Result<(bool, Damage), String> {
+        self.redo_in(kition_kit::kdm::UndoScope::Person)
+    }
+
     fn undo_in(&mut self, scope: kition_kit::kdm::UndoScope) -> Result<(bool, Damage), String> {
         let (done, damage) = self.session.undo_in(scope)?;
         self.changed(&damage);

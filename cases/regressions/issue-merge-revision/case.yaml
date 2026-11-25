@@ -1,0 +1,23 @@
+format: 1
+id: regressions/issue-merge-revision
+feature: html.collab.replica
+intent: >-
+  A merged draft, a restored state and the engine's undo() and redo() members changed the page's
+  replica without a new revision, so the preview kept drawing the page before them. They now move
+  the revision like a command; a merged agent's draft is one step of the person's Undo (M12a),
+  taken back and brought again exactly; a draft on a page edited meanwhile is refused (the page
+  is one text field, rule D5) and changes nothing; an imported change is a new revision inspect
+  sees; an agent's reply comes back unchanged (no tool ids).
+layer: unit
+source:
+  kind: issue
+  from: independent review of the plain-model round (2026-11-25)
+  license: Apache-2.0
+input: []
+steps:
+  - cargo-test: { package: kition-html-kit, filter: "replica_tests::" }
+expected:
+  - actual: out:exit
+    compare: exit
+since: "2026-11-25"
+timeout_s: 300
