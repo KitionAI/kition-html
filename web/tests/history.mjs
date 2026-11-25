@@ -14,7 +14,7 @@
 import { chromium, webkit } from '@playwright/test'
 import { createServer } from 'vite'
 import { readFileSync } from 'node:fs'
-import { decodeCommit, parseSchema, Replica, Version } from '@kition/sdk/kdm'
+import { parseSchema, readChangeList, Replica, Version } from '@kition/sdk/kdm'
 
 const which = process.argv[2] ?? 'chromium'
 const FILE = 'Sample.htm'
@@ -65,17 +65,22 @@ const storedSnapshot = async () => {
 /** The version a stored snapshot holds. */
 const versionOf = (snapshot) => Replica.load(SCHEMA, snapshot).version()
 /**
- * The origins of the changes the editor's engine exports after `since` (a version), or null when it
- * answers a snapshot rather than changes (`since` is not on its line of changes).
+ * The origins of the changes the editor's engine exports after `since` (a version), read with
+ * `readChangeList`, or null when it answers no change list (a snapshot: `since` is not on its line
+ * of changes).
  */
 const originsSince = async (since) => {
   const bytes = await page.evaluate(async (since) => {
     const answer = await window.devHost.connection().replica.exportChanges(new Uint8Array(since).buffer)
     return [...new Uint8Array(answer.changes)]
   }, [...since.encode()])
-  const list = JSON.parse(new TextDecoder().decode(new Uint8Array(bytes)))
-  if (!Array.isArray(list.changes)) return null
-  return list.changes.map((change) => decodeCommit(JSON.stringify(change.origin))?.origin ?? null)
+  let list
+  try {
+    list = readChangeList(new Uint8Array(bytes))
+  } catch {
+    return null
+  }
+  return list.changes.map((change) => change.origin)
 }
 /** How many of `origins` are the system's `import` (a file taken in). */
 const imports = (origins) => (origins ?? []).filter((origin) => origin?.kind === 'system' && origin.label === 'import').length
