@@ -355,3 +355,51 @@ fn an_agents_reply_comes_back_unchanged_as_the_schema_has_no_tool_ids() -> Resul
     }
     Ok(())
 }
+
+#[test]
+fn a_drafts_preview_is_the_state_accepting_it_gives() -> Result<(), String> {
+    // The preview (`compareChanges`, `KitSession::merged_state`) runs the kit's repair on a copy,
+    // as the merge runs it. `kit.html` has one text field and no repair (`validate` changes
+    // nothing), so the preview is the plain merge of the draft's edit. Nothing changes until the
+    // draft is accepted.
+    let mut doc = HtmlDocument::open("page.html", b"<h1>Title</h1><p>Body</p>")?;
+    let (mut draft, since) = draft_of(&doc)?;
+    draft.execute_as(
+        "file.setSource",
+        json!({ "source": "<h1>New title</h1><p>Body</p>" }),
+        &Origin::agent("agent:test"),
+    )?;
+    let changes = kition_kit::session::__export_changes(&draft, &since)?;
+    let before_state = doc
+        .session()
+        .replica()
+        .state_json()
+        .map_err(|e| e.to_string())?;
+    let before = doc.session().state_hash().map_err(|e| e.to_string())?;
+    let preview = doc
+        .session()
+        .merged_state(&changes)
+        .map_err(|e| e.to_string())?;
+    let compared: Value =
+        serde_json::from_str(&kition_kit::session::__compare_changes(&doc, &changes)?)
+            .map_err(|e| e.to_string())?;
+    assert_eq!(
+        doc.session().state_hash().map_err(|e| e.to_string())?,
+        before,
+        "the preview changes nothing"
+    );
+    KitSessionDocument::merge_changes(&mut doc, &changes, &Origin::agent("agent:test"))?;
+    assert_eq!(text(&doc)?, "<h1>New title</h1><p>Body</p>");
+    let after_state = doc
+        .session()
+        .replica()
+        .state_json()
+        .map_err(|e| e.to_string())?;
+    assert_eq!(preview, after_state, "the preview is the merged state");
+    assert_eq!(
+        compared,
+        kition_kit::kdm::diff::diff_states(&before_state, &after_state).to_json(),
+        "the comparison is what accepting the draft changed"
+    );
+    Ok(())
+}
