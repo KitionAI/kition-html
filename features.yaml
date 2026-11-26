@@ -53,6 +53,16 @@ features:
     gap: "Undo steps live in the session, not in the replica: after a reload or an outside change the page opens with no undo history."
     cases: [html.collab.host-history/reload-and-outside-change]
     since: "2026-11-24"
+  - id: html.collab.drafts
+    title: "An agent's draft is compared, accepted and undone in the editor as one step, and a checkpoint is restored as one step of the person's Undo (Kit UI protocol sections 7d and 7m)"
+    dimension: [collab, data-safety]
+    priority: P1
+    status: partial
+    paths: [web/tests/drafts.mjs, crates/kition-html-kit/src/lib.rs]
+    target: "Kit UI protocol sections 7d and 7m (draft/compare, draft/merge, replica/restore)"
+    gap: "The page is one text field, so a draft and an edit the person makes while it is open always collide (data model 6.6, D5): a draft merges only when the person did not edit meanwhile. The editor has no draft or version panel of its own: the draft is compared, merged and refused, and the checkpoint recorded and restored, through the host; a refused merge is said in the host's error, not in the editor."
+    cases: [html.collab.drafts/editor]
+    since: "2026-11-26"
   - id: html.page.edit
     title: "Edit the page's HTML, undo and redo, save it and reopen it as edited"
     dimension: [function, conversion, data-safety]

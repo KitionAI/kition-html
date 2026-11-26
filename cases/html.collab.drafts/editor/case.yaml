@@ -1,0 +1,26 @@
+format: 1
+id: html.collab.drafts/editor
+feature: html.collab.drafts
+intent: >-
+  Through the development host with the replica and checkpoint stores on: the person edits the
+  page's source; an agent's draft makes another edit, its comparison lists it and leaves the page
+  alone, and accepted, the editor shows both edits; one Undo of the editor takes back the draft's
+  edit only and Redo brings it back; a draft and a person's edit made while it is open collide on
+  the page's one text and the merge is refused, leaving the page as the person left it; a labelled
+  checkpoint of the saved page, restored over a later edit, shows the checkpoint's page and one
+  Undo brings the later edit back.
+layer: gate
+dimension: data-safety
+source:
+  kind: synthetic
+  from: web/tests/drafts.mjs
+  license: owned
+input: []
+steps:
+  - exec:
+      cmd: [node, web/tests/drafts.mjs, chromium]
+expected:
+  - { actual: "out:exec", compare: exit, value: 0 }
+since: "2026-11-26"
+timeout_s: 180
+requires: [chromium]
