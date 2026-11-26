@@ -532,10 +532,14 @@ impl KitSessionDocument for HtmlDocument {
 
     /// A draft merged in (`mergeChanges`, one step of the person's Undo, M12a): a new revision the
     /// preview and `inspect` see, as after a command.
-    fn merge_changes(&mut self, bytes: &[u8], origin: &Origin) -> Result<Damage, String> {
-        let damage = self.session.merge_changes(bytes, origin)?;
+    fn merge_changes(
+        &mut self,
+        bytes: &[u8],
+        origin: &Origin,
+    ) -> Result<(Option<kition_kit::kdm::UndoScope>, Damage), String> {
+        let (scope, damage) = self.session.merge_changes(bytes, origin)?;
         self.changed(&damage);
-        Ok(damage)
+        Ok((scope, damage))
     }
 
     /// An earlier state written over the page (`restoreState`), taken in as a merged draft is.
