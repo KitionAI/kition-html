@@ -5,7 +5,7 @@ intent: >-
   kit.json's headless.features lists exactly what the headless executable's kit.initialize answers
   (platform rule K9), and those features work on a page: model.open, model.import, model.export,
   model.save, model.describe and model.batch. Before, the executable served all six but kit.json
-  listed only view.describe and document.check, so a host could not know them before starting it.
+  listed only view.describe and file.check, so a host could not know them before starting it.
 layer: gate
 source:
   kind: probe

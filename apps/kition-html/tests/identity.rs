@@ -1,4 +1,4 @@
-//! `document.identity` and `document.fork` (Kit Process Protocol section 5.6, KitModel M7a)
+//! `file.identity` and `file.fork` (Kit Process Protocol section 5.6, KitModel M7a)
 //! through the real `kition-html` process. A saved page is its HTML source alone
 //! (`HtmlModel::export`): the file embeds no replica, and the kit makes a new one each time it
 //! opens a file. So a file carries no identity (`docId` is `null`) and its fork is the same bytes.
@@ -35,7 +35,7 @@ async fn a_page_carries_no_identity_and_forks_into_the_same_bytes() {
     let dir = workspace("plain");
     std::fs::write(dir.join("Plan.html"), PAGE).unwrap();
     let kit = launch(&dir).await;
-    assert!(kit.serves("document.identity"), "{}", kit.capabilities());
+    assert!(kit.serves("file.identity"), "{}", kit.capabilities());
     let manifest: serde_json::Value =
         serde_json::from_str(include_str!("../../../kit.json")).unwrap();
     assert_eq!(

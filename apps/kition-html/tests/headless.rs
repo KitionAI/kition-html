@@ -74,13 +74,13 @@ fn kit_json_lists_the_features_kit_initialize_answers() -> Result {
     let mut kit = kit()?;
     let serves = kit.serves_model();
     // What `kit.initialize` answers in `capabilities.features`: the server adds the object
-    // model's features, then `document.identity` for a backend that says how its files carry
+    // model's features, then `file.identity` for a backend that says how its files carry
     // their identity (Kit Process Protocol section 5.6).
     let mut answered = with_model_features(kit.capabilities(), serves)["features"].clone();
     if kit.file_identity().is_some()
         && let Some(features) = answered.as_array_mut()
     {
-        features.push(json!("document.identity"));
+        features.push(json!("file.identity"));
     }
     assert_eq!(manifest["headless"]["features"], answered);
     Ok(())

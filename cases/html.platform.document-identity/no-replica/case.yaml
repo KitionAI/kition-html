@@ -3,8 +3,8 @@ id: html.platform.document-identity/no-replica
 feature: html.platform.document-identity
 intent: >-
   Through the real kition-html process: a saved page is its HTML source alone and embeds no
-  replica, so document.identity answers no docId for a page and for an empty file, and
-  document.fork writes the page's bytes unchanged under the new name with no docId; the fork
+  replica, so file.identity answers no docId for a page and for an empty file, and
+  file.fork writes the page's bytes unchanged under the new name with no docId; the fork
   opens as a page, a fork of the fork is the same bytes again, and a fork never replaces an
   existing file.
 layer: gate

@@ -185,7 +185,7 @@ fn run() -> Result<(), String> {
 
 /// The kit served headless (`--kition-kit`), as `kit.json` declares it, with the object model and
 /// the replica methods over the engine's change exchange, and the identity a file carries
-/// (`document.identity`, `document.fork`): a saved page is its HTML source alone, with no replica
+/// (`file.identity`, `file.fork`): a saved page is its HTML source alone, with no replica
 /// in it, so a file carries no identity and its fork is the same bytes.
 fn headless() -> ExitCode {
     let kit = match kition_headless::KitInfo::from_manifest(

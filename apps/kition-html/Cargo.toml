@@ -19,7 +19,7 @@ kition-kit-server.workspace = true
 kition-kit.workspace = true
 # workspace_only.rs writes the picture outside the workspace and reads the previews.
 png.workspace = true
-# document.identity and document.fork through the real process (tests/identity.rs).
+# file.identity and file.fork through the real process (tests/identity.rs).
 kition-kit-host.workspace = true
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 
